@@ -1,0 +1,139 @@
+import 'package:flutter/material.dart';
+
+enum ButtonType { tonal, outline, text }
+
+class CustomButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final ButtonType type;
+  final Color? color;
+  final Color? overlayColor;
+  final double? width;
+  final double? height;
+  final IconData? icon;
+  final String? personalIcon;
+  final String? text;
+  final double size;
+  final EdgeInsets? padding;
+  final EdgeInsets? margin;
+  final MainAxisAlignment? alignment;
+  final String message;
+  final bool disabled;
+  final bool loading;
+
+  const CustomButton({
+    super.key,
+    required this.onPressed,
+    this.type = ButtonType.tonal,
+    this.color,
+    this.overlayColor,
+    this.width,
+    this.height,
+    this.icon,
+    this.personalIcon,
+    this.text,
+    this.size = 17,
+    this.padding,
+    this.margin,
+    this.alignment,
+    this.message = "",
+    this.disabled = false,
+    this.loading = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: message,
+      child: Container(
+        margin: margin,
+        child: _buttonStyle(context),
+      ),
+    );
+  }
+
+  Widget _buttonStyle(BuildContext context) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    final colorDisabled =
+        color != null ? color!.withOpacity(0.5) : primaryColor.withOpacity(0.5);
+
+    if (type == ButtonType.outline) {
+      return OutlinedButton(
+        onPressed: disabled ? null : onPressed,
+        style: ButtonStyle(
+          foregroundColor: MaterialStatePropertyAll(
+              disabled ? colorDisabled : color ?? primaryColor),
+          overlayColor: MaterialStatePropertyAll(
+              (disabled ? colorDisabled : color ?? primaryColor)
+                  .withOpacity(.3)),
+          side: MaterialStatePropertyAll(
+            BorderSide(
+                color: disabled ? colorDisabled : color ?? primaryColor,
+                width: 2),
+          ),
+        ),
+        child: _buttonContainer(context),
+      );
+    }
+
+    if (type == ButtonType.text) {
+      return TextButton(
+        style: ButtonStyle(
+          foregroundColor: MaterialStatePropertyAll(disabled
+              ? colorDisabled
+              : disabled
+                  ? colorDisabled
+                  : color ?? primaryColor),
+          overlayColor: MaterialStatePropertyAll(
+              (disabled ? colorDisabled : color ?? primaryColor)
+                  .withOpacity(.3)),
+        ),
+        onPressed: disabled ? null : onPressed,
+        child: _buttonContainer(context),
+      );
+    }
+
+    return ElevatedButton(
+      onPressed: disabled ? null : onPressed,
+      style: ButtonStyle(
+        backgroundColor: MaterialStatePropertyAll(
+            disabled ? colorDisabled : color ?? primaryColor),
+        foregroundColor: MaterialStatePropertyAll(overlayColor ?? Colors.white),
+        overlayColor: MaterialStatePropertyAll(
+          overlayColor != null ? overlayColor!.withOpacity(.1) : Colors.white10,
+        ),
+      ),
+      child: _buttonContainer(context),
+    );
+  }
+
+  Widget _buttonContainer(BuildContext context) {
+    if (loading) {
+      return SizedBox(
+        width: size,
+        height: size,
+        child: CircularProgressIndicator(
+          color: type == ButtonType.tonal ? Colors.white : color,
+        ),
+      );
+    }
+    return Container(
+      padding: padding,
+      width: width,
+      height: height,
+      child: Row(
+        mainAxisAlignment: alignment ?? MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (icon != null && personalIcon == null)
+            Icon(
+              icon,
+              size: size,
+            ),
+          if ((icon != null || personalIcon != null) && text != null)
+            const SizedBox(width: 10.0),
+          if (text != null) Text(text!, style: TextStyle(fontSize: size)),
+        ],
+      ),
+    );
+  }
+}
