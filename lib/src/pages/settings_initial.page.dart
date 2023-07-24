@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 
 import 'package:wallet_monitor/src/widgets/settings/color_selecteor.widget.dart';
+import 'package:wallet_monitor/src/widgets/settings/format_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/settings/theme_selector.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -33,6 +34,7 @@ class _SettingsInitialPageState extends State<SettingsInitialPage> {
                 logo(),
                 ThemeSelectorWidget(pref: _pref),
                 ColorSelectorWidget(pref: _pref),
+                FormatSelectorWidget(pref: _pref),
               ],
             ),
           ),

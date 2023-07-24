@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FormatSelectorWidget extends StatefulWidget {
-  const FormatSelectorWidget({super.key});
+  final SharedPreferences pref;
+
+  const FormatSelectorWidget({super.key, required this.pref});
 
   @override
   State<FormatSelectorWidget> createState() => _FormatSelectorWidgetState();
