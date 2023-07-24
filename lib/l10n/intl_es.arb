@@ -1,9 +1,11 @@
 {
   "initialConfig": "Configuraciones inicial",
   "colorSelector": "Selector de color",
+  "themeSelector": "Selector de tema",
   "selectAColor": "Seleccione un color",
   "none": "Ninguno",
   "color": "Color",
+  "theme": "Temas",
   "teal": "Aguamarina",
   "purple": "Morado",
   "pink": "Rosado",
@@ -11,8 +13,16 @@
   "orange": "Naranja",
   "red": "Rojo",
   "green": "Verde",
-  "chameleon": "Camaleon",
+  "chameleon": "Camaleón",
   "personal": "Personal",
   "cancel": "Cancelar",
-  "confirm": "Confirmar"
+  "confirm": "Confirmar",
+  "system": "Sistema",
+  "light": "Claro",
+  "lighting": "Brillante",
+  "dark": "Oscuro",
+  "night": "Nocturno",
+  "generalMode": "Modo General",
+  "lightStyle": "Estilo claro",
+  "darkStyle": "Estilo oscuro"
 }

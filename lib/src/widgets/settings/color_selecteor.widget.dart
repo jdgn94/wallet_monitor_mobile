@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
-import 'package:wallet_monitor/src/configs/theme.dart';
+import 'package:wallet_monitor/src/configs/theme.configs.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
-class ColorSelector extends StatefulWidget {
+class ColorSelectorWidget extends StatefulWidget {
   final SharedPreferences pref;
 
-  const ColorSelector({super.key, required this.pref});
+  const ColorSelectorWidget({super.key, required this.pref});
 
   @override
-  State<ColorSelector> createState() => _ColorSelectorState();
+  State<ColorSelectorWidget> createState() => _ColorSelectorWidgetState();
 }
 
-class _ColorSelectorState extends State<ColorSelector> {
+class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
   late TextEditingController _inputController;
-  late String? colorSelector;
-  late int? colorIndexSelector;
+  String? colorSelector;
+  int? colorIndexSelector;
   Color pickerColor = const Color(0xFF9e9e9e);
   Color currentColor = const Color(0xFF9e9e9e);
 
@@ -40,6 +41,12 @@ class _ColorSelectorState extends State<ColorSelector> {
     _inputController =
         TextEditingController(text: _colorNameTranslate(colorSelector!));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _inputController.dispose();
+    super.dispose();
   }
 
   void _openSelector() {
@@ -121,21 +128,21 @@ class _ColorSelectorState extends State<ColorSelector> {
     );
   }
 
-  Widget _selector() {
+  TextField _selector() {
     return TextField(
       controller: _inputController,
       readOnly: true,
       onTap: _openSelector,
-      decoration: const InputDecoration(
-        label: Text("Color"),
-        suffixIcon: Icon(Icons.arrow_drop_down_rounded),
+      decoration: InputDecoration(
+        label: Text(S.current.color),
+        suffixIcon: const Icon(Icons.arrow_drop_down_rounded),
       ),
     );
   }
 
   StatefulBuilder _dialog(BuildContext context) {
     String? colorSelectTemp = colorSelector;
-    int? indexSelected;
+    int? indexSelected = colorIndexSelector;
 
     return StatefulBuilder(
       builder: (localContext, localSetState) {
@@ -159,23 +166,25 @@ class _ColorSelectorState extends State<ColorSelector> {
         }
 
         return AlertDialog(
-          title: const Text("Select Color"),
+          title: Text(S.current.selectAColor),
           content: Container(
             color: Colors.transparent,
             width: MediaQuery.of(context).size.width,
-            height: 250,
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Wrap(
-                      children: colorsList
-                          .map((e) => _colorButton(
-                                changeColorSelected,
-                                e,
-                                colorSelectTemp,
-                                context,
-                              ))
-                          .toList()),
+                    children: colorsList
+                        .map(
+                          (e) => _colorButton(
+                            changeColorSelected,
+                            e,
+                            colorSelectTemp,
+                            context,
+                          ),
+                        )
+                        .toList(),
+                  ),
                   _personalColor(colorSelectTemp, changePersonalColor),
                 ],
               ),
@@ -245,7 +254,8 @@ class _ColorSelectorState extends State<ColorSelector> {
     );
   }
 
-  Widget _picker(BuildContext context, void Function(Color) changeColor) {
+  StatefulBuilder _picker(
+      BuildContext context, void Function(Color) changeColor) {
     confirm(Color newColor) {
       changeColor(newColor);
       _changePickerColor(newColor);
@@ -253,40 +263,46 @@ class _ColorSelectorState extends State<ColorSelector> {
     }
 
     return StatefulBuilder(builder: (localContext, localSetState) {
-      return AlertDialog(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(400),
-            topRight: Radius.circular(400),
+      return OrientationBuilder(builder: (context, orientation) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(
+                  orientation == Orientation.portrait ? 200 : 40),
+              bottom: const Radius.circular(40),
+            ),
           ),
-        ),
-        content: SingleChildScrollView(
-          child: ColorPicker(
-            pickerColor: pickerColor,
-            paletteType: PaletteType.hueWheel,
-            onColorChanged: _changeCurrentColor,
-            enableAlpha: false,
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: pickerColor,
+              paletteType: orientation == Orientation.portrait
+                  ? PaletteType.hueWheel
+                  : PaletteType.hsl,
+              onColorChanged: _changeCurrentColor,
+              colorPickerWidth: orientation == Orientation.portrait ? 300 : 200,
+              enableAlpha: false,
+            ),
           ),
-        ),
-        actions: <Widget>[
-          CustomButton(
-            onPressed: Navigator.of(context).pop,
-            message: S.current.cancel,
-            icon: Icons.clear,
-            color: Colors.red,
-            type: ButtonType.outline,
-            width: 20,
-          ),
-          CustomButton(
-            onPressed: () => confirm(currentColor),
-            message: S.current.confirm,
-            icon: Icons.check,
-            color: Colors.blue,
-            type: ButtonType.outline,
-            width: 20,
-          ),
-        ],
-      );
+          actions: <Widget>[
+            CustomButton(
+              onPressed: Navigator.of(context).pop,
+              message: S.current.cancel,
+              icon: Icons.clear,
+              color: Colors.red,
+              type: ButtonType.outline,
+              width: 20,
+            ),
+            CustomButton(
+              onPressed: () => confirm(currentColor),
+              message: S.current.confirm,
+              icon: Icons.check,
+              color: Colors.blue,
+              type: ButtonType.outline,
+              width: 20,
+            ),
+          ],
+        );
+      });
     });
   }
 }

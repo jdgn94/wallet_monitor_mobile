@@ -6,7 +6,7 @@ import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 import "package:wallet_monitor/generated/l10n.dart";
 import "package:wallet_monitor/src/bloc/settings/settings_bloc.dart";
-import "package:wallet_monitor/src/configs/theme.dart";
+import 'package:wallet_monitor/src/configs/theme.configs.dart';
 import "package:wallet_monitor/src/routes/index.dart";
 import "package:wallet_monitor/storage/index.dart";
 
@@ -15,12 +15,6 @@ Future<void> main() async {
   await SettingsLocalStorage.configureSettings();
 
   final pref = SettingsLocalStorage.pref;
-  print(pref.get('theme'));
-  print(pref.get('lang'));
-  print(pref.get('color'));
-  print(pref.get('formatNumber'));
-  print(pref.get('showTutorial'));
-  print(pref.get('defaultCurrency'));
 
   runApp(AppState(pref: pref));
 }

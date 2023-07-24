@@ -9,8 +9,14 @@ abstract class SettingsEvent extends Equatable {
 
 class ChangeTheme extends SettingsEvent {
   final String theme;
+  final String lightStyle;
+  final String darkStyle;
 
-  const ChangeTheme(this.theme);
+  const ChangeTheme(
+    this.theme,
+    this.lightStyle,
+    this.darkStyle,
+  );
 }
 
 class ChangeLanguage extends SettingsEvent {

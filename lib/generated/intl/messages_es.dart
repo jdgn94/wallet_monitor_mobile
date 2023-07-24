@@ -24,14 +24,21 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "blue": MessageLookupByLibrary.simpleMessage("Azul"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
-        "chameleon": MessageLookupByLibrary.simpleMessage("Camaleon"),
+        "chameleon": MessageLookupByLibrary.simpleMessage("Camaleón"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector":
             MessageLookupByLibrary.simpleMessage("Selector de color"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
+        "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
+        "darkStyle": MessageLookupByLibrary.simpleMessage("Estilo oscuro"),
+        "generalMode": MessageLookupByLibrary.simpleMessage("Modo General"),
         "green": MessageLookupByLibrary.simpleMessage("Verde"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Configuraciones inicial"),
+        "light": MessageLookupByLibrary.simpleMessage("Claro"),
+        "lightStyle": MessageLookupByLibrary.simpleMessage("Estilo claro"),
+        "lighting": MessageLookupByLibrary.simpleMessage("Brillante"),
+        "night": MessageLookupByLibrary.simpleMessage("Nocturno"),
         "none": MessageLookupByLibrary.simpleMessage("Ninguno"),
         "orange": MessageLookupByLibrary.simpleMessage("Naranja"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
@@ -40,6 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "red": MessageLookupByLibrary.simpleMessage("Rojo"),
         "selectAColor":
             MessageLookupByLibrary.simpleMessage("Seleccione un color"),
-        "teal": MessageLookupByLibrary.simpleMessage("Aguamarina")
+        "system": MessageLookupByLibrary.simpleMessage("Sistema"),
+        "teal": MessageLookupByLibrary.simpleMessage("Aguamarina"),
+        "theme": MessageLookupByLibrary.simpleMessage("Temas"),
+        "themeSelector":
+            MessageLookupByLibrary.simpleMessage("Selector de tema")
       };
 }

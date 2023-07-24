@@ -12,6 +12,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc({required this.pref})
       : super(SettingsInitial(
           pref.getString("theme"),
+          pref.getString("lightStyle"),
+          pref.getString("darkStyle"),
           pref.getString("lang"),
           pref.getString("color"),
           pref.getString("formatNumber"),
@@ -21,9 +23,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SettingsEvent>((event, emit) {
       if (event is ChangeTheme) {
         pref.setString("theme", event.theme);
+        pref.setString("lightStyle", event.lightStyle);
+        pref.setString("darkStyle", event.darkStyle);
 
         emit(SettingsState(
           event.theme,
+          event.lightStyle,
+          event.darkStyle,
           pref.getString("lang"),
           pref.getString("color"),
           pref.getString("formatNumber"),
@@ -37,6 +43,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
         emit(SettingsState(
           pref.getString("theme"),
+          pref.getString("lightStyle"),
+          pref.getString("darkStyle"),
           event.lang,
           pref.getString("color"),
           pref.getString("formatNumber"),
@@ -50,6 +58,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
         emit(SettingsState(
           pref.getString("theme"),
+          pref.getString("lightStyle"),
+          pref.getString("darkStyle"),
           pref.getString("lang"),
           event.color,
           pref.getString("formatNumber"),
@@ -63,6 +73,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
         emit(SettingsState(
           pref.getString("theme"),
+          pref.getString("lightStyle"),
+          pref.getString("darkStyle"),
           pref.getString("lang"),
           pref.getString("color"),
           event.formatNumber,
@@ -76,6 +88,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
         emit(SettingsState(
           pref.getString("theme"),
+          pref.getString("lightStyle"),
+          pref.getString("darkStyle"),
           pref.getString("lang"),
           pref.getString("color"),
           pref.getString("formatNumber"),
@@ -89,6 +103,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
         emit(SettingsState(
           pref.getString("theme"),
+          pref.getString("lightStyle"),
+          pref.getString("darkStyle"),
           pref.getString("lang"),
           pref.getString("color"),
           pref.getString("formatNumber"),

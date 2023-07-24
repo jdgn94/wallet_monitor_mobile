@@ -28,9 +28,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector": MessageLookupByLibrary.simpleMessage("Color selector"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "dark": MessageLookupByLibrary.simpleMessage("Dark"),
+        "darkStyle": MessageLookupByLibrary.simpleMessage("Dark Style"),
+        "generalMode": MessageLookupByLibrary.simpleMessage("General Mode"),
         "green": MessageLookupByLibrary.simpleMessage("Green"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Initial configs"),
+        "light": MessageLookupByLibrary.simpleMessage("Light"),
+        "lightStyle": MessageLookupByLibrary.simpleMessage("Light Style"),
+        "lighting": MessageLookupByLibrary.simpleMessage("Lighting"),
+        "night": MessageLookupByLibrary.simpleMessage("Night"),
         "none": MessageLookupByLibrary.simpleMessage("None"),
         "orange": MessageLookupByLibrary.simpleMessage("Orange"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
@@ -38,6 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "purple": MessageLookupByLibrary.simpleMessage("Purple"),
         "red": MessageLookupByLibrary.simpleMessage("Red"),
         "selectAColor": MessageLookupByLibrary.simpleMessage("Select a color"),
-        "teal": MessageLookupByLibrary.simpleMessage("Teal")
+        "system": MessageLookupByLibrary.simpleMessage("System"),
+        "teal": MessageLookupByLibrary.simpleMessage("Teal"),
+        "theme": MessageLookupByLibrary.simpleMessage("Themes"),
+        "themeSelector": MessageLookupByLibrary.simpleMessage("Theme selector")
       };
 }

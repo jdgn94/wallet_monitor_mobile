@@ -47,7 +47,6 @@ ThemeData themeDark({required String colorSelected}) {
 }
 
 Color _getPrimaryColor(String value) {
-  print(value);
   if (value[0] == "0" && value.length > 1 && value[1] == "x") {
     return Color(int.parse(value));
   }

@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Theme selector`
+  String get themeSelector {
+    return Intl.message(
+      'Theme selector',
+      name: 'themeSelector',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Select a color`
   String get selectAColor {
     return Intl.message(
@@ -95,6 +105,16 @@ class S {
     return Intl.message(
       'Color',
       name: 'color',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Themes`
+  String get theme {
+    return Intl.message(
+      'Themes',
+      name: 'theme',
       desc: '',
       args: [],
     );
@@ -205,6 +225,86 @@ class S {
     return Intl.message(
       'Confirm',
       name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message(
+      'System',
+      name: 'system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get light {
+    return Intl.message(
+      'Light',
+      name: 'light',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lighting`
+  String get lighting {
+    return Intl.message(
+      'Lighting',
+      name: 'lighting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message(
+      'Dark',
+      name: 'dark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Night`
+  String get night {
+    return Intl.message(
+      'Night',
+      name: 'night',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General Mode`
+  String get generalMode {
+    return Intl.message(
+      'General Mode',
+      name: 'generalMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light Style`
+  String get lightStyle {
+    return Intl.message(
+      'Light Style',
+      name: 'lightStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Style`
+  String get darkStyle {
+    return Intl.message(
+      'Dark Style',
+      name: 'darkStyle',
       desc: '',
       args: [],
     );

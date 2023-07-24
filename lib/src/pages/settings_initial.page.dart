@@ -3,7 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 
-import 'package:wallet_monitor/src/widgets/settings/colorSelected.dart';
+import 'package:wallet_monitor/src/widgets/settings/color_selecteor.widget.dart';
+import 'package:wallet_monitor/src/widgets/settings/theme_selector.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class SettingsInitialPage extends StatefulWidget {
@@ -23,13 +24,17 @@ class _SettingsInitialPageState extends State<SettingsInitialPage> {
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              logo(),
-              ColorSelector(pref: _pref),
-            ],
+          child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                logo(),
+                ThemeSelectorWidget(pref: _pref),
+                ColorSelectorWidget(pref: _pref),
+              ],
+            ),
           ),
         ),
       ),

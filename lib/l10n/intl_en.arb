@@ -1,9 +1,11 @@
 {
   "initialConfig": "Initial configs",
   "colorSelector": "Color selector",
+  "themeSelector": "Theme selector",
   "selectAColor": "Select a color",
   "none": "None",
   "color": "Color",
+  "theme": "Themes",
   "teal": "Teal",
   "purple": "Purple",
   "pink": "Pink",
@@ -14,5 +16,13 @@
   "chameleon": "Chameleon",
   "personal": "Personal",
   "cancel": "Cancel",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "system": "System",
+  "light": "Light",
+  "lighting": "Lighting",
+  "dark": "Dark",
+  "night": "Night",
+  "generalMode": "General Mode",
+  "lightStyle": "Light Style",
+  "darkStyle": "Dark Style"
 }
