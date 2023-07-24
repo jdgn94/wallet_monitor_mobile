@@ -1,10 +1,10 @@
-import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import "package:bloc/bloc.dart";
+import "package:equatable/equatable.dart";
 
-import 'package:wallet_monitor/storage/index.dart';
+import "package:wallet_monitor/storage/index.dart";
 
-part 'settings_event.dart';
-part 'settings_state.dart';
+part "settings_event.dart";
+part "settings_state.dart";
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SharedPreferences pref;
@@ -20,7 +20,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         )) {
     on<SettingsEvent>((event, emit) {
       if (event is ChangeTheme) {
-        pref.setString('theme', event.theme);
+        pref.setString("theme", event.theme);
 
         emit(SettingsState(
           event.theme,
@@ -33,7 +33,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
 
       if (event is ChangeLanguage) {
-        pref.setString('lang', event.lang);
+        pref.setString("lang", event.lang);
 
         emit(SettingsState(
           pref.getString("theme"),
@@ -46,7 +46,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
 
       if (event is ChangeColor) {
-        pref.setString('lang', event.color);
+        pref.setString("color", event.color);
 
         emit(SettingsState(
           pref.getString("theme"),
@@ -59,7 +59,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
 
       if (event is ChangeFormatNumber) {
-        pref.setString('lang', event.formatNumber);
+        pref.setString("formatNumber", event.formatNumber);
 
         emit(SettingsState(
           pref.getString("theme"),
@@ -72,7 +72,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
 
       if (event is ChangeShowTutorial) {
-        pref.setBool('lang', event.showTutorial);
+        pref.setBool("showTutorial", event.showTutorial);
 
         emit(SettingsState(
           pref.getString("theme"),

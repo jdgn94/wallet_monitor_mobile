@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a es locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,26 +18,28 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'es';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "blue": MessageLookupByLibrary.simpleMessage("Blue"),
-        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
-        "chameleon": MessageLookupByLibrary.simpleMessage("Chameleon"),
+        "blue": MessageLookupByLibrary.simpleMessage("Azul"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
+        "chameleon": MessageLookupByLibrary.simpleMessage("Camaleon"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
-        "colorSelector": MessageLookupByLibrary.simpleMessage("Color selector"),
-        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
-        "green": MessageLookupByLibrary.simpleMessage("Green"),
+        "colorSelector":
+            MessageLookupByLibrary.simpleMessage("Selector de color"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
+        "green": MessageLookupByLibrary.simpleMessage("Verde"),
         "initialConfig":
-            MessageLookupByLibrary.simpleMessage("Initial configs"),
-        "none": MessageLookupByLibrary.simpleMessage("None"),
-        "orange": MessageLookupByLibrary.simpleMessage("Orange"),
+            MessageLookupByLibrary.simpleMessage("Configuraciones inicial"),
+        "none": MessageLookupByLibrary.simpleMessage("Ninguno"),
+        "orange": MessageLookupByLibrary.simpleMessage("Naranja"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
-        "pink": MessageLookupByLibrary.simpleMessage("Pink"),
-        "purple": MessageLookupByLibrary.simpleMessage("Purple"),
-        "red": MessageLookupByLibrary.simpleMessage("Red"),
-        "selectAColor": MessageLookupByLibrary.simpleMessage("Select a color"),
-        "teal": MessageLookupByLibrary.simpleMessage("Teal")
+        "pink": MessageLookupByLibrary.simpleMessage("Rosado"),
+        "purple": MessageLookupByLibrary.simpleMessage("Morado"),
+        "red": MessageLookupByLibrary.simpleMessage("Rojo"),
+        "selectAColor":
+            MessageLookupByLibrary.simpleMessage("Seleccione un color"),
+        "teal": MessageLookupByLibrary.simpleMessage("Aguamarina")
       };
 }

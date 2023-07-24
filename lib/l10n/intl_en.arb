@@ -1,1 +1,18 @@
-{}
+{
+  "initialConfig": "Initial configs",
+  "colorSelector": "Color selector",
+  "selectAColor": "Select a color",
+  "none": "None",
+  "color": "Color",
+  "teal": "Teal",
+  "purple": "Purple",
+  "pink": "Pink",
+  "blue": "Blue",
+  "orange": "Orange",
+  "red": "Red",
+  "green": "Green",
+  "chameleon": "Chameleon",
+  "personal": "Personal",
+  "cancel": "Cancel",
+  "confirm": "Confirm"
+}

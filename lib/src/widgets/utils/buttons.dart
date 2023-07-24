@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum ButtonType { tonal, outline, text }
+enum ButtonType { tonal, outline, text, category }
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -19,6 +19,7 @@ class CustomButton extends StatelessWidget {
   final String message;
   final bool disabled;
   final bool loading;
+  final bool selected;
 
   const CustomButton({
     super.key,
@@ -38,6 +39,7 @@ class CustomButton extends StatelessWidget {
     this.message = "",
     this.disabled = false,
     this.loading = false,
+    this.selected = false,
   });
 
   @override
@@ -89,6 +91,46 @@ class CustomButton extends StatelessWidget {
         ),
         onPressed: disabled ? null : onPressed,
         child: _buttonContainer(context),
+      );
+    }
+
+    if (type == ButtonType.category) {
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onPressed,
+          borderRadius: BorderRadius.circular(20),
+          child: Ink(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              color: (color ?? Colors.grey).withAlpha(selected ? 90 : 30),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Ink(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: (color ?? Colors.grey).withAlpha(70),
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      topLeft: Radius.circular(20),
+                    ),
+                  ),
+                  child: Icon(
+                    icon,
+                    color: color ?? Colors.grey,
+                  ),
+                ),
+                const SizedBox(width: 5.0),
+                Text(text ?? "")
+              ],
+            ),
+          ),
+        ),
       );
     }
 

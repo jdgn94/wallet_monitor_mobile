@@ -15,6 +15,12 @@ Future<void> main() async {
   await SettingsLocalStorage.configureSettings();
 
   final pref = SettingsLocalStorage.pref;
+  print(pref.get('theme'));
+  print(pref.get('lang'));
+  print(pref.get('color'));
+  print(pref.get('formatNumber'));
+  print(pref.get('showTutorial'));
+  print(pref.get('defaultCurrency'));
 
   runApp(AppState(pref: pref));
 }
@@ -49,6 +55,7 @@ class MyApp extends StatelessWidget {
 
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
+        print(state.toString());
         return MaterialApp(
           title: "Wallet Monitor",
           debugShowCheckedModeBanner: false,

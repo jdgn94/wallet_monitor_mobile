@@ -1,0 +1,18 @@
+{
+  "initialConfig": "Configuraciones inicial",
+  "colorSelector": "Selector de color",
+  "selectAColor": "Seleccione un color",
+  "none": "Ninguno",
+  "color": "Color",
+  "teal": "Aguamarina",
+  "purple": "Morado",
+  "pink": "Rosado",
+  "blue": "Azul",
+  "orange": "Naranja",
+  "red": "Rojo",
+  "green": "Verde",
+  "chameleon": "Camaleon",
+  "personal": "Personal",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar"
+}

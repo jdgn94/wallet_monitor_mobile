@@ -15,6 +15,7 @@ List<ColorDescription> colorsList = [
   ColorDescription(color: Colors.pink.shade300, name: 'pink'),
   ColorDescription(color: Colors.green.shade700, name: 'green'),
   ColorDescription(color: Colors.blue, name: 'blue'),
+  ColorDescription(color: Colors.blue, name: 'chameleon'),
 ];
 
 ThemeData themeLight({required String colorSelected}) {
@@ -46,8 +47,9 @@ ThemeData themeDark({required String colorSelected}) {
 }
 
 Color _getPrimaryColor(String value) {
-  if (value[0] == "#") {
-    return Color(int.parse(value.replaceAll("#", '0xFF')));
+  print(value);
+  if (value[0] == "0" && value.length > 1 && value[1] == "x") {
+    return Color(int.parse(value));
   }
   final valueFormate = int.parse(value);
   if (valueFormate < 0 || valueFormate >= colorsList.length) {

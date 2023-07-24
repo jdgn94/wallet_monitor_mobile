@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:wallet_monitor/generated/l10n.dart';
 
 import 'package:wallet_monitor/src/widgets/settings/colorSelected.dart';
 import 'package:wallet_monitor/storage/index.dart';
@@ -66,9 +67,9 @@ class _SettingsInitialPageState extends State<SettingsInitialPage> {
             ],
           ),
         ),
-        const Text(
-          "Configuración inicial",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        Text(
+          S.current.initialConfig,
+          style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ],
     );
