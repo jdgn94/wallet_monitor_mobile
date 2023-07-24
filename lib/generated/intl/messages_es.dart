@@ -29,8 +29,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "colorSelector":
             MessageLookupByLibrary.simpleMessage("Selector de color"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
+        "currencyFormat":
+            MessageLookupByLibrary.simpleMessage("Formato de Moneda"),
         "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
         "darkStyle": MessageLookupByLibrary.simpleMessage("Estilo oscuro"),
+        "format": MessageLookupByLibrary.simpleMessage("Formato"),
         "generalMode": MessageLookupByLibrary.simpleMessage("Modo General"),
         "green": MessageLookupByLibrary.simpleMessage("Verde"),
         "initialConfig":

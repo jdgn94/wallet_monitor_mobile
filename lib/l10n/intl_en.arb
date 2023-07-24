@@ -24,5 +24,7 @@
   "night": "Night",
   "generalMode": "General Mode",
   "lightStyle": "Light Style",
-  "darkStyle": "Dark Style"
+  "darkStyle": "Dark Style",
+  "currencyFormat": "Currency Format",
+  "format": "Format"
 }

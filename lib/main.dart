@@ -43,9 +43,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String initialPage = pref.getString("defaultCurrency") != null
-        ? "/home"
-        : "/settingsInitial";
+    const String initialPage = "/settingsInitial";
+    // final String initialPage = pref.getString("defaultCurrency") != null
+    //     ? "/home"
+    //     : "/settingsInitial";
 
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {

@@ -163,7 +163,7 @@ class _ThemeSelectorWidgetState extends State<ThemeSelectorWidget> {
   Column _generalList(String theme, void Function(String) changeValue) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <RadioListTile<String>>[
         RadioListTile(
           title: Row(
             children: [

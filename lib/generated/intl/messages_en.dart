@@ -28,8 +28,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector": MessageLookupByLibrary.simpleMessage("Color selector"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "currencyFormat":
+            MessageLookupByLibrary.simpleMessage("Currency Format"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "darkStyle": MessageLookupByLibrary.simpleMessage("Dark Style"),
+        "format": MessageLookupByLibrary.simpleMessage("Format"),
         "generalMode": MessageLookupByLibrary.simpleMessage("General Mode"),
         "green": MessageLookupByLibrary.simpleMessage("Green"),
         "initialConfig":

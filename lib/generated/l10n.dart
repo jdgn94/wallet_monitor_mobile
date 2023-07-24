@@ -309,6 +309,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Currency Format`
+  String get currencyFormat {
+    return Intl.message(
+      'Currency Format',
+      name: 'currencyFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Format`
+  String get format {
+    return Intl.message(
+      'Format',
+      name: 'format',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
