@@ -18,7 +18,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("color"),
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
-          pref.getInt("defaultCurrency"),
         )) {
     on<SettingsEvent>((event, emit) {
       if (event is ChangeTheme) {
@@ -34,7 +33,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("color"),
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
-          pref.getInt("defaultCurrency"),
         ));
       }
 
@@ -49,7 +47,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("color"),
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
-          pref.getInt("defaultCurrency"),
         ));
       }
 
@@ -64,7 +61,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           event.color,
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
-          pref.getInt("defaultCurrency"),
         ));
       }
 
@@ -79,7 +75,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("color"),
           event.formatNumber,
           pref.getBool("showTutorial"),
-          pref.getInt("defaultCurrency"),
         ));
       }
 
@@ -94,22 +89,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("color"),
           pref.getString("formatNumber"),
           event.showTutorial,
-          pref.getInt("defaultCurrency"),
-        ));
-      }
-
-      if (event is ChangeDefaultCurrency) {
-        pref.setInt("defaultCurrency", event.defaultCurrency);
-
-        emit(SettingsState(
-          pref.getString("theme"),
-          pref.getString("lightStyle"),
-          pref.getString("darkStyle"),
-          pref.getString("lang"),
-          pref.getString("color"),
-          pref.getString("formatNumber"),
-          pref.getBool("showTutorial"),
-          event.defaultCurrency,
         ));
       }
     });

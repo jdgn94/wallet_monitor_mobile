@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 
 import 'package:wallet_monitor/src/widgets/settings/color_selecteor.widget.dart';
-import 'package:wallet_monitor/src/widgets/settings/format_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/settings/theme_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.dart';
 import 'package:wallet_monitor/storage/index.dart';
@@ -19,12 +18,13 @@ class SettingsInitialPage extends StatefulWidget {
 class _SettingsInitialPageState extends State<SettingsInitialPage> {
   final _pref = SettingsLocalStorage.pref;
 
-  bool _checkValues() {
-    if (_pref.getString('formatCurrency') != null) {
-      return false;
-    }
-    return true;
+  @override
+  void initState() {
+    _setInitialValueOnSharedPreferences();
+    super.initState();
   }
+
+  _setInitialValueOnSharedPreferences() {}
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,9 @@ class _SettingsInitialPageState extends State<SettingsInitialPage> {
                 logo(),
                 ThemeSelectorWidget(pref: _pref),
                 ColorSelectorWidget(pref: _pref),
-                FormatSelectorWidget(pref: _pref),
+                const SizedBox(
+                  height: 15,
+                ),
                 _nextPage(),
               ],
             ),
@@ -53,7 +55,7 @@ class _SettingsInitialPageState extends State<SettingsInitialPage> {
     );
   }
 
-  Widget logo() {
+  Column logo() {
     return Column(
       children: [
         SizedBox(
@@ -94,11 +96,10 @@ class _SettingsInitialPageState extends State<SettingsInitialPage> {
 
   Widget _nextPage() {
     return CustomButton(
-      onPressed: () {},
+      onPressed: () => Navigator.of(context).pushNamed("/settingsSecondary"),
       text: 'Next Page',
       margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       height: 60.0,
-      disabled: _checkValues(),
     );
   }
 }

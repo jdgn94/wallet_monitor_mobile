@@ -63,14 +63,16 @@ class CustomButton extends StatelessWidget {
         onPressed: disabled ? null : onPressed,
         style: ButtonStyle(
           foregroundColor: MaterialStatePropertyAll(
-              disabled ? colorDisabled : color ?? primaryColor),
+            disabled ? colorDisabled : color ?? primaryColor,
+          ),
           overlayColor: MaterialStatePropertyAll(
-              (disabled ? colorDisabled : color ?? primaryColor)
-                  .withOpacity(.3)),
+            (disabled ? colorDisabled : color ?? primaryColor).withOpacity(.3),
+          ),
           side: MaterialStatePropertyAll(
             BorderSide(
-                color: disabled ? colorDisabled : color ?? primaryColor,
-                width: 2),
+              color: disabled ? colorDisabled : color ?? primaryColor,
+              width: 2,
+            ),
           ),
         ),
         child: _buttonContainer(context),
@@ -126,7 +128,12 @@ class CustomButton extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 5.0),
-                Text(text ?? "")
+                Expanded(
+                  child: Text(
+                    text ?? "",
+                    style: const TextStyle(overflow: TextOverflow.ellipsis),
+                  ),
+                ),
               ],
             ),
           ),

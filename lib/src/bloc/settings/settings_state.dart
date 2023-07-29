@@ -8,7 +8,6 @@ class SettingsState extends Equatable {
   final String? color;
   final String? formatNumber;
   final bool? showTutorial;
-  final int? defaultCurrency;
 
   const SettingsState(
     this.theme,
@@ -18,7 +17,6 @@ class SettingsState extends Equatable {
     this.color,
     this.formatNumber,
     this.showTutorial,
-    this.defaultCurrency,
   );
 
   @override
@@ -30,7 +28,6 @@ class SettingsState extends Equatable {
         color,
         formatNumber,
         showTutorial,
-        defaultCurrency,
       ];
 }
 
@@ -43,6 +40,5 @@ class SettingsInitial extends SettingsState {
     super.color,
     super.formatNumber,
     super.showTutorial,
-    super.defaultCurrency,
   );
 }

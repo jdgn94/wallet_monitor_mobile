@@ -22,8 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accounts": MessageLookupByLibrary.simpleMessage("Cuentas"),
         "blue": MessageLookupByLibrary.simpleMessage("Azul"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
+        "categories": MessageLookupByLibrary.simpleMessage("Categorías"),
         "chameleon": MessageLookupByLibrary.simpleMessage("Camaleón"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector":
@@ -43,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lighting": MessageLookupByLibrary.simpleMessage("Brillante"),
         "night": MessageLookupByLibrary.simpleMessage("Nocturno"),
         "none": MessageLookupByLibrary.simpleMessage("Ninguno"),
+        "operations": MessageLookupByLibrary.simpleMessage("Operaciones"),
         "orange": MessageLookupByLibrary.simpleMessage("Naranja"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
         "pink": MessageLookupByLibrary.simpleMessage("Rosado"),
@@ -50,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "red": MessageLookupByLibrary.simpleMessage("Rojo"),
         "selectAColor":
             MessageLookupByLibrary.simpleMessage("Seleccione un color"),
+        "statistics": MessageLookupByLibrary.simpleMessage("Estadísticas"),
         "system": MessageLookupByLibrary.simpleMessage("Sistema"),
         "teal": MessageLookupByLibrary.simpleMessage("Aguamarina"),
         "theme": MessageLookupByLibrary.simpleMessage("Temas"),

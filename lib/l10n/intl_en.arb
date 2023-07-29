@@ -26,5 +26,9 @@
   "lightStyle": "Light Style",
   "darkStyle": "Dark Style",
   "currencyFormat": "Currency Format",
-  "format": "Format"
+  "format": "Format",
+  "accounts": "Accounts",
+  "categories": "Categories",
+  "operations": "Operations",
+  "statistics": "Statistics"
 }

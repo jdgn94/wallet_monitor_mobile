@@ -7,12 +7,14 @@ import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import "package:wallet_monitor/generated/l10n.dart";
 import "package:wallet_monitor/src/bloc/settings/settings_bloc.dart";
 import 'package:wallet_monitor/src/configs/theme.configs.dart';
+import 'package:wallet_monitor/src/db/index.db.dart';
 import "package:wallet_monitor/src/routes/index.dart";
 import "package:wallet_monitor/storage/index.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsLocalStorage.configureSettings();
+  DataBase.initDB();
 
   final pref = SettingsLocalStorage.pref;
 
@@ -44,9 +46,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String initialPage = "/settingsInitial";
-    // final String initialPage = pref.getString("defaultCurrency") != null
-    //     ? "/home"
-    //     : "/settingsInitial";
+    // final String initialPage =
+    //     pref.getString("formatNumber") != null ? "/home" : "/settingsInitial";
 
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
