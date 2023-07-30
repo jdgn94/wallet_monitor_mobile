@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
-import 'package:wallet_monitor/src/widgets/utils/buttons.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class ThemeSelectorWidget extends StatefulWidget {

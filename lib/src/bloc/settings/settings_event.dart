@@ -42,3 +42,10 @@ class ChangeShowTutorial extends SettingsEvent {
 
   const ChangeShowTutorial(this.showTutorial);
 }
+
+class ChangeDefaultCurrency extends SettingsEvent {
+  final int defaultCurrency;
+  final String currencySymbol;
+
+  const ChangeDefaultCurrency(this.defaultCurrency, this.currencySymbol);
+}

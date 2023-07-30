@@ -5,7 +5,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
 import 'package:wallet_monitor/src/configs/theme.configs.dart';
-import 'package:wallet_monitor/src/widgets/utils/buttons.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class ColorSelectorWidget extends StatefulWidget {
@@ -27,7 +27,9 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
   @override
   void initState() {
     if (widget.pref.getString("color") == null) {
-      colorSelector = S.current.none;
+      colorSelector = S.current.teal;
+      colorIndexSelector = 0;
+      _changeGlobalColor(colorIndexSelector, 'teal');
     } else if (widget.pref.getString("color")![0] == '0' &&
         widget.pref.getString("color")!.length > 1 &&
         widget.pref.getString("color")![1] == "x") {
@@ -55,7 +57,9 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
 
   void _openColorPicker(void Function(Color) changeColor) {
     showDialog(
-        context: context, builder: (context) => _picker(context, changeColor));
+      context: context,
+      builder: (context) => _picker(context, changeColor),
+    );
   }
 
   void _changeGlobalColor(int? colorIndex, String colorName) {
@@ -154,13 +158,14 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
         }
 
         void confirm() {
-          Navigator.of(context).pop();
+          Navigator.of(localContext).pop();
           _changeGlobalColor(indexSelected, colorSelectTemp!);
         }
 
         void changePersonalColor(Color color) {
           localSetState(() {
             colorSelectTemp = "Personal";
+            indexSelected = null;
           });
           _changePickerColor(color);
         }
@@ -192,7 +197,7 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
           ),
           actions: [
             CustomButton(
-              onPressed: Navigator.of(context).pop,
+              onPressed: Navigator.of(localContext).pop,
               message: S.current.cancel,
               icon: Icons.close,
               color: Colors.red,

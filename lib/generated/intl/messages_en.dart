@@ -22,6 +22,167 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AfghanistanAfghani":
+            MessageLookupByLibrary.simpleMessage("Afghanistan Afghani"),
+        "AlbaniaLek": MessageLookupByLibrary.simpleMessage("AlbaniaLek"),
+        "ArgentinaPeso": MessageLookupByLibrary.simpleMessage("Argentina Peso"),
+        "ArubaGuilder": MessageLookupByLibrary.simpleMessage("Aruba Guilder"),
+        "AustraliaDollar":
+            MessageLookupByLibrary.simpleMessage("Australia Dollar"),
+        "AzerbaijanManat":
+            MessageLookupByLibrary.simpleMessage("Azerbaijan Manat"),
+        "BahamasDollar": MessageLookupByLibrary.simpleMessage("Bahamas Dollar"),
+        "BarbadosDollar":
+            MessageLookupByLibrary.simpleMessage("Barbados Dollar"),
+        "BelarusRuble": MessageLookupByLibrary.simpleMessage("Belarus Ruble"),
+        "BelizeDollar": MessageLookupByLibrary.simpleMessage("Belize Dollar"),
+        "BermudaDollar": MessageLookupByLibrary.simpleMessage("Bermuda Dollar"),
+        "BoliviaBoliviano":
+            MessageLookupByLibrary.simpleMessage("Bolivia Boliviano"),
+        "BosniaAndHerzegovinaConvertibleMark":
+            MessageLookupByLibrary.simpleMessage(
+                "Bosnia and Herzegovina Convertible Mark"),
+        "BotswanaPula": MessageLookupByLibrary.simpleMessage("Botswana Pula"),
+        "BrazilReal": MessageLookupByLibrary.simpleMessage("Brazil Real"),
+        "BruneiDarussalamDollar":
+            MessageLookupByLibrary.simpleMessage("Brunei Darussalam Dollar"),
+        "BulgariaLev": MessageLookupByLibrary.simpleMessage("Bulgaria Lev"),
+        "CambodiaRiel": MessageLookupByLibrary.simpleMessage("Cambodia Riel"),
+        "CanadaDollar": MessageLookupByLibrary.simpleMessage("Canada Dollar"),
+        "CaymanIslandsDollar":
+            MessageLookupByLibrary.simpleMessage("Cayman Islands Dollar"),
+        "ChilePeso": MessageLookupByLibrary.simpleMessage("Chile Peso"),
+        "ChinaYuanRenminbi":
+            MessageLookupByLibrary.simpleMessage("China Yuan Renminbi"),
+        "ColombiaPeso": MessageLookupByLibrary.simpleMessage("Colombia Peso"),
+        "CostaRicaColon":
+            MessageLookupByLibrary.simpleMessage("Costa Rica Colon"),
+        "CroatiaKuna": MessageLookupByLibrary.simpleMessage("Croatia Kuna"),
+        "CubaPeso": MessageLookupByLibrary.simpleMessage("Cuba Peso"),
+        "CzechRepublicKoruna":
+            MessageLookupByLibrary.simpleMessage("Czech Republic Koruna"),
+        "DenmarkKrone": MessageLookupByLibrary.simpleMessage("Denmark Krone"),
+        "DominicanRepublicPeso":
+            MessageLookupByLibrary.simpleMessage("Dominican Republic Peso"),
+        "EastCaribbeanDollar":
+            MessageLookupByLibrary.simpleMessage("East Caribbean Dollar"),
+        "EgyptPound": MessageLookupByLibrary.simpleMessage("Egypt Pound"),
+        "ElSalvadorColon":
+            MessageLookupByLibrary.simpleMessage("El Salvador Colon"),
+        "EuroMemberCountries": MessageLookupByLibrary.simpleMessage("Euro"),
+        "FalklandIslandsMalvinasPound": MessageLookupByLibrary.simpleMessage(
+            "Falkland Islands Malvinas Pound"),
+        "FijiDollar": MessageLookupByLibrary.simpleMessage("Fiji Dollar"),
+        "GhanaCedi": MessageLookupByLibrary.simpleMessage("Ghana Cedi"),
+        "GibraltarPound":
+            MessageLookupByLibrary.simpleMessage("Gibraltar Pound"),
+        "GuatemalaQuetzal":
+            MessageLookupByLibrary.simpleMessage("Guatemala Quetzal"),
+        "GuernseyPound": MessageLookupByLibrary.simpleMessage("Guernsey Pound"),
+        "GuyanaDollar": MessageLookupByLibrary.simpleMessage("Guyana Dollar"),
+        "HondurasLempira":
+            MessageLookupByLibrary.simpleMessage("Honduras Lempira"),
+        "HongKongDollar":
+            MessageLookupByLibrary.simpleMessage("Hong Kong Dollar"),
+        "HungaryForint": MessageLookupByLibrary.simpleMessage("Hungary Forint"),
+        "IcelandKrona": MessageLookupByLibrary.simpleMessage("Iceland Krona"),
+        "IndiaRupee": MessageLookupByLibrary.simpleMessage("India Rupee"),
+        "IndonesiaRupiah":
+            MessageLookupByLibrary.simpleMessage("Indonesia Rupiah"),
+        "IranRial": MessageLookupByLibrary.simpleMessage("Iran Rial"),
+        "IsleOfManPound":
+            MessageLookupByLibrary.simpleMessage("Isle of Man Pound"),
+        "IsraelShekel": MessageLookupByLibrary.simpleMessage("Israel Shekel"),
+        "JamaicaDollar": MessageLookupByLibrary.simpleMessage("Jamaica Dollar"),
+        "JapanYen": MessageLookupByLibrary.simpleMessage("Japan Yen"),
+        "JerseyPound": MessageLookupByLibrary.simpleMessage("Jersey Pound"),
+        "KazakhstanTenge":
+            MessageLookupByLibrary.simpleMessage("Kazakhstan Tenge"),
+        "KoreaNorthWon":
+            MessageLookupByLibrary.simpleMessage("Korea (North) Won"),
+        "KoreaSouthWon":
+            MessageLookupByLibrary.simpleMessage("Korea (South) Won"),
+        "KyrgyzstanSom": MessageLookupByLibrary.simpleMessage("Kyrgyzstan Som"),
+        "LaosKip": MessageLookupByLibrary.simpleMessage("Laos Kip"),
+        "LebanonPound": MessageLookupByLibrary.simpleMessage("Lebanon Pound"),
+        "LiberiaDollar": MessageLookupByLibrary.simpleMessage("Liberia Dollar"),
+        "MacedoniaDenar":
+            MessageLookupByLibrary.simpleMessage("Macedonia Denar"),
+        "MalaysiaRinggit":
+            MessageLookupByLibrary.simpleMessage("Malaysia Ringgit"),
+        "MauritiusRupee":
+            MessageLookupByLibrary.simpleMessage("Mauritius Rupee"),
+        "MexicoPeso": MessageLookupByLibrary.simpleMessage("Mexico Peso"),
+        "MongoliaTughrik":
+            MessageLookupByLibrary.simpleMessage("Mongolia Tughrik"),
+        "MozambiqueMetical":
+            MessageLookupByLibrary.simpleMessage("Mozambique Metical"),
+        "NamibiaDollar": MessageLookupByLibrary.simpleMessage("Namibia Dollar"),
+        "NepalRupee": MessageLookupByLibrary.simpleMessage("Nepal Rupee"),
+        "NetherlandsAntillesGuilder": MessageLookupByLibrary.simpleMessage(
+            "Netherlands Antilles Guilder"),
+        "NewZealandDollar":
+            MessageLookupByLibrary.simpleMessage("New Zealand Dollar"),
+        "NicaraguaCordoba":
+            MessageLookupByLibrary.simpleMessage("Nicaragua Cordoba"),
+        "NigeriaNaira": MessageLookupByLibrary.simpleMessage("Nigeria Naira"),
+        "NorwayKrone": MessageLookupByLibrary.simpleMessage("Norway Krone"),
+        "OmanRial": MessageLookupByLibrary.simpleMessage("Oman Rial"),
+        "PakistanRupee": MessageLookupByLibrary.simpleMessage("Pakistan Rupee"),
+        "PanamaBalboa": MessageLookupByLibrary.simpleMessage("Panama Balboa"),
+        "ParaguayGuarani":
+            MessageLookupByLibrary.simpleMessage("Paraguay Guarani"),
+        "PeruSol": MessageLookupByLibrary.simpleMessage("Peru Sol"),
+        "PhilippinesPeso":
+            MessageLookupByLibrary.simpleMessage("Philippines Peso"),
+        "PolandZloty": MessageLookupByLibrary.simpleMessage("Poland Zloty"),
+        "QatarRiyal": MessageLookupByLibrary.simpleMessage("Qatar Riyal"),
+        "RomaniaLeu": MessageLookupByLibrary.simpleMessage("Romania Leu"),
+        "RussiaRuble": MessageLookupByLibrary.simpleMessage("Russia Ruble"),
+        "SaintHelenaPound":
+            MessageLookupByLibrary.simpleMessage("Saint Helena Pound"),
+        "SaudiArabiaRiyal":
+            MessageLookupByLibrary.simpleMessage("Saudi Arabia Riyal"),
+        "SerbiaDinar": MessageLookupByLibrary.simpleMessage("Serbia Dinar"),
+        "SeychellesRupee":
+            MessageLookupByLibrary.simpleMessage("Seychelles Rupee"),
+        "SingaporeDollar":
+            MessageLookupByLibrary.simpleMessage("Singapore Dollar"),
+        "SolomonIslandsDollar":
+            MessageLookupByLibrary.simpleMessage("Solomon Islands Dollar"),
+        "SomaliaShilling":
+            MessageLookupByLibrary.simpleMessage("Somalia Shilling"),
+        "SouthAfricaRand":
+            MessageLookupByLibrary.simpleMessage("South Africa Rand"),
+        "SriLankaRupee":
+            MessageLookupByLibrary.simpleMessage("Sri Lanka Rupee"),
+        "SurinameDollar":
+            MessageLookupByLibrary.simpleMessage("Suriname Dollar"),
+        "SwedenKrona": MessageLookupByLibrary.simpleMessage("Sweden Krona"),
+        "SwitzerlandFranc":
+            MessageLookupByLibrary.simpleMessage("Switzerland Franc"),
+        "SyriaPound": MessageLookupByLibrary.simpleMessage("Syria Pound"),
+        "TaiwanNewDollar":
+            MessageLookupByLibrary.simpleMessage("Taiwan New Dollar"),
+        "ThailandBaht": MessageLookupByLibrary.simpleMessage("Thailand Baht"),
+        "TrinidadAndTobagoDollar":
+            MessageLookupByLibrary.simpleMessage("Trinidad and Tobago Dollar"),
+        "TurkeyLira": MessageLookupByLibrary.simpleMessage("Turkey Lira"),
+        "TuvaluDollar": MessageLookupByLibrary.simpleMessage("Tuvalu Dollar"),
+        "UkraineHryvnia":
+            MessageLookupByLibrary.simpleMessage("Ukraine Hryvnia"),
+        "UnitedKingdomPound":
+            MessageLookupByLibrary.simpleMessage("United Kingdom Pound"),
+        "UnitedStatesDollar":
+            MessageLookupByLibrary.simpleMessage("United States Dollar"),
+        "UruguayPeso": MessageLookupByLibrary.simpleMessage("Uruguay Peso"),
+        "UzbekistanSom": MessageLookupByLibrary.simpleMessage("Uzbekistan Som"),
+        "VenezuelaBolivar":
+            MessageLookupByLibrary.simpleMessage("Venezuela Bolivar"),
+        "VietnamDong": MessageLookupByLibrary.simpleMessage("Vietnam Dong"),
+        "YemenRial": MessageLookupByLibrary.simpleMessage("Yemen Rial"),
+        "ZimbabweDollar":
+            MessageLookupByLibrary.simpleMessage("Zimbabwe Dollar"),
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "blue": MessageLookupByLibrary.simpleMessage("Blue"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -30,6 +191,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector": MessageLookupByLibrary.simpleMessage("Color selector"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "currencies": MessageLookupByLibrary.simpleMessage("Currencies"),
+        "currency": MessageLookupByLibrary.simpleMessage("Currency"),
+        "currencyConfig":
+            MessageLookupByLibrary.simpleMessage("Currency config"),
         "currencyFormat":
             MessageLookupByLibrary.simpleMessage("Currency Format"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
@@ -42,15 +207,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "lightStyle": MessageLookupByLibrary.simpleMessage("Light Style"),
         "lighting": MessageLookupByLibrary.simpleMessage("Lighting"),
+        "next": MessageLookupByLibrary.simpleMessage("Next"),
         "night": MessageLookupByLibrary.simpleMessage("Night"),
         "none": MessageLookupByLibrary.simpleMessage("None"),
         "operations": MessageLookupByLibrary.simpleMessage("Operations"),
         "orange": MessageLookupByLibrary.simpleMessage("Orange"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
         "pink": MessageLookupByLibrary.simpleMessage("Pink"),
+        "primary": MessageLookupByLibrary.simpleMessage("Primary"),
         "purple": MessageLookupByLibrary.simpleMessage("Purple"),
         "red": MessageLookupByLibrary.simpleMessage("Red"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "selectAColor": MessageLookupByLibrary.simpleMessage("Select a color"),
+        "start": MessageLookupByLibrary.simpleMessage("Start"),
         "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "teal": MessageLookupByLibrary.simpleMessage("Teal"),

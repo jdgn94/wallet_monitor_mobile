@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
-import 'package:wallet_monitor/src/widgets/utils/buttons.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
 
 class FormatSelectorWidget extends StatefulWidget {
   final SharedPreferences pref;
@@ -23,13 +23,13 @@ class _FormatSelectorWidgetState extends State<FormatSelectorWidget> {
   final double numberExample = 12345678.90;
   late TextEditingController _inputController;
   late String currencyFormat;
+  late String currencySymbol;
 
   @override
   void initState() {
     currencyFormat = widget.pref.getString('formatNumber') ?? 'en_US';
-    NumberFormat nFormat = NumberFormat("#,##0.00", currencyFormat);
-    _inputController =
-        TextEditingController(text: "\$ ${nFormat.format(numberExample)}");
+    _inputController = TextEditingController();
+    _setInputText();
     super.initState();
   }
 
@@ -37,6 +37,13 @@ class _FormatSelectorWidgetState extends State<FormatSelectorWidget> {
   void dispose() {
     _inputController.dispose();
     super.dispose();
+  }
+
+  _setInputText() {
+    currencySymbol = widget.pref.getString("currencySymbol") ?? '\$';
+    NumberFormat nFormat = NumberFormat("#,##0.00", currencyFormat);
+    _inputController.text = "$currencySymbol ${nFormat.format(numberExample)}";
+    setState(() {});
   }
 
   void changeCurrency(String newFormat) {
@@ -57,24 +64,30 @@ class _FormatSelectorWidgetState extends State<FormatSelectorWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(15.0),
-      child: SizedBox(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              S.current.currencyFormat,
-              style: const TextStyle(fontSize: 22),
-            ),
-            const SizedBox(height: 10),
-            _selector(),
-          ],
+    return BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
+      if (state.currencySymbol != currencySymbol) {
+        Future.delayed(Duration.zero, _setInputText);
+      }
+
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(15.0),
+        child: SizedBox(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                S.current.currencyFormat,
+                style: const TextStyle(fontSize: 22),
+              ),
+              const SizedBox(height: 10),
+              _selector(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   TextField _selector() {
@@ -136,28 +149,28 @@ class _FormatSelectorWidgetState extends State<FormatSelectorWidget> {
         children: <RadioListTile<String>>[
           RadioListTile(
             title: Text(
-                "\$ ${NumberFormat("#,##0.00", "pl_PL").format(numberExample)}"),
+                "$currencySymbol ${NumberFormat("#,##0.00", "pl_PL").format(numberExample)}"),
             value: 'pl_PL',
             groupValue: format,
             onChanged: (String? value) => changeValue(value!),
           ),
           RadioListTile(
             title: Text(
-                "\$ ${NumberFormat("#,##0.00", "en_US").format(numberExample)}"),
+                "$currencySymbol ${NumberFormat("#,##0.00", "en_US").format(numberExample)}"),
             value: 'en_US',
             groupValue: format,
             onChanged: (String? value) => changeValue(value!),
           ),
           RadioListTile(
             title: Text(
-                "\$ ${NumberFormat("#,##0.00", "de_DE").format(numberExample)}"),
+                "$currencySymbol ${NumberFormat("#,##0.00", "de_DE").format(numberExample)}"),
             value: 'de_DE',
             groupValue: format,
             onChanged: (String? value) => changeValue(value!),
           ),
           RadioListTile(
             title: Text(
-                "\$ ${NumberFormat("#,##0.00", "it_CH").format(numberExample)}"),
+                "$currencySymbol ${NumberFormat("#,##0.00", "it_CH").format(numberExample)}"),
             value: 'it_CH',
             groupValue: format,
             onChanged: (String? value) => changeValue(value!),

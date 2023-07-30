@@ -6,6 +6,8 @@ class SettingsState extends Equatable {
   final String? darkStyle;
   final String? lang;
   final String? color;
+  final int defaultCurrency;
+  final String currencySymbol;
   final String? formatNumber;
   final bool? showTutorial;
 
@@ -15,6 +17,8 @@ class SettingsState extends Equatable {
     this.darkStyle,
     this.lang,
     this.color,
+    this.defaultCurrency,
+    this.currencySymbol,
     this.formatNumber,
     this.showTutorial,
   );
@@ -38,6 +42,8 @@ class SettingsInitial extends SettingsState {
     super.darkStyle,
     super.lang,
     super.color,
+    super.defaultCurrency,
+    super.currencySymbol,
     super.formatNumber,
     super.showTutorial,
   );

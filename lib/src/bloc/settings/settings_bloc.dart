@@ -16,6 +16,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("darkStyle"),
           pref.getString("lang"),
           pref.getString("color"),
+          pref.getInt("defaultCurrency") ?? 103,
+          pref.getString("currencySymbol") ?? "\$",
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
         )) {
@@ -31,6 +33,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           event.darkStyle,
           pref.getString("lang"),
           pref.getString("color"),
+          pref.getInt("defaultCurrency") ?? 103,
+          pref.getString("currencySymbol") ?? "\$",
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
         ));
@@ -45,6 +49,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("darkStyle"),
           event.lang,
           pref.getString("color"),
+          pref.getInt("defaultCurrency") ?? 103,
+          pref.getString("currencySymbol") ?? "\$",
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
         ));
@@ -59,6 +65,25 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("darkStyle"),
           pref.getString("lang"),
           event.color,
+          pref.getInt("defaultCurrency") ?? 103,
+          pref.getString("currencySymbol") ?? "\$",
+          pref.getString("formatNumber"),
+          pref.getBool("showTutorial"),
+        ));
+      }
+
+      if (event is ChangeDefaultCurrency) {
+        pref.setInt("defaultCurrency", event.defaultCurrency);
+        pref.setString("currencySymbol", event.currencySymbol);
+
+        emit(SettingsState(
+          pref.getString("theme"),
+          pref.getString("lightStyle"),
+          pref.getString("darkStyle"),
+          pref.getString("lang"),
+          pref.getString("color"),
+          event.defaultCurrency,
+          event.currencySymbol,
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
         ));
@@ -73,6 +98,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("darkStyle"),
           pref.getString("lang"),
           pref.getString("color"),
+          pref.getInt("defaultCurrency") ?? 103,
+          pref.getString("currencySymbol") ?? "\$",
           event.formatNumber,
           pref.getBool("showTutorial"),
         ));
@@ -87,6 +114,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("darkStyle"),
           pref.getString("lang"),
           pref.getString("color"),
+          pref.getInt("defaultCurrency") ?? 103,
+          pref.getString("currencySymbol") ?? "\$",
           pref.getString("formatNumber"),
           event.showTutorial,
         ));

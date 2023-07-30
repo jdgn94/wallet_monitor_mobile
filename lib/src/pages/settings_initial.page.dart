@@ -5,7 +5,7 @@ import 'package:wallet_monitor/generated/l10n.dart';
 
 import 'package:wallet_monitor/src/widgets/settings/color_selecteor.widget.dart';
 import 'package:wallet_monitor/src/widgets/settings/theme_selector.widget.dart';
-import 'package:wallet_monitor/src/widgets/utils/buttons.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class SettingsInitialPage extends StatefulWidget {
@@ -17,14 +17,6 @@ class SettingsInitialPage extends StatefulWidget {
 
 class _SettingsInitialPageState extends State<SettingsInitialPage> {
   final _pref = SettingsLocalStorage.pref;
-
-  @override
-  void initState() {
-    _setInitialValueOnSharedPreferences();
-    super.initState();
-  }
-
-  _setInitialValueOnSharedPreferences() {}
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +33,11 @@ class _SettingsInitialPageState extends State<SettingsInitialPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 logo(),
+                SizedBox(height: MediaQuery.of(context).size.height * .09),
                 ThemeSelectorWidget(pref: _pref),
+                SizedBox(height: MediaQuery.of(context).size.height * .09),
                 ColorSelectorWidget(pref: _pref),
-                const SizedBox(
-                  height: 15,
-                ),
+                SizedBox(height: MediaQuery.of(context).size.height * .09),
                 _nextPage(),
               ],
             ),
@@ -94,10 +86,10 @@ class _SettingsInitialPageState extends State<SettingsInitialPage> {
     );
   }
 
-  Widget _nextPage() {
+  CustomButton _nextPage() {
     return CustomButton(
       onPressed: () => Navigator.of(context).pushNamed("/settingsSecondary"),
-      text: 'Next Page',
+      text: S.current.next,
       margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       height: 60.0,
     );
