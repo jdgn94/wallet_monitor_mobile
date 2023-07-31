@@ -6,8 +6,8 @@ class SettingsState extends Equatable {
   final String? darkStyle;
   final String? lang;
   final String? color;
-  final int defaultCurrency;
-  final String currencySymbol;
+  final int? defaultCurrency;
+  final String? currencySymbol;
   final String? formatNumber;
   final bool? showTutorial;
 

@@ -149,28 +149,32 @@ class _FormatSelectorWidgetState extends State<FormatSelectorWidget> {
         children: <RadioListTile<String>>[
           RadioListTile(
             title: Text(
-                "$currencySymbol ${NumberFormat("#,##0.00", "pl_PL").format(numberExample)}"),
+              "$currencySymbol ${NumberFormat("#,##0.00", "pl_PL").format(numberExample)}",
+            ),
             value: 'pl_PL',
             groupValue: format,
             onChanged: (String? value) => changeValue(value!),
           ),
           RadioListTile(
             title: Text(
-                "$currencySymbol ${NumberFormat("#,##0.00", "en_US").format(numberExample)}"),
+              "$currencySymbol ${NumberFormat("#,##0.00", "en_US").format(numberExample)}",
+            ),
             value: 'en_US',
             groupValue: format,
             onChanged: (String? value) => changeValue(value!),
           ),
           RadioListTile(
             title: Text(
-                "$currencySymbol ${NumberFormat("#,##0.00", "de_DE").format(numberExample)}"),
+              "$currencySymbol ${NumberFormat("#,##0.00", "de_DE").format(numberExample)}",
+            ),
             value: 'de_DE',
             groupValue: format,
             onChanged: (String? value) => changeValue(value!),
           ),
           RadioListTile(
             title: Text(
-                "$currencySymbol ${NumberFormat("#,##0.00", "it_CH").format(numberExample)}"),
+              "$currencySymbol ${NumberFormat("#,##0.00", "it_CH").format(numberExample)}",
+            ),
             value: 'it_CH',
             groupValue: format,
             onChanged: (String? value) => changeValue(value!),
