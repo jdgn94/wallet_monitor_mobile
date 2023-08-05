@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
 import 'package:wallet_monitor/src/configs/theme.configs.dart';
+import 'package:wallet_monitor/src/widgets/settings/picker_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -22,7 +22,6 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
   String? colorSelector;
   int? colorIndexSelector;
   Color pickerColor = const Color(0xFF9e9e9e);
-  Color currentColor = const Color(0xFF9e9e9e);
 
   @override
   void initState() {
@@ -35,7 +34,6 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
         widget.pref.getString("color")![1] == "x") {
       colorSelector = S.current.personal;
       pickerColor = Color(int.parse(widget.pref.getString("color")!));
-      currentColor = Color(int.parse(widget.pref.getString("color")!));
     } else {
       colorIndexSelector = int.parse(widget.pref.getString("color")!);
       colorSelector = colorsList[colorIndexSelector!].name;
@@ -55,13 +53,6 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
     showDialog(context: context, builder: _dialog);
   }
 
-  void _openColorPicker(void Function(Color) changeColor) {
-    showDialog(
-      context: context,
-      builder: (context) => _picker(context, changeColor),
-    );
-  }
-
   void _changeGlobalColor(int? colorIndex, String colorName) {
     BlocProvider.of<SettingsBloc>(context).add(ChangeColor(
       (colorIndex ?? pickerColor)
@@ -73,12 +64,6 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
     setState(() {
       colorIndexSelector = colorIndex;
       colorSelector = colorName;
-    });
-  }
-
-  void _changeCurrentColor(Color color) {
-    setState(() {
-      currentColor = color;
     });
   }
 
@@ -236,7 +221,7 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
         text: _colorNameTranslate(element.name),
         selected: colorSelectTemp == element.name,
         width: MediaQuery.of(context).size.width / 3 - 10,
-        type: ButtonType.category,
+        type: ButtonType.color,
       ),
     );
   }
@@ -247,67 +232,17 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
   ) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: CustomButton(
-        onPressed: () => _openColorPicker(changeColor),
+      child: PickerSelectorWidget(
         color: pickerColor,
+        type: ButtonType.color,
         icon: Icons.palette_rounded,
-        text: "Personal",
-        selected: colorSelectorTmp == "Personal",
+        text: S.current.personal,
         width: MediaQuery.of(context).size.width / 3 * 2 - 10,
-        type: ButtonType.category,
+        confirm: (Color newColor) {
+          changeColor(newColor);
+          _changePickerColor(newColor);
+        },
       ),
     );
-  }
-
-  StatefulBuilder _picker(
-      BuildContext context, void Function(Color) changeColor) {
-    confirm(Color newColor) {
-      changeColor(newColor);
-      _changePickerColor(newColor);
-      Navigator.of(context).pop();
-    }
-
-    return StatefulBuilder(builder: (localContext, localSetState) {
-      return OrientationBuilder(builder: (context, orientation) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(
-                  orientation == Orientation.portrait ? 200 : 40),
-              bottom: const Radius.circular(40),
-            ),
-          ),
-          content: SingleChildScrollView(
-            child: ColorPicker(
-              pickerColor: pickerColor,
-              paletteType: orientation == Orientation.portrait
-                  ? PaletteType.hueWheel
-                  : PaletteType.hsl,
-              onColorChanged: _changeCurrentColor,
-              colorPickerWidth: orientation == Orientation.portrait ? 300 : 200,
-              enableAlpha: false,
-            ),
-          ),
-          actions: <Widget>[
-            CustomButton(
-              onPressed: Navigator.of(context).pop,
-              message: S.current.cancel,
-              icon: Icons.clear,
-              color: Colors.red,
-              type: ButtonType.outline,
-              width: 20,
-            ),
-            CustomButton(
-              onPressed: () => confirm(currentColor),
-              message: S.current.confirm,
-              icon: Icons.check,
-              color: Colors.blue,
-              type: ButtonType.outline,
-              width: 20,
-            ),
-          ],
-        );
-      });
-    });
   }
 }

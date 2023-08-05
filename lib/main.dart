@@ -45,9 +45,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String initialPage = "/settingsInitial";
-    // final String initialPage =
-    //     pref.getString("formatNumber") != null ? "/home" : "/settingsInitial";
+    final String initialPage = pref.getString("color") == null
+        ? "/settingsInitial"
+        : pref.getString("formatNumber") == null
+            ? "/settingsSecondary"
+            : "/home";
 
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {

@@ -185,31 +185,46 @@ class MessageLookup extends MessageLookupByLibrary {
         "YemenRial": MessageLookupByLibrary.simpleMessage("Yemen Rial"),
         "ZimbabweDollar":
             MessageLookupByLibrary.simpleMessage("Zimbabue Dólar"),
+        "accountCurrency":
+            MessageLookupByLibrary.simpleMessage("Moneda de la cuenta"),
+        "accountType": MessageLookupByLibrary.simpleMessage("Tipo de cuenta"),
         "accounts": MessageLookupByLibrary.simpleMessage("Cuentas"),
         "blue": MessageLookupByLibrary.simpleMessage("Azul"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
+        "card": MessageLookupByLibrary.simpleMessage("Tarjeta"),
+        "cash": MessageLookupByLibrary.simpleMessage("Efectivo"),
         "categories": MessageLookupByLibrary.simpleMessage("Categorías"),
         "chameleon": MessageLookupByLibrary.simpleMessage("Camaleón"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector":
             MessageLookupByLibrary.simpleMessage("Selector de color"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
+        "create": MessageLookupByLibrary.simpleMessage("Crear"),
+        "createAccount": MessageLookupByLibrary.simpleMessage("Crear Cuenta"),
         "currencies": MessageLookupByLibrary.simpleMessage("Monedas"),
         "currency": MessageLookupByLibrary.simpleMessage("Moneda"),
         "currencyConfig":
             MessageLookupByLibrary.simpleMessage("Configuración de monedas"),
         "currencyFormat":
             MessageLookupByLibrary.simpleMessage("Formato de Moneda"),
+        "currentBalance": MessageLookupByLibrary.simpleMessage("Balance"),
         "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
         "darkStyle": MessageLookupByLibrary.simpleMessage("Estilo oscuro"),
+        "description": MessageLookupByLibrary.simpleMessage("Descripción"),
+        "disable": MessageLookupByLibrary.simpleMessage("Deshabilitar"),
+        "edit": MessageLookupByLibrary.simpleMessage("Editar"),
+        "enable": MessageLookupByLibrary.simpleMessage("Habilitar"),
         "format": MessageLookupByLibrary.simpleMessage("Formato"),
         "generalMode": MessageLookupByLibrary.simpleMessage("Modo General"),
+        "goal": MessageLookupByLibrary.simpleMessage("Meta"),
         "green": MessageLookupByLibrary.simpleMessage("Verde"),
+        "icon": MessageLookupByLibrary.simpleMessage("Icono"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Configuraciones inicial"),
         "light": MessageLookupByLibrary.simpleMessage("Claro"),
         "lightStyle": MessageLookupByLibrary.simpleMessage("Estilo claro"),
         "lighting": MessageLookupByLibrary.simpleMessage("Brillante"),
+        "name": MessageLookupByLibrary.simpleMessage("Nombre"),
         "next": MessageLookupByLibrary.simpleMessage("Siguiente"),
         "night": MessageLookupByLibrary.simpleMessage("Nocturno"),
         "none": MessageLookupByLibrary.simpleMessage("Ninguno"),
@@ -220,6 +235,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "primary": MessageLookupByLibrary.simpleMessage("Primaria"),
         "purple": MessageLookupByLibrary.simpleMessage("Morado"),
         "red": MessageLookupByLibrary.simpleMessage("Rojo"),
+        "regular": MessageLookupByLibrary.simpleMessage("Normal"),
+        "regularAccounts":
+            MessageLookupByLibrary.simpleMessage("Cuentas Normales."),
+        "saving": MessageLookupByLibrary.simpleMessage("Ahorro"),
+        "savingsAccounts":
+            MessageLookupByLibrary.simpleMessage("Cuentas de Ahorros."),
         "search": MessageLookupByLibrary.simpleMessage("Buscar"),
         "selectAColor":
             MessageLookupByLibrary.simpleMessage("Seleccione un color"),
@@ -229,6 +250,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "teal": MessageLookupByLibrary.simpleMessage("Aguamarina"),
         "theme": MessageLookupByLibrary.simpleMessage("Temas"),
         "themeSelector":
-            MessageLookupByLibrary.simpleMessage("Selector de tema")
+            MessageLookupByLibrary.simpleMessage("Selector de tema"),
+        "title": MessageLookupByLibrary.simpleMessage("Titulo")
       };
 }

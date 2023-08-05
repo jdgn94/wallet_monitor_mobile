@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
+import 'package:wallet_monitor/src/db/consults/account.consult.dart';
 import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 
 import 'package:wallet_monitor/src/widgets/settings/format_selector.widget.dart';
@@ -16,6 +17,43 @@ class SettingsSecondPage extends StatefulWidget {
 
 class _SettingsSecondPageState extends State<SettingsSecondPage> {
   final _pref = SettingsLocalStorage.pref;
+
+  Future<void> _createAccounts() async {
+    final currencyId = _pref.getInt('defaultCurrency') ?? 103;
+    await AccountConsult.createOrUpdate(
+      id: 1,
+      amount: 0,
+      color: 'ff2196f3',
+      alert: 0,
+      icon: 'wallet',
+      name: S.current.card,
+      currencyId: currencyId,
+      description: '',
+    );
+    await AccountConsult.createOrUpdate(
+      id: 2,
+      amount: 0,
+      color: 'ff388e3c',
+      alert: 0,
+      icon: 'cash',
+      name: S.current.cash,
+      currencyId: currencyId,
+      description: '',
+    );
+    await AccountConsult.createOrUpdate(
+      id: 3,
+      amount: 0,
+      color: 'ff26c6da',
+      alert: 0,
+      icon: 'saving',
+      name: S.current.saving,
+      currencyId: currencyId,
+      description: '',
+    );
+
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -151,8 +189,7 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
 
   CustomButton _nextPage() {
     return CustomButton(
-      onPressed: () => Navigator.of(context)
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false),
+      onPressed: _createAccounts,
       text: S.current.start,
       margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       height: 60.0,

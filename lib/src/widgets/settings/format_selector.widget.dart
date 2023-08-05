@@ -1,9 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';

@@ -4,6 +4,7 @@ import 'package:isar/isar.dart';
 import 'package:uuid/uuid.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
 
+import 'package:wallet_monitor/src/db/models/account.model.dart';
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
 import 'package:wallet_monitor/src/db/seeds/index.seed.dart';
 
@@ -19,6 +20,7 @@ class DataBase {
       db = await Isar.open(
         [
           CurrencySchema,
+          AccountSchema,
         ],
         name: "dev",
         directory: (await pathProvider.getApplicationDocumentsDirectory()).path,
@@ -28,10 +30,6 @@ class DataBase {
     }
 
     await insertAllSeeds();
-  }
-
-  static Future<void> _insertSeeds() async {
-    print("Aquí debo correr todas las semillas que quiera poner por defecto");
   }
 
   String generateUuid() {

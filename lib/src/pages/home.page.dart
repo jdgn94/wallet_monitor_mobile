@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
+import 'package:wallet_monitor/src/pages/home/accounts.page.dart';
+import 'package:wallet_monitor/src/utils/icons.utils.dart';
+import 'package:wallet_monitor/storage/index.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,23 +13,76 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _pref = SettingsLocalStorage.pref;
+  late PageController _pageController;
   int _page = 1;
 
   @override
   void initState() {
+    _pageController = PageController(initialPage: 1);
     super.initState();
   }
 
   void _changePage(int newPage) {
+    _pageController.animateToPage(
+      newPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeIn,
+    );
     setState(() {
       _page = newPage;
     });
   }
 
+  String _pageName() {
+    switch (_page) {
+      case 0:
+        return S.current.accounts;
+      case 1:
+        return S.current.categories;
+      case 2:
+        return S.current.operations;
+      case 3:
+        return S.current.statistics;
+      default:
+        return S.current.none;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _topBar(),
+      body: _pages(),
       bottomNavigationBar: _bottomBar(),
+    );
+  }
+
+  PreferredSize _topBar() {
+    final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
+    return PreferredSize(
+      preferredSize: const Size(double.infinity, 50),
+      child: AppBar(
+        title: Text(_pageName()),
+        centerTitle: true,
+        foregroundColor:
+            usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
+        backgroundColor:
+            usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
+      ),
+    );
+  }
+
+  PageView _pages() {
+    return PageView(
+      controller: _pageController,
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        AccountPage(pref: _pref),
+        const Center(child: Text("Page 1")),
+        const Center(child: Text("Page 2")),
+        const Center(child: Text("Page 3")),
+      ],
     );
   }
 
@@ -39,19 +94,23 @@ class _HomePageState extends State<HomePage> {
       onTap: _changePage,
       items: [
         BottomNavigationBarItem(
-          icon: Icon(MdiIcons.walletBifold),
+          activeIcon: Icon(getIcon('accounts')),
+          icon: Icon(getIcon('noAccounts')),
           label: S.current.accounts,
         ),
         BottomNavigationBarItem(
-          icon: Icon(MdiIcons.shapePlus),
+          activeIcon: Icon(getIcon('categories')),
+          icon: Icon(getIcon('noCategories')),
           label: S.current.categories,
         ),
         BottomNavigationBarItem(
-          icon: Icon(MdiIcons.receiptText),
+          activeIcon: Icon(getIcon('operations')),
+          icon: Icon(getIcon('noOperations')),
           label: S.current.operations,
         ),
         BottomNavigationBarItem(
-          icon: Icon(MdiIcons.chartBar),
+          activeIcon: Icon(getIcon('statistics')),
+          icon: Icon(getIcon('noStatistics')),
           label: S.current.statistics,
         ),
       ],

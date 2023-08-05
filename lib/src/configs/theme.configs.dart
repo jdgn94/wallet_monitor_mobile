@@ -25,8 +25,8 @@ ThemeData themeLight({required String colorSelected}) {
     ),
     inputDecorationTheme: const InputDecorationTheme(
       border: OutlineInputBorder(
-          // borderRadius: BorderRadius.all(Radius.circular(35)),
-          ),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
     ),
     useMaterial3: true,
   );
@@ -39,7 +39,7 @@ ThemeData themeDark({required String colorSelected}) {
     ),
     inputDecorationTheme: const InputDecorationTheme(
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(35)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
     ),
     useMaterial3: true,

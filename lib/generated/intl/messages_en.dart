@@ -183,30 +183,46 @@ class MessageLookup extends MessageLookupByLibrary {
         "YemenRial": MessageLookupByLibrary.simpleMessage("Yemen Rial"),
         "ZimbabweDollar":
             MessageLookupByLibrary.simpleMessage("Zimbabwe Dollar"),
+        "accountCurrency":
+            MessageLookupByLibrary.simpleMessage("Account Currency"),
+        "accountType": MessageLookupByLibrary.simpleMessage("AccountType"),
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "blue": MessageLookupByLibrary.simpleMessage("Blue"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "card": MessageLookupByLibrary.simpleMessage("Card"),
+        "cash": MessageLookupByLibrary.simpleMessage("Cash"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "chameleon": MessageLookupByLibrary.simpleMessage("Chameleon"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector": MessageLookupByLibrary.simpleMessage("Color selector"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
         "currencies": MessageLookupByLibrary.simpleMessage("Currencies"),
         "currency": MessageLookupByLibrary.simpleMessage("Currency"),
         "currencyConfig":
             MessageLookupByLibrary.simpleMessage("Currency config"),
         "currencyFormat":
             MessageLookupByLibrary.simpleMessage("Currency Format"),
+        "currentBalance":
+            MessageLookupByLibrary.simpleMessage("Current Balance"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "darkStyle": MessageLookupByLibrary.simpleMessage("Dark Style"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "disable": MessageLookupByLibrary.simpleMessage("Disable"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enable": MessageLookupByLibrary.simpleMessage("Enable"),
         "format": MessageLookupByLibrary.simpleMessage("Format"),
         "generalMode": MessageLookupByLibrary.simpleMessage("General Mode"),
+        "goal": MessageLookupByLibrary.simpleMessage("Goal"),
         "green": MessageLookupByLibrary.simpleMessage("Green"),
+        "icon": MessageLookupByLibrary.simpleMessage("Icon"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Initial configs"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "lightStyle": MessageLookupByLibrary.simpleMessage("Light Style"),
         "lighting": MessageLookupByLibrary.simpleMessage("Lighting"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "night": MessageLookupByLibrary.simpleMessage("Night"),
         "none": MessageLookupByLibrary.simpleMessage("None"),
@@ -217,6 +233,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "primary": MessageLookupByLibrary.simpleMessage("Primary"),
         "purple": MessageLookupByLibrary.simpleMessage("Purple"),
         "red": MessageLookupByLibrary.simpleMessage("Red"),
+        "regular": MessageLookupByLibrary.simpleMessage("Regular"),
+        "regularAccounts":
+            MessageLookupByLibrary.simpleMessage("Regular Accounts."),
+        "saving": MessageLookupByLibrary.simpleMessage("Saving"),
+        "savingsAccounts":
+            MessageLookupByLibrary.simpleMessage("Savings Accounts."),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "selectAColor": MessageLookupByLibrary.simpleMessage("Select a color"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
@@ -224,6 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "teal": MessageLookupByLibrary.simpleMessage("Teal"),
         "theme": MessageLookupByLibrary.simpleMessage("Themes"),
-        "themeSelector": MessageLookupByLibrary.simpleMessage("Theme selector")
+        "themeSelector": MessageLookupByLibrary.simpleMessage("Theme selector"),
+        "title": MessageLookupByLibrary.simpleMessage("Title")
       };
 }

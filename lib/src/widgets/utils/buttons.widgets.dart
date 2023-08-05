@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum ButtonType { tonal, outline, text, category }
+enum ButtonType { tonal, outline, text, color }
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -96,7 +96,7 @@ class CustomButton extends StatelessWidget {
       );
     }
 
-    if (type == ButtonType.category) {
+    if (type == ButtonType.color) {
       return Material(
         color: Colors.transparent,
         child: InkWell(
