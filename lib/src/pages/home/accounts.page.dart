@@ -85,6 +85,7 @@ class _AccountPageState extends State<AccountPage> {
                 child: Center(
                   child: Icon(
                     getIcon(item.icon),
+                    color: Color(int.parse("0x${item.color}")),
                     size: 45,
                   ),
                 ),
@@ -99,7 +100,9 @@ class _AccountPageState extends State<AccountPage> {
                       Text(
                         item.name,
                         style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         "${item.currency.value!.symbol}\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(item.amount)}",
@@ -126,7 +129,7 @@ class _AccountPageState extends State<AccountPage> {
         padding: EdgeInsets.zero,
         radius: const Radius.circular(10.0),
         child: InkWell(
-          onDoubleTap: () {},
+          onTap: () => Navigator.pushNamed(context, "/account"),
           borderRadius: BorderRadius.circular(10.0),
           child: Ink(
             width: double.infinity,

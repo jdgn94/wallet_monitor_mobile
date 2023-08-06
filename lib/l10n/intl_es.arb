@@ -165,5 +165,7 @@
   "edit": "Editar",
   "regularAccounts": "Cuentas Normales.",
   "savingsAccounts": "Cuentas de Ahorros.",
-  "createAccount": "Crear Cuenta"
+  "createAccount": "Crear Cuenta",
+  "amount": "Monto",
+  "minimumAmount": "Monto Mínimo"
 }

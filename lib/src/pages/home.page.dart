@@ -52,28 +52,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _topBar(),
-      body: _pages(),
-      bottomNavigationBar: _bottomBar(),
+      appBar: _appBar(),
+      body: _body(),
+      bottomNavigationBar: _bottomNavigationBar(),
     );
   }
 
-  PreferredSize _topBar() {
+  PreferredSize _appBar() {
     final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
+
     return PreferredSize(
       preferredSize: const Size(double.infinity, 50),
       child: AppBar(
         title: Text(_pageName()),
         centerTitle: true,
-        foregroundColor:
-            usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
+        // foregroundColor:
+        //     usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
         backgroundColor:
             usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
       ),
     );
   }
 
-  PageView _pages() {
+  PageView _body() {
     return PageView(
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  BottomNavigationBar _bottomBar() {
+  BottomNavigationBar _bottomNavigationBar() {
     return BottomNavigationBar(
       fixedColor: Theme.of(context).colorScheme.primary,
       unselectedItemColor: Theme.of(context).colorScheme.primary.withAlpha(175),

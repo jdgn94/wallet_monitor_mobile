@@ -165,5 +165,7 @@
   "edit": "Edit",
   "regularAccounts": "Regular Accounts.",
   "savingsAccounts": "Savings Accounts.",
-  "createAccount": "Create Account"
+  "createAccount": "Create Account",
+  "amount": "Amount",
+  "minimumAmount": "Minimum Amount"
 }

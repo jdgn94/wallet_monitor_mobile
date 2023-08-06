@@ -5,7 +5,7 @@ import 'package:wallet_monitor/src/db/consults/account.consult.dart';
 import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 
 import 'package:wallet_monitor/src/widgets/settings/format_selector.widget.dart';
-import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class SettingsSecondPage extends StatefulWidget {

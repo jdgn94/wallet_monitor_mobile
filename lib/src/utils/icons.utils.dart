@@ -28,7 +28,43 @@ IconData getIcon(String name) {
     case 'cash':
       return MdiIcons.cash;
     case 'add':
-      return Icons.add_rounded;
+      return Icons.add;
+    case 'search':
+      return Icons.search_rounded;
+    case 'palette':
+      return Icons.palette;
+    case 'divider':
+      return MdiIcons.division;
+    case 'multiplication':
+      return MdiIcons.close;
+    case 'sum':
+      return Icons.add;
+    case 'minus':
+      return MdiIcons.minus;
+    case '0':
+      return MdiIcons.numeric0;
+    case '9':
+      return MdiIcons.numeric9;
+    case '8':
+      return MdiIcons.numeric8;
+    case '6':
+      return MdiIcons.numeric6;
+    case '7':
+      return MdiIcons.numeric7;
+    case '5':
+      return MdiIcons.numeric5;
+    case '4':
+      return MdiIcons.numeric4;
+    case '3':
+      return MdiIcons.numeric3;
+    case '2':
+      return MdiIcons.numeric2;
+    case '1':
+      return MdiIcons.numeric1;
+    case ',':
+      return MdiIcons.comma;
+    case '.':
+      return MdiIcons.vectorPoint;
     default:
       return Icons.question_mark_rounded;
   }

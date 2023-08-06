@@ -5,7 +5,7 @@ import 'package:wallet_monitor/generated/l10n.dart';
 
 import 'package:wallet_monitor/src/widgets/settings/color_selecteor.widget.dart';
 import 'package:wallet_monitor/src/widgets/settings/theme_selector.widget.dart';
-import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class SettingsInitialPage extends StatefulWidget {

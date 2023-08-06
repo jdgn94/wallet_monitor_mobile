@@ -6,7 +6,7 @@ import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
 import 'package:wallet_monitor/src/db/consults/currency.consult.dart';
 import 'package:wallet_monitor/src/functions/currency.functions.dart';
-import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class CurrencySelectorWidget extends StatefulWidget {
@@ -43,7 +43,7 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   }
 
   Future<void> _changeCurrencyPref(int newCurrencyId) async {
-    final newCurrency = await CurrencyConsult().getById(newCurrencyId);
+    final newCurrency = await CurrencyConsult.getById(newCurrencyId);
     if (newCurrency == null) return;
     print("Cambiando los valores de los prefs por ${newCurrency.name}");
 
@@ -68,12 +68,12 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   }
 
   Future<void> _getAllCurrencies() async {
-    currencies = await CurrencyConsult().getAll();
+    currencies = await CurrencyConsult.getAll();
     setState(() {});
   }
 
   Future<void> _setInputName() async {
-    final currencyValue = await CurrencyConsult().getById(currency);
+    final currencyValue = await CurrencyConsult.getById(currency);
     if (currencyValue == null) {
       _inputController.text = S.current.none;
       return;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 
-import 'package:wallet_monitor/src/widgets/utils/buttons.widgets.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 
 class PickerSelectorWidget extends StatefulWidget {
   final ButtonType type;
