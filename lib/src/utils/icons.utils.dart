@@ -65,6 +65,10 @@ IconData getIcon(String name) {
       return MdiIcons.comma;
     case '.':
       return MdiIcons.vectorPoint;
+    case 'check':
+      return MdiIcons.check;
+    case "delete":
+      return MdiIcons.backspaceOutline;
     default:
       return Icons.question_mark_rounded;
   }
