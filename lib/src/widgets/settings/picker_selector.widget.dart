@@ -68,7 +68,8 @@ class _PickerSelectorWidgetState extends State<PickerSelectorWidget> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(
-                      orientation == Orientation.portrait ? 200 : 40),
+                    orientation == Orientation.portrait ? 200 : 40,
+                  ),
                   bottom: const Radius.circular(40),
                 ),
               ),

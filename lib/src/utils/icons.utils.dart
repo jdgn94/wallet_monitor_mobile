@@ -33,13 +33,13 @@ IconData getIcon(String name) {
       return Icons.search_rounded;
     case 'palette':
       return Icons.palette;
-    case 'divider':
+    case 'division':
       return MdiIcons.division;
     case 'multiplication':
       return MdiIcons.close;
     case 'sum':
       return Icons.add;
-    case 'minus':
+    case 'subtract':
       return MdiIcons.minus;
     case '0':
       return MdiIcons.numeric0;

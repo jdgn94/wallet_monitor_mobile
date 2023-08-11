@@ -9,14 +9,14 @@ import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/keyboard.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
-class AccountPage extends StatefulWidget {
-  const AccountPage({super.key});
+class AccountEditionPage extends StatefulWidget {
+  const AccountEditionPage({super.key});
 
   @override
-  State<AccountPage> createState() => _AccountPageState();
+  State<AccountEditionPage> createState() => _AccountEditionPageState();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _AccountEditionPageState extends State<AccountEditionPage> {
   final _pref = SettingsLocalStorage.pref;
 
   late TextEditingController _nameController;
@@ -85,11 +85,8 @@ class _AccountPageState extends State<AccountPage> {
       child: AppBar(
         title: Text(S.current.createAccount),
         centerTitle: true,
-        foregroundColor:
-            usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
-        backgroundColor: usePrimaryColor
-            ? Theme.of(context).colorScheme.primary
-            : colorCategory.withAlpha(255),
+        backgroundColor:
+            usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
       ),
     );
   }
@@ -122,7 +119,14 @@ class _AccountPageState extends State<AccountPage> {
                 activeCalendar: false,
               ),
               _spacing(),
-              _alertInput(),
+              KeyboardWidget(
+                pref: _pref,
+                type: KeyType.input,
+                label: S.current.minimumAmount,
+                currency: currency,
+                confirm: (int value) {},
+                activeCalendar: false,
+              ),
               _spacing(),
             ],
           ),
