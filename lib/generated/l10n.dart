@@ -1739,6 +1739,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Icons`
+  String get icons {
+    return Intl.message(
+      'Icons',
+      name: 'icons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Icon`
+  String get selectIcon {
+    return Intl.message(
+      'Select Icon',
+      name: 'selectIcon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Color`
+  String get selectColor {
+    return Intl.message(
+      'Select Color',
+      name: 'selectColor',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
 import 'package:wallet_monitor/src/configs/theme.configs.dart';
-import 'package:wallet_monitor/src/widgets/settings/picker_selector.widget.dart';
+import 'package:wallet_monitor/src/widgets/settings/picker_color_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -232,7 +232,7 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
   ) {
     return Padding(
       padding: const EdgeInsets.all(5.0),
-      child: PickerSelectorWidget(
+      child: PickerColorSelectorWidget(
         color: pickerColor,
         type: ButtonType.color,
         icon: Icons.palette_rounded,

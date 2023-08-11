@@ -218,6 +218,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goal": MessageLookupByLibrary.simpleMessage("Goal"),
         "green": MessageLookupByLibrary.simpleMessage("Green"),
         "icon": MessageLookupByLibrary.simpleMessage("Icon"),
+        "icons": MessageLookupByLibrary.simpleMessage("Icons"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Initial configs"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
@@ -243,6 +244,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Savings Accounts."),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "selectAColor": MessageLookupByLibrary.simpleMessage("Select a color"),
+        "selectColor": MessageLookupByLibrary.simpleMessage("Select Color"),
+        "selectIcon": MessageLookupByLibrary.simpleMessage("Select Icon"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
         "system": MessageLookupByLibrary.simpleMessage("System"),

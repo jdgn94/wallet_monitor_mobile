@@ -11,8 +11,17 @@ import 'package:wallet_monitor/storage/index.dart';
 
 class CurrencySelectorWidget extends StatefulWidget {
   final SharedPreferences pref;
+  final bool localSelect;
+  final int? defaultCurrency;
+  final Function(Currency)? confirm;
 
-  const CurrencySelectorWidget({super.key, required this.pref});
+  const CurrencySelectorWidget({
+    super.key,
+    required this.pref,
+    this.localSelect = false,
+    this.defaultCurrency,
+    this.confirm,
+  });
 
   @override
   State<CurrencySelectorWidget> createState() => _CurrencySelectorWidgetState();
@@ -26,7 +35,8 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
 
   @override
   void initState() {
-    currency = widget.pref.getInt('defaultCurrency') ?? 103;
+    currency =
+        widget.pref.getInt('defaultCurrency') ?? widget.defaultCurrency ?? 103;
     _inputController = TextEditingController();
     _scrollController = ScrollController();
     _setInputName();
@@ -47,10 +57,14 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
     if (newCurrency == null) return;
     print("Cambiando los valores de los prefs por ${newCurrency.name}");
 
-    BlocProvider.of<SettingsBloc>(context).add(ChangeDefaultCurrency(
-      newCurrencyId,
-      newCurrency.symbol,
-    ));
+    if (widget.localSelect) {
+      widget.confirm!(newCurrency);
+    } else {
+      BlocProvider.of<SettingsBloc>(context).add(ChangeDefaultCurrency(
+        newCurrencyId,
+        newCurrency.symbol,
+      ));
+    }
   }
 
   void _openSelector() {
@@ -84,6 +98,10 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.localSelect) {
+      return _selector();
+    }
+
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(15.0),
@@ -107,7 +125,8 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
       readOnly: true,
       onTap: _openSelector,
       decoration: InputDecoration(
-        label: Text(S.current.primary),
+        label:
+            Text(widget.localSelect ? S.current.currency : S.current.primary),
         suffixIcon: const Icon(Icons.arrow_drop_down_rounded),
       ),
     );

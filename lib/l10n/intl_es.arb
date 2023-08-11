@@ -167,5 +167,8 @@
   "savingsAccounts": "Cuentas de Ahorros.",
   "createAccount": "Crear Cuenta",
   "amount": "Monto",
-  "minimumAmount": "Monto Mínimo"
+  "minimumAmount": "Monto Mínimo",
+  "icons": "Iconos",
+  "selectIcon": "Seleccionar Icono",
+  "selectColor": "Seleccionar Color"
 }

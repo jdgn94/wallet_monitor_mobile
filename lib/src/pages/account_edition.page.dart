@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/db/consults/currency.consult.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
+import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
+import 'package:wallet_monitor/src/widgets/utils/icon_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/keyboard.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -21,26 +23,18 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
 
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
-  late TextEditingController _iconController;
-  late TextEditingController _amountController;
-  late TextEditingController _alertController;
-  late TextEditingController _currencyController;
   late int currencyId;
-  late String iconSelected;
-  late Color colorSelected;
-  late Color colorPicker;
+  int amount = 0;
+  int minAmount = 0;
   Currency? currency;
   String iconCategory = 'none';
-  Color colorCategory = Color((math.Random().nextDouble() * 0xFFFFFF).toInt());
+  Color colorCategory =
+      Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1);
 
   @override
   void initState() {
     _nameController = TextEditingController();
     _descriptionController = TextEditingController();
-    _iconController = TextEditingController(text: " ");
-    _currencyController = TextEditingController();
-    _amountController = TextEditingController();
-    _alertController = TextEditingController();
     currencyId = _pref.getInt("defaultCurrency") ?? 103;
     _getCurrency();
     super.initState();
@@ -50,9 +44,6 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   void dispose() {
     _nameController.dispose();
     _descriptionController.dispose();
-    _iconController.dispose();
-    _amountController.dispose();
-    _alertController.dispose();
     super.dispose();
   }
 
@@ -61,12 +52,42 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
     setState(() {});
   }
 
-  void _openChangeIcon() {
+  void _selectIcon(Color newColor, String newIcon) {
     setState(() {
-      iconSelected = iconCategory;
-      colorSelected = colorCategory;
+      colorCategory = newColor;
+      iconCategory = newIcon;
     });
-    showDialog(context: context, builder: _dialogIcon);
+  }
+
+  void _changeCurrency(Currency newCurrency) {
+    setState(() {
+      currency = newCurrency;
+      currencyId = newCurrency.id;
+    });
+  }
+
+  bool _checkValues() {
+    return _nameController.text.isEmpty || iconCategory == "none";
+  }
+
+  void _changeInitValue(int newValue) {
+    setState(() {
+      amount = newValue;
+    });
+  }
+
+  void _changeMinAmount(int newValue) {
+    setState(() {
+      minAmount = newValue;
+    });
+  }
+
+  Future<void> _saveAccount() async {
+    print(_nameController.text);
+    print(_descriptionController.text);
+    print(currency?.name);
+    print(amount);
+    print(minAmount);
   }
 
   @override
@@ -106,16 +127,23 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
               _spacing(),
               _descriptionInput(),
               _spacing(),
-              _iconInput(),
+              // _iconInput(),
+              IconSelectorWidget(confirm: _selectIcon),
               _spacing(),
-              _currencyInput(),
+              // _currencyInput(),
+              CurrencySelectorWidget(
+                pref: _pref,
+                localSelect: true,
+                defaultCurrency: currencyId,
+                confirm: _changeCurrency,
+              ),
               _spacing(),
               KeyboardWidget(
                 pref: _pref,
                 type: KeyType.input,
                 label: S.current.amount,
                 currency: currency,
-                confirm: (int value) {},
+                confirm: _changeInitValue,
                 activeCalendar: false,
               ),
               _spacing(),
@@ -124,10 +152,11 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
                 type: KeyType.input,
                 label: S.current.minimumAmount,
                 currency: currency,
-                confirm: (int value) {},
+                confirm: _changeMinAmount,
                 activeCalendar: false,
               ),
               _spacing(),
+              _buttonToSave(),
             ],
           ),
         ),
@@ -159,133 +188,14 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
     );
   }
 
-  Widget _iconInput() {
-    return SizedBox(
-      height: 64,
-      child: Stack(
-        children: [
-          TextField(
-            controller: _iconController,
-            readOnly: true,
-            onTap: _openChangeIcon,
-            decoration: InputDecoration(
-              label: Text(S.current.icon),
-              filled: true,
-              fillColor: colorCategory.withAlpha(100),
-            ),
-          ),
-          Center(
-            child: GestureDetector(
-              onTap: _openChangeIcon,
-              child: Icon(
-                getIcon(iconCategory),
-                color: colorCategory.withAlpha(255),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _currencyInput() {
-    return TextField(
-      controller: _currencyController,
-      readOnly: true,
-      decoration: InputDecoration(
-        label: Text(S.current.currency),
-        prefixIcon: const Icon(Icons.search_rounded),
-      ),
-    );
-  }
-
-  Widget _alertInput() {
-    return TextField(
-      controller: _alertController,
-      readOnly: true,
-      decoration: InputDecoration(
-        label: Text(S.current.minimumAmount),
-      ),
-    );
-  }
-
-  StatefulBuilder _dialogIcon(BuildContext context) {
-    return StatefulBuilder(builder: (localContext, localSetState) {
-      void changeColorAndIcon() {
-        Navigator.of(localContext).pop();
-      }
-
-      return OrientationBuilder(builder: (context, orientation) {
-        return AlertDialog(
-          content: SingleChildScrollView(
-            child: Column(
-              children: [
-                _iconPreview(),
-                _spacing(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _selector("Select Icon", "search"),
-                    _selector("Select Color", "palette"),
-                  ],
-                )
-              ],
-            ),
-          ),
-          actions: [
-            CustomButton(
-              onPressed: Navigator.of(localContext).pop,
-              message: S.current.cancel,
-              icon: Icons.close,
-              color: Colors.red,
-              type: ButtonType.outline,
-              width: 20,
-            ),
-            CustomButton(
-              onPressed: changeColorAndIcon,
-              message: S.current.confirm,
-              icon: Icons.check,
-              color: Colors.blue,
-              type: ButtonType.outline,
-              width: 20,
-              disabled: iconSelected == "none",
-            ),
-          ],
-        );
-      });
-    });
-  }
-
-  Container _iconPreview() {
-    return Container(
-      width: 60,
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: colorSelected.withAlpha(100),
-      ),
-      child: Icon(
-        getIcon(iconSelected),
-        color: colorSelected.withAlpha(255),
-      ),
-    );
-  }
-
-  InkWell _selector(String text, String icon) {
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(10.0),
-      child: Ink(
-        width: MediaQuery.of(context).size.width / 2 - 70,
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: Column(
-          children: [
-            Icon(getIcon(icon)),
-            const SizedBox(height: 10.0),
-            Text(text),
-          ],
-        ),
-      ),
+  Widget _buttonToSave() {
+    return CustomButton(
+      onPressed: _saveAccount,
+      text: S.current.create,
+      icon: getIcon("save"),
+      height: 50,
+      size: 20,
+      disabled: _checkValues(),
     );
   }
 }

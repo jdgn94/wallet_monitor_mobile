@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum ButtonType { tonal, outline, text, color }
+enum ButtonType { tonal, outline, text, color, selector }
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -93,6 +93,24 @@ class CustomButton extends StatelessWidget {
         ),
         onPressed: disabled ? null : onPressed,
         child: _buttonContainer(context),
+      );
+    }
+
+    if (type == ButtonType.selector) {
+      return InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(10.0),
+        child: Ink(
+          width: MediaQuery.of(context).size.width / 2 - 70,
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: Column(
+            children: [
+              Icon(icon),
+              const SizedBox(height: 10.0),
+              Text(text ?? ""),
+            ],
+          ),
+        ),
       );
     }
 

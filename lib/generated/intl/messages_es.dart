@@ -220,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goal": MessageLookupByLibrary.simpleMessage("Meta"),
         "green": MessageLookupByLibrary.simpleMessage("Verde"),
         "icon": MessageLookupByLibrary.simpleMessage("Icono"),
+        "icons": MessageLookupByLibrary.simpleMessage("Iconos"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Configuraciones inicial"),
         "light": MessageLookupByLibrary.simpleMessage("Claro"),
@@ -246,6 +247,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Buscar"),
         "selectAColor":
             MessageLookupByLibrary.simpleMessage("Seleccione un color"),
+        "selectColor":
+            MessageLookupByLibrary.simpleMessage("Seleccionar Color"),
+        "selectIcon": MessageLookupByLibrary.simpleMessage("Seleccionar Icono"),
         "start": MessageLookupByLibrary.simpleMessage("Comenzar"),
         "statistics": MessageLookupByLibrary.simpleMessage("Estadísticas"),
         "system": MessageLookupByLibrary.simpleMessage("Sistema"),

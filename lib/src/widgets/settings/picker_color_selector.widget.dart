@@ -4,7 +4,7 @@ import 'package:wallet_monitor/generated/l10n.dart';
 
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 
-class PickerSelectorWidget extends StatefulWidget {
+class PickerColorSelectorWidget extends StatefulWidget {
   final ButtonType type;
   final Color color;
   final Function(Color) confirm;
@@ -12,7 +12,7 @@ class PickerSelectorWidget extends StatefulWidget {
   final String? text;
   final double? width;
 
-  const PickerSelectorWidget({
+  const PickerColorSelectorWidget({
     super.key,
     required this.type,
     required this.color,
@@ -23,10 +23,11 @@ class PickerSelectorWidget extends StatefulWidget {
   });
 
   @override
-  State<PickerSelectorWidget> createState() => _PickerSelectorWidgetState();
+  State<PickerColorSelectorWidget> createState() =>
+      _PickerSelectorWidgetState();
 }
 
-class _PickerSelectorWidgetState extends State<PickerSelectorWidget> {
+class _PickerSelectorWidgetState extends State<PickerColorSelectorWidget> {
   Color currentColor = const Color(0xFF9e9e9e);
 
   void _changeCurrentColor(Color color) {

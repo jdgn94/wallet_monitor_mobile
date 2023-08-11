@@ -75,6 +75,32 @@ IconData getIcon(String name) {
       return MdiIcons.alphaC;
     case "calendar":
       return MdiIcons.calendar;
+    case "bank":
+      return MdiIcons.bank;
+    case "cashMultiple":
+      return MdiIcons.cashMultiple;
+    case "cash100":
+      return MdiIcons.cash100;
+    case "creditCardOutline":
+      return MdiIcons.creditCardOutline;
+    case "fileOutline":
+      return MdiIcons.fileOutline;
+    case "giftOutline":
+      return MdiIcons.giftOutline;
+    case "piggyBankOutline":
+      return MdiIcons.piggyBankOutline;
+    case "simOutline":
+      return MdiIcons.simOutline;
+    case "walletBifoldOutline":
+      return MdiIcons.walletBifoldOutline;
+    case "walletGiftCard":
+      return MdiIcons.walletGiftcard;
+    case "walletMembership":
+      return MdiIcons.walletMembership;
+    case "walletOutline":
+      return MdiIcons.walletOutline;
+    case "save":
+      return MdiIcons.contentSave;
     default:
       return Icons.question_mark_rounded;
   }

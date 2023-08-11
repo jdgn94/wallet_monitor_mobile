@@ -167,5 +167,8 @@
   "savingsAccounts": "Savings Accounts.",
   "createAccount": "Create Account",
   "amount": "Amount",
-  "minimumAmount": "Minimum Amount"
+  "minimumAmount": "Minimum Amount",
+  "icons": "Icons",
+  "selectIcon": "Select Icon",
+  "selectColor": "Select Color"
 }

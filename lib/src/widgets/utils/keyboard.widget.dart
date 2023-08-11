@@ -165,7 +165,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
         definitiveNumber = allNumbers[0];
         _inputController.text =
             "${widget.currency?.symbol ?? '\$'}\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(double.parse(definitiveNumber))}";
-        widget.confirm((double.parse(definitiveNumber) * 10).toInt());
+        widget.confirm((double.parse(definitiveNumber) * 100).toInt());
         Navigator.of(context).pop();
       }
     }
