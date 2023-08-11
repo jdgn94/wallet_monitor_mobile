@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 
 import "package:flutter_bloc/flutter_bloc.dart";
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
         : pref.getString("formatNumber") == null
             ? "/settingsSecondary"
             : "/home";
+
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {

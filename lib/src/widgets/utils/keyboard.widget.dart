@@ -17,6 +17,7 @@ class KeyboardWidget extends StatefulWidget {
   Currency? currency;
   String? label;
   String? defaultValue;
+  bool activeCalendar;
 
   KeyboardWidget({
     super.key,
@@ -26,6 +27,7 @@ class KeyboardWidget extends StatefulWidget {
     this.currency,
     this.label,
     this.defaultValue,
+    this.activeCalendar = true,
   });
 
   @override
@@ -33,10 +35,14 @@ class KeyboardWidget extends StatefulWidget {
 }
 
 class _KeyboardWidgetState extends State<KeyboardWidget> {
+  final today = DateTime.now();
   late TextEditingController _inputController;
   late String number;
-  List<String> rightKeys = ["delete", "check"];
   List<String> leftKeys = [];
+  DateTime dateSelected = DateTime.now();
+  List<String> numbers = ["0"];
+  List<String> operation = [];
+  bool writingDecimal = false;
 
   @override
   void initState() {
@@ -47,17 +53,21 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       "7",
       "8",
       "9",
+      "delete",
       "multiplication",
       "4",
       "5",
       "6",
+      "clear",
       "minus",
       "1",
       "2",
       "3",
+      "calendar",
       "sum",
       "0",
-      widget.pref.getString("formatNumber") == "de_DE" ? "," : "."
+      widget.pref.getString("formatNumber") == "de_DE" ? "," : ".",
+      "check",
     ];
     super.initState();
   }
@@ -74,6 +84,59 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       builder: _keyboard,
       isDismissible: true,
     );
+  }
+
+  String _dateDif() {
+    if (dateSelected.day == today.day &&
+        dateSelected.month == today.month &&
+        dateSelected.year == today.year) {
+      return "Today, ";
+    }
+
+    return "";
+  }
+
+  bool _valueIsNumber(String value) {
+    return value == "1" ||
+        value == "2" ||
+        value == "3" ||
+        value == "4" ||
+        value == "5" ||
+        value == "6" ||
+        value == "7" ||
+        value == "8" ||
+        value == "9" ||
+        value == "0" ||
+        value == "," ||
+        value == ".";
+  }
+
+  void _buttonAction(String value) {
+    if (value == 'calendar' && !widget.activeCalendar) return;
+    final number = _valueIsNumber(value);
+    print(value);
+    print(number);
+  }
+
+  Color _getIconColor(String name) {
+    if (name == 'calendar' && !widget.activeCalendar) {
+      return Colors.blue.withAlpha(100);
+    }
+
+    if (name == 'calendar') return Colors.blue;
+
+    if (name == 'check' ||
+        name == 'equal' ||
+        name == 'sum' ||
+        name == 'minus' ||
+        name == 'multiplication' ||
+        name == 'divider') {
+      return Colors.green;
+    }
+
+    if (name == 'delete' || name == 'clear') return Colors.red;
+
+    return Theme.of(context).colorScheme.onBackground;
   }
 
   @override
@@ -99,43 +162,47 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
               style: const TextStyle(fontSize: 25.0),
               textAlign: TextAlign.center,
             ),
-            const Divider(),
+            Divider(
+              height: 0.5,
+              color: Theme.of(context).colorScheme.onBackground.withAlpha(60),
+            ),
             SizedBox(
               width: double.infinity,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width * .80,
-                    height: 400,
+                    width: MediaQuery.of(context).size.width,
+                    height: 315,
                     constraints: const BoxConstraints(
-                      maxWidth: 490,
+                      maxWidth: 615,
                     ),
-                    padding:
-                        const EdgeInsets.only(left: 7.0, top: 7.0, bottom: 7.0),
+                    padding: const EdgeInsets.only(
+                        left: 7.0, right: 7.0, top: 7.0, bottom: 7.0),
                     child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.end,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children:
                           leftKeys.map((e) => _keyboardButton(e)).toList(),
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * .20,
-                    height: 400,
-                    padding: const EdgeInsets.only(
-                        right: 7.0, top: 7.0, bottom: 7.0),
-                    constraints: const BoxConstraints(
-                      maxWidth: 130,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                          rightKeys.map((e) => _keyboardButton(e)).toList(),
                     ),
                   ),
                 ],
               ),
             ),
+            Visibility(
+                visible: widget.activeCalendar,
+                child: Column(
+                  children: [
+                    Divider(
+                      height: 0.5,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onBackground
+                          .withAlpha(60),
+                    ),
+                    Text(
+                        "${_dateDif()}${dateSelected.year}/${dateSelected.month}/${dateSelected.day}"),
+                  ],
+                )),
           ],
         ),
       ),
@@ -146,15 +213,12 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
-        onTap: () {
-          final date = DateTime.parse("2023-08-08 09:13:37.205981");
-          print(date);
-        },
+        onTap: () => _buttonAction(iconName),
         borderRadius: BorderRadius.circular(10.0),
         child: Container(
           constraints: BoxConstraints(
             maxWidth: iconName == "0" ? 230 : 110,
-            maxHeight: iconName == "check" || iconName == "equal" ? 295 : 85,
+            maxHeight: 85,
             minWidth: 52.8,
           ),
           child: Ink(
@@ -162,7 +226,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                     .2 *
                     (iconName == '0' ? 2 : 1) -
                 (iconName == '0' ? 20 : 15),
-            height: iconName == "check" || iconName == "equal" ? 295 - 20 : 85,
+            height: 65,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: Theme.of(context).scaffoldBackgroundColor,
@@ -184,6 +248,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                           iconName == 'sum'
                       ? 27
                       : 35,
+              color: _getIconColor(iconName),
             ),
           ),
         ),

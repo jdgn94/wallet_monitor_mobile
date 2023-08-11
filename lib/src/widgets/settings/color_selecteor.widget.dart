@@ -25,10 +25,10 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
 
   @override
   void initState() {
+    _inputController = TextEditingController();
     if (widget.pref.getString("color") == null) {
       colorSelector = S.current.teal;
       colorIndexSelector = 0;
-      _changeGlobalColor(colorIndexSelector, 'teal');
     } else if (widget.pref.getString("color")![0] == '0' &&
         widget.pref.getString("color")!.length > 1 &&
         widget.pref.getString("color")![1] == "x") {
@@ -38,8 +38,8 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
       colorIndexSelector = int.parse(widget.pref.getString("color")!);
       colorSelector = colorsList[colorIndexSelector!].name;
     }
-    _inputController =
-        TextEditingController(text: _colorNameTranslate(colorSelector!));
+
+    _inputController.text = _colorNameTranslate(colorSelector!);
     super.initState();
   }
 

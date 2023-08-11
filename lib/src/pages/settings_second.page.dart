@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:wallet_monitor/generated/l10n.dart';
-import 'package:wallet_monitor/src/db/consults/account.consult.dart';
-import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 
+import 'package:wallet_monitor/generated/l10n.dart';
+import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
+import 'package:wallet_monitor/src/db/consults/account.consult.dart';
 import 'package:wallet_monitor/src/widgets/settings/format_selector.widget.dart';
+import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -19,7 +21,16 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
   final _pref = SettingsLocalStorage.pref;
 
   Future<void> _createAccounts() async {
-    final currencyId = _pref.getInt('defaultCurrency') ?? 103;
+    int? currencyId = _pref.getInt('defaultCurrency');
+    if (currencyId == null) {
+      BlocProvider.of<SettingsBloc>(context)
+          .add(const ChangeDefaultCurrency(103, "\$"));
+      currencyId = 103;
+    }
+    if (_pref.getString("formatNumber") == null) {
+      BlocProvider.of<SettingsBloc>(context)
+          .add(const ChangeFormatNumber("en_US"));
+    }
     await AccountConsult.createOrUpdate(
       id: 1,
       amount: 0,

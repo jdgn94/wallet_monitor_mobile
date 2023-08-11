@@ -119,6 +119,7 @@ class _AccountPageState extends State<AccountPage> {
                 label: S.current.amount,
                 currency: currency,
                 confirm: (int value) {},
+                activeCalendar: false,
               ),
               _spacing(),
               _alertInput(),
