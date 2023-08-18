@@ -5,12 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
 import 'package:wallet_monitor/src/db/consults/currency.consult.dart';
-import 'package:wallet_monitor/src/functions/currency.functions.dart';
+import 'package:wallet_monitor/src/functions/currency.function.dart';
+import 'package:wallet_monitor/src/functions/snack_bar.fimction.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class CurrencySelectorWidget extends StatefulWidget {
   final SharedPreferences pref;
+  final bool disabled;
   final bool localSelect;
   final int? defaultCurrency;
   final Function(Currency)? confirm;
@@ -21,6 +23,7 @@ class CurrencySelectorWidget extends StatefulWidget {
     this.localSelect = false,
     this.defaultCurrency,
     this.confirm,
+    this.disabled = false,
   });
 
   @override
@@ -68,6 +71,14 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   }
 
   void _openSelector() {
+    if (widget.disabled) {
+      showMessage(
+        context: context,
+        type: Type.warning,
+        message: S.current.currencyNotChange,
+      );
+      return;
+    }
     showDialog(context: context, builder: _dialog);
 
     Future.delayed(const Duration(milliseconds: 500), _animateScroll);

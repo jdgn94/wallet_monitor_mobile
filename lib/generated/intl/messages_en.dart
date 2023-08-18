@@ -205,6 +205,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Currency config"),
         "currencyFormat":
             MessageLookupByLibrary.simpleMessage("Currency Format"),
+        "currencyNotChange": MessageLookupByLibrary.simpleMessage(
+            "primary currency cannot be changed."),
         "currentBalance":
             MessageLookupByLibrary.simpleMessage("Current Balance"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
@@ -246,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectAColor": MessageLookupByLibrary.simpleMessage("Select a color"),
         "selectColor": MessageLookupByLibrary.simpleMessage("Select Color"),
         "selectIcon": MessageLookupByLibrary.simpleMessage("Select Icon"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
         "system": MessageLookupByLibrary.simpleMessage("System"),

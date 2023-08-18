@@ -208,6 +208,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Configuración de monedas"),
         "currencyFormat":
             MessageLookupByLibrary.simpleMessage("Formato de Moneda"),
+        "currencyNotChange": MessageLookupByLibrary.simpleMessage(
+            "La moneda principal no puede ser cambiada."),
         "currentBalance": MessageLookupByLibrary.simpleMessage("Balance"),
         "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
         "darkStyle": MessageLookupByLibrary.simpleMessage("Estilo oscuro"),
@@ -250,6 +252,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectColor":
             MessageLookupByLibrary.simpleMessage("Seleccionar Color"),
         "selectIcon": MessageLookupByLibrary.simpleMessage("Seleccionar Icono"),
+        "settings": MessageLookupByLibrary.simpleMessage("Configuraciones"),
         "start": MessageLookupByLibrary.simpleMessage("Comenzar"),
         "statistics": MessageLookupByLibrary.simpleMessage("Estadísticas"),
         "system": MessageLookupByLibrary.simpleMessage("Sistema"),

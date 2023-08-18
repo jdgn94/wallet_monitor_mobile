@@ -170,5 +170,7 @@
   "minimumAmount": "Monto Mínimo",
   "icons": "Iconos",
   "selectIcon": "Seleccionar Icono",
-  "selectColor": "Seleccionar Color"
+  "selectColor": "Seleccionar Color",
+  "settings": "Configuraciones",
+  "currencyNotChange": "La moneda principal no puede ser cambiada."
 }

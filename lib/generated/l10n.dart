@@ -1769,6 +1769,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `primary currency cannot be changed.`
+  String get currencyNotChange {
+    return Intl.message(
+      'primary currency cannot be changed.',
+      name: 'currencyNotChange',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -101,6 +101,16 @@ IconData getIcon(String name) {
       return MdiIcons.walletOutline;
     case "save":
       return MdiIcons.contentSave;
+    case "settings":
+      return Icons.settings;
+    case "info":
+      return MdiIcons.informationVariantCircleOutline;
+    case "warning":
+      return MdiIcons.alertOutline;
+    case "success":
+      return MdiIcons.checkCircleOutline;
+    case "error":
+      return MdiIcons.alertOctagonOutline;
     default:
       return Icons.question_mark_rounded;
   }

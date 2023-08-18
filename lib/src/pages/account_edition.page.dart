@@ -106,6 +106,8 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
       child: AppBar(
         title: Text(S.current.createAccount),
         centerTitle: true,
+        foregroundColor:
+            usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
         backgroundColor:
             usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
       ),

@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: _appBar(),
       body: _body(),
+      drawer: _drawer(),
       bottomNavigationBar: _bottomNavigationBar(),
     );
   }
@@ -66,8 +67,8 @@ class _HomePageState extends State<HomePage> {
       child: AppBar(
         title: Text(_pageName()),
         centerTitle: true,
-        // foregroundColor:
-        //     usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
+        foregroundColor:
+            usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
         backgroundColor:
             usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
       ),
@@ -84,6 +85,88 @@ class _HomePageState extends State<HomePage> {
         const Center(child: Text("Page 2")),
         const Center(child: Text("Page 3")),
       ],
+    );
+  }
+
+  Drawer _drawer() {
+    return Drawer(
+      width: 350,
+      child: SafeArea(
+        child: Column(
+          children: [
+            _headerDrawer(),
+            const SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: _listPages(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _headerDrawer() {
+    return Container(
+      width: double.infinity,
+      height: 100,
+      color: Theme.of(context).colorScheme.primary,
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Row(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            padding: const EdgeInsets.all(7),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onPrimary,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Image.asset('lib/src/assets/icons/logo.png'),
+          ),
+          const SizedBox(width: 25),
+          Expanded(
+            child: Text(
+              'Wallet Monitor',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+                fontSize: 27,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SingleChildScrollView _listPages() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _listPageItem(getIcon("settings"), S.current.settings, "/settings"),
+        ],
+      ),
+    );
+  }
+
+  InkWell _listPageItem(IconData iconName, String name, String routeName) {
+    return InkWell(
+      onTap: () => Navigator.of(context).popAndPushNamed(routeName),
+      borderRadius: BorderRadius.circular(30.0),
+      child: Ink(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              Icon(iconName),
+              const SizedBox(width: 8.0),
+              Text(name),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
