@@ -173,5 +173,22 @@
   "selectColor": "Seleccionar Color",
   "settings": "Configuraciones",
   "currencyNotChange": "La moneda principal no puede ser cambiada.",
-  "createCategory": "Crear Categoría"
+  "createCategory": "Crear Categoría",
+  "january": "Enero",
+  "february": "Febrero",
+  "march": "Marzo",
+  "april": "Abril",
+  "may": "Mayo",
+  "jun": "Junio",
+  "july": "Julio",
+  "august": "Agosto",
+  "september": "Septiembre",
+  "october": "Octubre",
+  "november": "Noviembre",
+  "december": "Diciembre",
+  "selectMonth": "Seleccionar Mes",
+  "allTime": "Todo el Tiempo",
+  "selectYear": "Seleccionar Año",
+  "selectDay": "Seleccionar Día",
+  "selectRange": "Seleccionar Rango"
 }

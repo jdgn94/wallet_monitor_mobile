@@ -173,5 +173,22 @@
   "selectColor": "Select Color",
   "settings": "Settings",
   "currencyNotChange": "Primary currency cannot be changed.",
-  "createCategory": "Create Category"
+  "createCategory": "Create Category",
+  "january": "January",
+  "february": "February",
+  "march": "March",
+  "april": "April",
+  "may": "May",
+  "jun": "Jun",
+  "july": "July",
+  "august": "August",
+  "september": "September",
+  "october": "October",
+  "november": "November",
+  "december": "December",
+  "selectMonth": "Select Month",
+  "allTime": "All Time",
+  "selectYear": "Select Year",
+  "selectDay": "Select Day",
+  "selectRange": "Select Range"
 }

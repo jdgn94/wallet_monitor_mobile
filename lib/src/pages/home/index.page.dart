@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/pages/home/accounts.page.dart';
+import 'package:wallet_monitor/src/pages/home/category.page.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         AccountPage(pref: _pref),
-        const Center(child: Text("Page 1")),
+        CategoryPage(pref: _pref),
         const Center(child: Text("Page 2")),
         const Center(child: Text("Page 3")),
       ],

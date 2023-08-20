@@ -28,6 +28,13 @@ ThemeData themeLight({required String colorSelected}) {
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
     ),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        overlayColor: MaterialStatePropertyAll(
+            _getPrimaryColor(colorSelected).withAlpha(100)),
+        // color
+      ),
+    ),
     useMaterial3: true,
   );
 }
@@ -40,6 +47,13 @@ ThemeData themeDark({required String colorSelected}) {
     inputDecorationTheme: const InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        overlayColor: MaterialStatePropertyAll(
+            _getPrimaryColor(colorSelected).withAlpha(100)),
+        // color
       ),
     ),
     useMaterial3: true,

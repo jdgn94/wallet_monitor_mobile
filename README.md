@@ -16,7 +16,7 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ### command
-  - Create files to internationalization `flutter pub run intl_utils:generate`
-  - Create models `flutter packages pub run build_runner build --delete-conflicting-outputs`
-  - Image application `flutter pub run icons_launcher:create`
+  - Create files to internationalization `dart run intl_utils:generate`
+  <!-- - Create models `flutter packages pub run build_runner build --delete-conflicting-outputs` -->
+  - Image application `dart run icons_launcher:create`
   - Create apk `flutter build apk`

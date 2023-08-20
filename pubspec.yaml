@@ -75,6 +75,11 @@ flutter:
   assets:
     # image
     - lib/src/assets/icons/logo.png
+    - lib/src/assets/icons/calendar_infinity.svg
+    - lib/src/assets/icons/calendar_month.svg
+    - lib/src/assets/icons/calendar_range.svg
+    - lib/src/assets/icons/calendar_today.svg
+    - lib/src/assets/icons/calendar_year.svg
     - lib/src/assets/images/dark_theme.png
     - lib/src/assets/images/light_theme.png
     - lib/src/assets/images/system_theme.png
