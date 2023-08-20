@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:wallet_monitor/src/bloc/global/global_bloc.dart';
-import 'package:wallet_monitor/src/db/querys/currency.consult.dart';
+import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
+import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -77,8 +78,11 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       widget.pref.getString("formatNumber") == "de_DE" ? "," : ".",
       "check",
     ];
-    _inputController.text =
-        "$currencySymbol\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(0)}";
+    _inputController.text = CurrencyFunctions.formatNumber(
+      symbol: currencySymbol,
+      decimalDigits: widget.currency!.decimalDigits,
+      amount: 0,
+    );
     super.initState();
   }
 
@@ -170,8 +174,11 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
         keyValues[keyValues.length - 1] = "check";
       } else if (value == "check") {
         definitiveNumber = allNumbers[0];
-        _inputController.text =
-            "$currencySymbol\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(double.parse(definitiveNumber))}";
+        _inputController.text = CurrencyFunctions.formatNumber(
+          symbol: currencySymbol,
+          decimalDigits: widget.currency!.decimalDigits,
+          amount: double.parse(definitiveNumber),
+        );
         widget.confirm((double.parse(definitiveNumber)));
         Navigator.of(context).pop();
       }

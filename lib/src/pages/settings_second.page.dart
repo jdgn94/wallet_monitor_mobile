@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
-import 'package:wallet_monitor/src/db/querys/account.consult.dart';
+import 'package:wallet_monitor/src/db/queries/account.consult.dart';
 import 'package:wallet_monitor/src/widgets/settings/format_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
@@ -35,7 +35,7 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       id: 1,
       amount: 0,
       color: 'ff2196f3',
-      alert: 0,
+      minAmount: 0,
       icon: 'wallet',
       name: S.current.card,
       currencyId: currencyId,
@@ -46,7 +46,7 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       id: 2,
       amount: 0,
       color: 'ff388e3c',
-      alert: 0,
+      minAmount: 0,
       icon: 'cash',
       name: S.current.cash,
       currencyId: currencyId,
@@ -57,7 +57,7 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       id: 3,
       amount: 0,
       color: 'ff26c6da',
-      alert: 0,
+      minAmount: 0,
       icon: 'saving',
       name: S.current.saving,
       currencyId: currencyId,

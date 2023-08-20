@@ -1,11 +1,11 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
-import 'package:wallet_monitor/src/db/querys/account.consult.dart';
+import 'package:wallet_monitor/src/db/queries/account.consult.dart';
 import 'package:wallet_monitor/src/db/models/navigator_returned.dart';
+import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -77,7 +77,7 @@ class _AccountPageState extends State<AccountPage> {
         focusColor: buttonSplash,
         child: Ink(
           width: double.infinity,
-          height: 80,
+          height: 70,
           decoration: BoxDecoration(
             color: buttonColor,
             borderRadius: BorderRadius.circular(10),
@@ -86,7 +86,7 @@ class _AccountPageState extends State<AccountPage> {
             children: [
               Ink(
                 height: double.infinity,
-                width: 80,
+                width: 70,
                 decoration: BoxDecoration(
                   color: buttonColor,
                   borderRadius: const BorderRadius.only(
@@ -112,15 +112,17 @@ class _AccountPageState extends State<AccountPage> {
                       Text(
                         item.name,
                         style: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 17,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        NumberFormat("#,##0.00",
-                                widget.pref.getString("formatNumber")!)
-                            .format(item.amount),
-                        style: const TextStyle(fontSize: 15),
+                        CurrencyFunctions.formatNumber(
+                          symbol: item.currencySymbol,
+                          decimalDigits: item.decimalDigits,
+                          amount: item.amount,
+                        ),
+                        style: const TextStyle(fontSize: 17),
                       ),
                     ],
                   ),

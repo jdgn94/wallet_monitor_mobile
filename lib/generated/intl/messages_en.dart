@@ -199,6 +199,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
+        "createCategory":
+            MessageLookupByLibrary.simpleMessage("Create Category"),
         "currencies": MessageLookupByLibrary.simpleMessage("Currencies"),
         "currency": MessageLookupByLibrary.simpleMessage("Currency"),
         "currencyConfig":

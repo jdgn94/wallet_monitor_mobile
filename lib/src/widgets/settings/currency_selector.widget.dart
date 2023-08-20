@@ -1,10 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
-import 'package:wallet_monitor/src/db/querys/currency.consult.dart';
+import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/functions/snack_bar.function.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
@@ -218,7 +220,7 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   ) {
     return RadioListTile<int>(
       groupValue: selected,
-      value: currency.id!,
+      value: currency.id,
       contentPadding: const EdgeInsets.symmetric(horizontal: 3),
       onChanged: (value) => changeValue(value!),
       title: Row(

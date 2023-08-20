@@ -172,5 +172,6 @@
   "selectIcon": "Seleccionar Icono",
   "selectColor": "Seleccionar Color",
   "settings": "Configuraciones",
-  "currencyNotChange": "La moneda principal no puede ser cambiada."
+  "currencyNotChange": "La moneda principal no puede ser cambiada.",
+  "createCategory": "Crear Categoría"
 }

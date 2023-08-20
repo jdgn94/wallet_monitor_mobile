@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/global/global_bloc.dart';
-import 'package:wallet_monitor/src/db/querys/account.consult.dart';
-import 'package:wallet_monitor/src/db/querys/currency.consult.dart';
+import 'package:wallet_monitor/src/db/queries/account.consult.dart';
+import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 import 'package:wallet_monitor/src/db/models/navigator_returned.dart';
 import 'package:wallet_monitor/src/functions/snack_bar.function.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
@@ -33,7 +33,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   double minAmount = 0;
   Currency? currency;
   String iconCategory = 'none';
-  Color colorCategory = Color((math.Random().nextDouble() * 0xFFFFFF).toInt());
+  Color colorAccount = Color((math.Random().nextDouble() * 0xFFFFFF).toInt());
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
 
   void _selectIcon(Color newColor, String newIcon) {
     setState(() {
-      colorCategory = newColor;
+      colorAccount = newColor;
       iconCategory = newIcon;
     });
   }
@@ -92,9 +92,9 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   Future<void> _saveAccount() async {
     try {
       await AccountConsult.createOrUpdate(
-        alert: minAmount,
+        minAmount: minAmount,
         amount: amount,
-        color: colorCategory
+        color: colorAccount
             .toString()
             .replaceAll("Color(0x", "")
             .replaceAll(")", ""),
@@ -132,7 +132,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
             usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
         backgroundColor: usePrimaryColor
             ? Theme.of(context).colorScheme.primary
-            : colorCategory.withAlpha(255),
+            : colorAccount.withAlpha(255),
       ),
     );
   }
@@ -216,7 +216,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   Widget _buttonToSave() {
     final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
     return CustomButton(
-      color: usePrimaryColor ? null : colorCategory,
+      color: usePrimaryColor ? null : colorAccount,
       onPressed: _saveAccount,
       text: S.current.create,
       icon: getIcon("save"),

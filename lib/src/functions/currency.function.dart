@@ -1,6 +1,23 @@
+// ignore_for_file: depend_on_referenced_packages
+
+import 'package:intl/intl.dart';
+
 import 'package:wallet_monitor/generated/l10n.dart';
 
+import 'package:wallet_monitor/storage/index.dart';
+
 abstract class CurrencyFunctions {
+  static String formatNumber({
+    required String symbol,
+    required int decimalDigits,
+    required double amount,
+  }) {
+    final pref = SettingsLocalStorage.pref;
+    final formatNumber = _numberDigits(decimalDigits);
+
+    return "$symbol\t${NumberFormat(formatNumber, pref.getString("formatNumber")!).format(amount)}";
+  }
+
   static String name(String value) {
     switch (value) {
       case "AlbaniaLek":
@@ -224,5 +241,22 @@ abstract class CurrencyFunctions {
       default:
         return S.current.none;
     }
+  }
+}
+
+String _numberDigits(int value) {
+  switch (value) {
+    case 1:
+      return "#,##0.0";
+    case 2:
+      return "#,##0.00";
+    case 3:
+      return "#,##0.000";
+    case 4:
+      return "#,##0.0000";
+    case 5:
+      return "#,##0.00000";
+    default:
+      return "#,##0";
   }
 }

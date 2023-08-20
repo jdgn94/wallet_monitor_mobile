@@ -33,12 +33,14 @@ void showMessage({
       children: [
         Icon(getIcon(icon), color: Colors.white),
         const SizedBox(width: 10),
-        Text(
-          message,
-          maxLines: 3,
-          style: const TextStyle(
-            color: Colors.white,
-            overflow: TextOverflow.ellipsis,
+        Expanded(
+          child: Text(
+            message,
+            maxLines: 3,
+            style: const TextStyle(
+              color: Colors.white,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
       ],

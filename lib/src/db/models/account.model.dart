@@ -10,6 +10,11 @@ class Account {
   DateTime createdAt;
   DateTime updatedAt;
   DateTime? deletedAt;
+  String currencyName;
+  String currencySymbol;
+  String currencyCode;
+  double exchangeRate;
+  int decimalDigits;
 
   Account({
     required this.id,
@@ -23,6 +28,11 @@ class Account {
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
+    required this.currencyName,
+    required this.currencySymbol,
+    required this.currencyCode,
+    required this.exchangeRate,
+    required this.decimalDigits,
   });
 
   factory Account.fromJson(Map<String, dynamic> json) => Account(
@@ -33,10 +43,17 @@ class Account {
         color: json["color"],
         amount: json["amount"],
         minAmount: json["min_amount"],
-        currencyId: json["currencyId"],
-        createdAt: json["created_at"],
-        updatedAt: json["updated_at"],
-        deletedAt: json["deleted_at"],
+        currencyId: json["currency_id"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        deletedAt: json["deleted_at"] == null
+            ? null
+            : DateTime.parse(json["deleted_at"]),
+        currencyName: json["currency_name"],
+        currencySymbol: json["currency_symbol"],
+        currencyCode: json["currency_code"],
+        exchangeRate: json["exchange_rate"],
+        decimalDigits: json["decimal_digits"],
       );
 }
 

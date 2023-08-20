@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+
 import "package:wallet_monitor/src/db/services/database.service.dart";
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
 
@@ -25,8 +26,6 @@ abstract class CurrencyConsult {
       SELECT * FROM currencies WHERE id = $id
     """);
 
-    // _db.rawQuery(sql)
-
     if (result.isEmpty) return null;
 
     final currencyJson = result[0];
@@ -46,7 +45,7 @@ abstract class CurrencyConsult {
     required bool deleted,
   }) async {
     await _db.insert(
-      'currencies',
+      "currencies",
       {
         "id": id,
         "code": code,

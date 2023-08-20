@@ -172,5 +172,6 @@
   "selectIcon": "Select Icon",
   "selectColor": "Select Color",
   "settings": "Settings",
-  "currencyNotChange": "Primary currency cannot be changed."
+  "currencyNotChange": "Primary currency cannot be changed.",
+  "createCategory": "Create Category"
 }

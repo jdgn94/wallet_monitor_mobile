@@ -71,7 +71,16 @@ class _HomePageState extends State<HomePage> {
             usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
         backgroundColor:
             usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
+        actions: [if (_page == 0 || _page == 1) _createButton()],
       ),
+    );
+  }
+
+  IconButton _createButton() {
+    return IconButton(
+      onPressed: () => Navigator.of(context)
+          .pushNamed(_page == 0 ? "/account" : "/category"),
+      icon: Icon(getIcon("add")),
     );
   }
 

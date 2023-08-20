@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wallet_monitor/src/db/querys/currency.consult.dart';
+import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 
 import 'package:wallet_monitor/src/db/models/currencies_response.model.dart';
 
