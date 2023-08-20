@@ -42,16 +42,22 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  SingleChildScrollView _body() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          ThemeSelectorWidget(pref: _pref),
-          ColorSelectorWidget(pref: _pref),
-          CurrencySelectorWidget(pref: _pref, disabled: true),
-          FormatSelectorWidget(pref: _pref),
-          LanguageSelectorWidget(pref: _pref),
-        ],
+  GestureDetector _body() {
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: Column(
+          children: [
+            ThemeSelectorWidget(pref: _pref),
+            ColorSelectorWidget(pref: _pref),
+            CurrencySelectorWidget(pref: _pref, disabled: true),
+            FormatSelectorWidget(pref: _pref),
+            LanguageSelectorWidget(pref: _pref),
+          ],
+        ),
       ),
     );
   }

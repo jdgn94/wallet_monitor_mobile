@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
-import 'package:wallet_monitor/src/db/consults/currency.consult.dart';
+import 'package:wallet_monitor/src/db/querys/currency.consult.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
-import 'package:wallet_monitor/src/functions/snack_bar.fimction.dart';
+import 'package:wallet_monitor/src/functions/snack_bar.function.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -32,7 +32,6 @@ class CurrencySelectorWidget extends StatefulWidget {
 
 class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   late TextEditingController _inputController;
-  late ScrollController _scrollController;
   late int currency;
   late List<Currency> currencies;
 
@@ -41,17 +40,19 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
     currency =
         widget.pref.getInt('defaultCurrency') ?? widget.defaultCurrency ?? 103;
     _inputController = TextEditingController();
-    _scrollController = ScrollController();
     _setInputName();
     _getAllCurrencies();
-    if (widget.pref.getInt('defaultCurrency') == null) _changeCurrencyPref(103);
+    if (widget.pref.getInt('defaultCurrency') == null) {
+      _changeCurrencyPref(103);
+    } else {
+      _changeCurrencyPref(widget.pref.getInt('defaultCurrency')!);
+    }
     super.initState();
   }
 
   @override
   void dispose() {
     _inputController.dispose();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -59,6 +60,7 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
     final newCurrency = await CurrencyConsult.getById(newCurrencyId);
     if (newCurrency == null) return;
     print("Cambiando los valores de los prefs por ${newCurrency.name}");
+    print("id de la nueva moneda $newCurrencyId");
 
     if (widget.localSelect) {
       widget.confirm!(newCurrency);
@@ -80,16 +82,6 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
       return;
     }
     showDialog(context: context, builder: _dialog);
-
-    Future.delayed(const Duration(milliseconds: 500), _animateScroll);
-  }
-
-  void _animateScroll() {
-    _scrollController.animateTo(
-      currency * 56.0 - MediaQuery.of(context).size.height * .25,
-      curve: Curves.bounceIn,
-      duration: const Duration(milliseconds: 500),
-    );
   }
 
   Future<void> _getAllCurrencies() async {
@@ -181,7 +173,6 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  controller: _scrollController,
                   keyboardDismissBehavior:
                       ScrollViewKeyboardDismissBehavior.onDrag,
                   child: Column(
@@ -227,7 +218,7 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   ) {
     return RadioListTile<int>(
       groupValue: selected,
-      value: currency.id,
+      value: currency.id!,
       contentPadding: const EdgeInsets.symmetric(horizontal: 3),
       onChanged: (value) => changeValue(value!),
       title: Row(

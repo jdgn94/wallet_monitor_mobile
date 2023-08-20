@@ -6,3 +6,9 @@ sealed class GlobalEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class ChangeNewCurrency extends GlobalEvent {
+  final int newCurrency;
+
+  const ChangeNewCurrency(this.newCurrency);
+}

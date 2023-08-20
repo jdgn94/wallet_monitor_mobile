@@ -1780,10 +1780,10 @@ class S {
     );
   }
 
-  /// `primary currency cannot be changed.`
+  /// `Primary currency cannot be changed.`
   String get currencyNotChange {
     return Intl.message(
-      'primary currency cannot be changed.',
+      'Primary currency cannot be changed.',
       name: 'currencyNotChange',
       desc: '',
       args: [],

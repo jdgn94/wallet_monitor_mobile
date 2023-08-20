@@ -1,8 +1,11 @@
 // ignore_for_file: depend_on_referenced_packages, must_be_immutable
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
+import 'package:wallet_monitor/src/bloc/global/global_bloc.dart';
+import 'package:wallet_monitor/src/db/querys/currency.consult.dart';
 
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
@@ -12,7 +15,7 @@ enum KeyType { input, category }
 
 class KeyboardWidget extends StatefulWidget {
   SharedPreferences pref;
-  Function(int) confirm;
+  Function(double) confirm;
   KeyType type;
   Currency? currency;
   String? label;
@@ -38,6 +41,8 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
   final today = DateTime.now();
   late TextEditingController _inputController;
   late String definitiveNumber;
+  late String currencySymbol;
+  late int actualCurrencyId;
   List<String> keyValues = [];
   DateTime dateSelected = DateTime.now();
   List<String> allNumbers = ["0"];
@@ -49,6 +54,8 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
   void initState() {
     definitiveNumber = widget.defaultValue ?? '0';
     _inputController = TextEditingController();
+    currencySymbol = widget.pref.getString('currencySymbol') ?? '\$';
+    actualCurrencyId = widget.pref.getInt('defaultCurrency') ?? 103;
     keyValues = [
       "division",
       "7",
@@ -71,7 +78,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       "check",
     ];
     _inputController.text =
-        "${widget.currency?.symbol ?? '\$'}\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(0)}";
+        "$currencySymbol\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(0)}";
     super.initState();
   }
 
@@ -164,14 +171,26 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       } else if (value == "check") {
         definitiveNumber = allNumbers[0];
         _inputController.text =
-            "${widget.currency?.symbol ?? '\$'}\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(double.parse(definitiveNumber))}";
-        widget.confirm((double.parse(definitiveNumber) * 100).toInt());
+            "$currencySymbol\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(double.parse(definitiveNumber))}";
+        widget.confirm((double.parse(definitiveNumber)));
         Navigator.of(context).pop();
       }
     }
 
     setState(() {});
     changeState(() {});
+  }
+
+  Future<void> _refreshInput(int id) async {
+    final currency = await CurrencyConsult.getById(id);
+    print(id);
+
+    setState(() {
+      currencySymbol = currency!.symbol;
+      actualCurrencyId = id;
+    });
+    _inputController.text =
+        "$currencySymbol\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(double.parse(allNumbers[0]))}";
   }
 
   void _calculateOperation(StateSetter changeState) {
@@ -242,18 +261,26 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      readOnly: true,
-      onTap: _showKeyboard,
-      controller: _inputController,
-      decoration: InputDecoration(
-        label: Text(widget.label ?? ""),
-      ),
-    );
+    return BlocBuilder<GlobalBloc, GlobalState>(builder: (context, snapshot) {
+      print(actualCurrencyId);
+      print(snapshot.newCurrency);
+      if (snapshot.newCurrency != actualCurrencyId &&
+          snapshot.newCurrency != null) {
+        Future.delayed(
+            Duration.zero, () => _refreshInput(snapshot.newCurrency!));
+      }
+      return TextField(
+        readOnly: true,
+        onTap: _showKeyboard,
+        controller: _inputController,
+        decoration: InputDecoration(
+          label: Text(widget.label ?? ""),
+        ),
+      );
+    });
   }
 
   Widget _keyboard(BuildContext context) {
-    print(MediaQuery.of(context).size);
     return StatefulBuilder(builder: (context, changeState) {
       return SingleChildScrollView(
         child: Padding(

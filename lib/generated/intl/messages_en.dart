@@ -206,7 +206,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currencyFormat":
             MessageLookupByLibrary.simpleMessage("Currency Format"),
         "currencyNotChange": MessageLookupByLibrary.simpleMessage(
-            "primary currency cannot be changed."),
+            "Primary currency cannot be changed."),
         "currentBalance":
             MessageLookupByLibrary.simpleMessage("Current Balance"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),

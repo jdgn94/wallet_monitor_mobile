@@ -6,16 +6,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 
 import "package:wallet_monitor/generated/l10n.dart";
+import "package:wallet_monitor/src/bloc/global/global_bloc.dart";
 import "package:wallet_monitor/src/bloc/settings/settings_bloc.dart";
 import 'package:wallet_monitor/src/configs/theme.configs.dart';
-import 'package:wallet_monitor/src/db/index.db.dart';
+import "package:wallet_monitor/src/db/services/database.service.dart";
 import "package:wallet_monitor/src/routes/index.dart";
+import "package:wallet_monitor/src/utils/fetch_controller.utils.dart";
 import "package:wallet_monitor/storage/index.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsLocalStorage.configureSettings();
-  DataBase.initDB();
+  await DatabaseService().database();
 
   final pref = SettingsLocalStorage.pref;
 
@@ -31,7 +33,7 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider<GlobalBloc>(create: (_) => GlobalBloc()),
+        BlocProvider<GlobalBloc>(create: (_) => GlobalBloc()),
         BlocProvider<SettingsBloc>(create: (_) => SettingsBloc(pref: pref)),
       ],
       child: MyApp(pref: pref),
@@ -46,6 +48,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FetchController.getAllCurrencies();
+
     final String initialPage = pref.getString("color") == null
         ? "/settingsInitial"
         : pref.getString("formatNumber") == null
@@ -57,7 +61,7 @@ class MyApp extends StatelessWidget {
 
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {
-        print(state.toString());
+        print("Nombre del idioma ${state.lang}");
         return MaterialApp(
           title: "Wallet Monitor",
           debugShowCheckedModeBanner: false,

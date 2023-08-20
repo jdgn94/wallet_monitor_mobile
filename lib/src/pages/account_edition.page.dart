@@ -1,9 +1,14 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
-import 'package:wallet_monitor/src/db/consults/currency.consult.dart';
+import 'package:wallet_monitor/src/bloc/global/global_bloc.dart';
+import 'package:wallet_monitor/src/db/querys/account.consult.dart';
+import 'package:wallet_monitor/src/db/querys/currency.consult.dart';
+import 'package:wallet_monitor/src/db/models/navigator_returned.dart';
+import 'package:wallet_monitor/src/functions/snack_bar.function.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
@@ -24,12 +29,11 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
   late int currencyId;
-  int amount = 0;
-  int minAmount = 0;
+  double amount = 0;
+  double minAmount = 0;
   Currency? currency;
   String iconCategory = 'none';
-  Color colorCategory =
-      Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1);
+  Color colorCategory = Color((math.Random().nextDouble() * 0xFFFFFF).toInt());
 
   @override
   void initState() {
@@ -60,6 +64,9 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   }
 
   void _changeCurrency(Currency newCurrency) {
+    BlocProvider.of<GlobalBloc>(context).add(ChangeNewCurrency(
+      newCurrency.id,
+    ));
     setState(() {
       currency = newCurrency;
       currencyId = newCurrency.id;
@@ -70,24 +77,39 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
     return _nameController.text.isEmpty || iconCategory == "none";
   }
 
-  void _changeInitValue(int newValue) {
+  void _changeInitValue(double newValue) {
     setState(() {
       amount = newValue;
     });
   }
 
-  void _changeMinAmount(int newValue) {
+  void _changeMinAmount(double newValue) {
     setState(() {
       minAmount = newValue;
     });
   }
 
   Future<void> _saveAccount() async {
-    print(_nameController.text);
-    print(_descriptionController.text);
-    print(currency?.name);
-    print(amount);
-    print(minAmount);
+    try {
+      await AccountConsult.createOrUpdate(
+        alert: minAmount,
+        amount: amount,
+        color: colorCategory
+            .toString()
+            .replaceAll("Color(0x", "")
+            .replaceAll(")", ""),
+        currencyId: currency!.id,
+        description: _descriptionController.text,
+        icon: iconCategory,
+        name: _nameController.text,
+        createdAt: DateTime.now(),
+      );
+
+      final response = CreateReturner(reload: true);
+      Navigator.of(context).pop(response);
+    } catch (e) {
+      showMessage(context: context, type: Type.error, message: e.toString());
+    }
   }
 
   @override
@@ -108,8 +130,9 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
         centerTitle: true,
         foregroundColor:
             usePrimaryColor ? Theme.of(context).colorScheme.onPrimary : null,
-        backgroundColor:
-            usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
+        backgroundColor: usePrimaryColor
+            ? Theme.of(context).colorScheme.primary
+            : colorCategory.withAlpha(255),
       ),
     );
   }
@@ -191,7 +214,9 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   }
 
   Widget _buttonToSave() {
+    final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
     return CustomButton(
+      color: usePrimaryColor ? null : colorCategory,
       onPressed: _saveAccount,
       text: S.current.create,
       icon: getIcon("save"),

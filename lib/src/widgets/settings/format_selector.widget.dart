@@ -64,30 +64,32 @@ class _FormatSelectorWidgetState extends State<FormatSelectorWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
-      if (state.currencySymbol != currencySymbol) {
-        Future.delayed(Duration.zero, _setInputText);
-      }
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (context, snapshot) {
+        if (snapshot.currencySymbol != currencySymbol) {
+          Future.delayed(Duration.zero, _setInputText);
+        }
 
-      return Container(
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(15.0),
-        child: SizedBox(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                S.current.currencyFormat,
-                style: const TextStyle(fontSize: 22),
-              ),
-              const SizedBox(height: 10),
-              _selector(),
-            ],
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.all(15.0),
+          child: SizedBox(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  S.current.currencyFormat,
+                  style: const TextStyle(fontSize: 22),
+                ),
+                const SizedBox(height: 10),
+                _selector(),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   TextField _selector() {

@@ -91,17 +91,26 @@ class _HomePageState extends State<HomePage> {
   Drawer _drawer() {
     return Drawer(
       width: 350,
-      child: SafeArea(
-        child: Column(
-          children: [
-            _headerDrawer(),
-            const SizedBox(height: 10.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: _listPages(),
+      child: Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 100,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          SafeArea(
+            child: Column(
+              children: [
+                _headerDrawer(),
+                const SizedBox(height: 10.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: _listPages(),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

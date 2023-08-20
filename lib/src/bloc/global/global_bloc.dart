@@ -5,9 +5,11 @@ part 'global_event.dart';
 part 'global_state.dart';
 
 class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
-  GlobalBloc() : super(GlobalInitial()) {
+  GlobalBloc() : super(const GlobalInitial(null)) {
     on<GlobalEvent>((event, emit) {
-      // TODO: implement event handler
+      if (event is ChangeNewCurrency) {
+        emit(GlobalInitial(event.newCurrency));
+      }
     });
   }
 }

@@ -4,7 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
-import 'package:wallet_monitor/src/db/consults/account.consult.dart';
+import 'package:wallet_monitor/src/db/querys/account.consult.dart';
+import 'package:wallet_monitor/src/db/models/navigator_returned.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
@@ -26,8 +27,19 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Future<void> _getAllAccounts() async {
-    accounts = await AccountConsult.getAll();
-    setState(() {});
+    final response = await AccountConsult.getAll();
+    setState(() {
+      accounts = response.accounts;
+    });
+  }
+
+  Future<void> _goToCreateAccount() async {
+    final response = await Navigator.of(context).pushNamed("/account");
+    if (response == null) return;
+    response as CreateReturner;
+    if (response.reload) {
+      _getAllAccounts();
+    }
   }
 
   @override
@@ -105,7 +117,9 @@ class _AccountPageState extends State<AccountPage> {
                         ),
                       ),
                       Text(
-                        "${item.currency.value!.symbol}\t${NumberFormat("#,##0.00", widget.pref.getString("formatNumber")!).format(item.amount)}",
+                        NumberFormat("#,##0.00",
+                                widget.pref.getString("formatNumber")!)
+                            .format(item.amount),
                         style: const TextStyle(fontSize: 15),
                       ),
                     ],
@@ -129,7 +143,7 @@ class _AccountPageState extends State<AccountPage> {
         padding: EdgeInsets.zero,
         radius: const Radius.circular(10.0),
         child: InkWell(
-          onTap: () => Navigator.pushNamed(context, "/account"),
+          onTap: _goToCreateAccount,
           borderRadius: BorderRadius.circular(10.0),
           child: Ink(
             width: double.infinity,

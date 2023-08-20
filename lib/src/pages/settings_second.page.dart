@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
-import 'package:wallet_monitor/src/db/consults/account.consult.dart';
+import 'package:wallet_monitor/src/db/querys/account.consult.dart';
 import 'package:wallet_monitor/src/widgets/settings/format_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
@@ -40,6 +40,7 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       name: S.current.card,
       currencyId: currencyId,
       description: '',
+      createdAt: DateTime.now(),
     );
     await AccountConsult.createOrUpdate(
       id: 2,
@@ -50,6 +51,7 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       name: S.current.cash,
       currencyId: currencyId,
       description: '',
+      createdAt: DateTime.now(),
     );
     await AccountConsult.createOrUpdate(
       id: 3,
@@ -60,6 +62,7 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       name: S.current.saving,
       currencyId: currencyId,
       description: '',
+      createdAt: DateTime.now(),
     );
 
     Navigator.of(context)

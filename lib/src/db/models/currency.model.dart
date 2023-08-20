@@ -1,17 +1,32 @@
-import 'package:isar/isar.dart';
-
-part 'currency.model.g.dart';
-
-@Collection(accessor: 'currencies')
 class Currency {
-  final Id id;
-  @Index(unique: true, caseSensitive: true)
+  final int id;
   final String name;
   final String symbol;
+  final String code;
+  final double exchangeRate;
+  final int decimalDigits;
+  final bool deleted;
 
   Currency({
-    this.id = Isar.autoIncrement,
+    required this.id,
     required this.name,
     required this.symbol,
+    required this.code,
+    required this.exchangeRate,
+    required this.decimalDigits,
+    this.deleted = false,
   });
+
+  factory Currency.fromJson(Map<String, dynamic> json) => Currency(
+        id: json["id"],
+        name: json["name"],
+        symbol: json["symbol"],
+        code: json["code"],
+        exchangeRate: json["exchange_rate"],
+        decimalDigits: json["decimal_digits"],
+        deleted: json["deleted"] == 1,
+      );
 }
+
+List<Currency> currenciesFromJson(List<Map<String, dynamic>> json) =>
+    json.isEmpty ? [] : json.map((x) => Currency.fromJson(x)).toList();
