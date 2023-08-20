@@ -1,4 +1,4 @@
-import 'package:wallet_monitor/src/db/querys/currency.consult.dart';
+import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 
 class CurrenciesResponse {
   List<Currency?> currencies;
