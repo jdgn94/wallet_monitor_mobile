@@ -4,6 +4,7 @@ import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/pages/home/accounts.page.dart';
 import 'package:wallet_monitor/src/pages/home/category.page.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
+import 'package:wallet_monitor/src/widgets/utils/calendar_selector.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,12 +17,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _pref = SettingsLocalStorage.pref;
   late PageController _pageController;
+  DateTime firstCurrentDate = DateTime.now();
+  DateTime lastCurrentDate =
+      DateTime(DateTime.now().year, DateTime.now().month, 1);
   int _page = 1;
 
   @override
   void initState() {
     _pageController = PageController(initialPage: 1);
     super.initState();
+  }
+
+  void changeDates(DateTime fistDate, DateTime lastTime) {
+    setState(() {
+      firstCurrentDate = fistDate;
+      lastCurrentDate = lastTime;
+    });
   }
 
   void _changePage(int newPage) {
@@ -85,15 +96,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  PageView _body() {
-    return PageView(
-      controller: _pageController,
-      physics: const NeverScrollableScrollPhysics(),
+  Column _body() {
+    return Column(
       children: [
-        AccountPage(pref: _pref),
-        CategoryPage(pref: _pref),
-        const Center(child: Text("Page 2")),
-        const Center(child: Text("Page 3")),
+        CalendarSelectorWidget(pref: _pref, changeDates: changeDates),
+        Expanded(
+          child: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              AccountPage(pref: _pref),
+              CategoryPage(pref: _pref),
+              const Center(child: Text("Page 2")),
+              const Center(child: Text("Page 3")),
+            ],
+          ),
+        ),
       ],
     );
   }

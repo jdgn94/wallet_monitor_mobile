@@ -1969,6 +1969,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Initial Day`
+  String get initDay {
+    return Intl.message(
+      'Initial Day',
+      name: 'initDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Day`
+  String get lastDay {
+    return Intl.message(
+      'Last Day',
+      name: 'lastDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Filter`
+  String get selectFilter {
+    return Intl.message(
+      'Select Filter',
+      name: 'selectFilter',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

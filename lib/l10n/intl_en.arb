@@ -190,5 +190,8 @@
   "allTime": "All Time",
   "selectYear": "Select Year",
   "selectDay": "Select Day",
-  "selectRange": "Select Range"
+  "selectRange": "Select Range",
+  "initDay": "Initial Day",
+  "lastDay": "Last Day",
+  "selectFilter": "Select Filter"
 }

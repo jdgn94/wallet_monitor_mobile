@@ -20,6 +20,8 @@ class CustomButton extends StatelessWidget {
   final bool disabled;
   final bool loading;
   final bool selected;
+  final Color? borderColor;
+  final Color? textColor;
 
   const CustomButton({
     super.key,
@@ -40,6 +42,8 @@ class CustomButton extends StatelessWidget {
     this.disabled = false,
     this.loading = false,
     this.selected = false,
+    this.borderColor,
+    this.textColor,
   });
 
   @override
@@ -63,14 +67,16 @@ class CustomButton extends StatelessWidget {
         onPressed: disabled ? null : onPressed,
         style: ButtonStyle(
           foregroundColor: MaterialStatePropertyAll(
-            disabled ? colorDisabled : color ?? primaryColor,
+            disabled ? colorDisabled : textColor ?? color ?? primaryColor,
           ),
           overlayColor: MaterialStatePropertyAll(
-            (disabled ? colorDisabled : color ?? primaryColor).withOpacity(.3),
+            (disabled ? colorDisabled : color ?? primaryColor).withAlpha(50),
           ),
           side: MaterialStatePropertyAll(
             BorderSide(
-              color: disabled ? colorDisabled : color ?? primaryColor,
+              color: disabled
+                  ? colorDisabled
+                  : borderColor ?? color ?? primaryColor,
               width: 2,
             ),
           ),
@@ -88,8 +94,7 @@ class CustomButton extends StatelessWidget {
                   ? colorDisabled
                   : color ?? primaryColor),
           overlayColor: MaterialStatePropertyAll(
-              (disabled ? colorDisabled : color ?? primaryColor)
-                  .withOpacity(.3)),
+              (disabled ? colorDisabled : color ?? primaryColor).withAlpha(50)),
         ),
         onPressed: disabled ? null : onPressed,
         child: _buttonContainer(context),
@@ -166,7 +171,7 @@ class CustomButton extends StatelessWidget {
             disabled ? colorDisabled : color ?? primaryColor),
         foregroundColor: MaterialStatePropertyAll(overlayColor ?? Colors.white),
         overlayColor: MaterialStatePropertyAll(
-          overlayColor != null ? overlayColor!.withOpacity(.1) : Colors.white10,
+          overlayColor != null ? overlayColor!.withAlpha(25) : Colors.white10,
         ),
       ),
       child: _buttonContainer(context),

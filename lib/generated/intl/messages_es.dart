@@ -230,11 +230,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "green": MessageLookupByLibrary.simpleMessage("Verde"),
         "icon": MessageLookupByLibrary.simpleMessage("Icono"),
         "icons": MessageLookupByLibrary.simpleMessage("Iconos"),
+        "initDay": MessageLookupByLibrary.simpleMessage("Día Inicial"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Configuraciones inicial"),
         "january": MessageLookupByLibrary.simpleMessage("Enero"),
         "july": MessageLookupByLibrary.simpleMessage("Julio"),
         "jun": MessageLookupByLibrary.simpleMessage("Junio"),
+        "lastDay": MessageLookupByLibrary.simpleMessage("Día Final"),
         "light": MessageLookupByLibrary.simpleMessage("Claro"),
         "lightStyle": MessageLookupByLibrary.simpleMessage("Estilo claro"),
         "lighting": MessageLookupByLibrary.simpleMessage("Brillante"),
@@ -266,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectColor":
             MessageLookupByLibrary.simpleMessage("Seleccionar Color"),
         "selectDay": MessageLookupByLibrary.simpleMessage("Seleccionar Día"),
+        "selectFilter": MessageLookupByLibrary.simpleMessage("Select Filter"),
         "selectIcon": MessageLookupByLibrary.simpleMessage("Seleccionar Icono"),
         "selectMonth": MessageLookupByLibrary.simpleMessage("Seleccionar Mes"),
         "selectRange":

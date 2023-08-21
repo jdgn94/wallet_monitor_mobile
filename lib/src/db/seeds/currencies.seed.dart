@@ -1,3 +1,5 @@
+import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
+
 final List<Map<String, String>> currencies = [
   {
     "id": "1",
@@ -742,3 +744,17 @@ final List<Map<String, String>> currencies = [
     "decimalDigits": "2"
   },
 ];
+
+Future<void> insertCurrencies() async {
+  for (final currency in currencies) {
+    await CurrencyConsult.insertOrUpdate(
+      id: int.parse(currency["id"]!),
+      code: currency["code"]!,
+      name: currency["name"]!,
+      decimalDigits: int.parse(currency["decimalDigits"]!),
+      exchangeRate: 1,
+      symbol: currency["symbol"]!,
+      deleted: false,
+    );
+  }
+}

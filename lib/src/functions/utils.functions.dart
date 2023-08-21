@@ -1,4 +1,15 @@
 import 'package:wallet_monitor/generated/l10n.dart';
+import 'package:wallet_monitor/storage/index.dart';
+
+enum DateTypeFormat {
+  number,
+  monthString,
+  dayString,
+  monthAndDayString,
+  dayAndMonthOnly,
+  monthAndYearOnly,
+  monthStringAndYearOnly
+}
 
 String translateMonth(int month) {
   switch (month) {
@@ -28,5 +39,45 @@ String translateMonth(int month) {
       return S.current.december;
     default:
       return "Month not found";
+  }
+}
+
+String dateFormat(
+  DateTime date, {
+  DateTypeFormat dateType = DateTypeFormat.number,
+}) {
+  switch (dateType.name) {
+    case "monthString":
+      return _formatDate(
+        date.year.toString(),
+        translateMonth(date.month),
+        "${date.day < 10 ? '0' : ''}${date.day}",
+      );
+    case "monthStringAndYearOnly":
+      return _formatDate(
+        date.year.toString(),
+        translateMonth(date.month),
+        "",
+      );
+    default:
+      return _formatDate(
+        date.year.toString(),
+        "${date.month < 10 ? '0' : ''}${date.month}",
+        "${date.day < 10 ? '0' : ''}${date.day}",
+      );
+  }
+}
+
+String _formatDate(String year, String month, String day) {
+  final pref = SettingsLocalStorage.pref;
+  final formatType = pref.getString("dateFormat");
+
+  switch (formatType) {
+    case "us":
+      return "$month $day $year";
+    case "es":
+      return "$day $month $year";
+    default:
+      return "$year $month $day";
   }
 }

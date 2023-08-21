@@ -190,5 +190,8 @@
   "allTime": "Todo el Tiempo",
   "selectYear": "Seleccionar Año",
   "selectDay": "Seleccionar Día",
-  "selectRange": "Seleccionar Rango"
+  "selectRange": "Seleccionar Rango",
+  "initDay": "Día Inicial",
+  "lastDay": "Día Final",
+  "selectFilter": "Select Filter"
 }
