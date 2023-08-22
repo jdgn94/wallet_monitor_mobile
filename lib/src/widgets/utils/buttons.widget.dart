@@ -6,10 +6,12 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final ButtonType type;
   final Color? color;
+  final Color? backgroundColor;
   final Color? overlayColor;
   final double? width;
   final double? height;
   final IconData? icon;
+  final IconData? rightIcon;
   final String? personalIcon;
   final String? text;
   final double size;
@@ -28,10 +30,12 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.type = ButtonType.tonal,
     this.color,
+    this.backgroundColor,
     this.overlayColor,
     this.width,
     this.height,
     this.icon,
+    this.rightIcon,
     this.personalIcon,
     this.text,
     this.size = 17,
@@ -72,6 +76,7 @@ class CustomButton extends StatelessWidget {
           overlayColor: MaterialStatePropertyAll(
             (disabled ? colorDisabled : color ?? primaryColor).withAlpha(50),
           ),
+          backgroundColor: MaterialStatePropertyAll(backgroundColor),
           side: MaterialStatePropertyAll(
             BorderSide(
               color: disabled
@@ -95,6 +100,7 @@ class CustomButton extends StatelessWidget {
                   : color ?? primaryColor),
           overlayColor: MaterialStatePropertyAll(
               (disabled ? colorDisabled : color ?? primaryColor).withAlpha(50)),
+          backgroundColor: MaterialStatePropertyAll(backgroundColor),
         ),
         onPressed: disabled ? null : onPressed,
         child: _buttonContainer(context),
@@ -196,14 +202,21 @@ class CustomButton extends StatelessWidget {
         mainAxisAlignment: alignment ?? MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (icon != null && personalIcon == null)
-            Icon(
-              icon,
-              size: size,
-            ),
+          if (icon != null && personalIcon == null) Icon(icon, size: size),
           if ((icon != null || personalIcon != null) && text != null)
             const SizedBox(width: 10.0),
-          if (text != null) Text(text!, style: TextStyle(fontSize: size)),
+          if (text != null)
+            Expanded(
+              child: Text(
+                text!,
+                style: TextStyle(
+                  fontSize: size,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          if ((rightIcon != null && text != null)) const SizedBox(width: 10.0),
+          if (rightIcon != null) Icon(rightIcon, size: size),
         ],
       ),
     );

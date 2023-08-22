@@ -154,11 +154,11 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
       onPressed: dateType == DateType.range ||
               dateType == DateType.all ||
               (dateType == DateType.day &&
-                  firstCurrentDate.compareTo(DateTime(200)) <= 0) ||
+                  firstCurrentDate.compareTo(DateTime(2000)) <= 0) ||
               (dateType == DateType.month &&
-                  firstCurrentDate.compareTo(DateTime(200)) <= 0) ||
+                  firstCurrentDate.compareTo(DateTime(2000)) <= 0) ||
               (dateType == DateType.year &&
-                  firstCurrentDate.compareTo(DateTime(200)) <= 0)
+                  firstCurrentDate.compareTo(DateTime(2000)) <= 0)
           ? null
           : _substractDate,
       icon: const Icon(Icons.chevron_left_rounded),
@@ -396,7 +396,7 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
       yearList.add(i);
     }
 
-    for (int i = 1; i < 13; i++) {
+    for (int i = 1; i <= 12; i++) {
       monthList.add(i);
     }
     return StatefulBuilder(builder: (localContext, localSetState) {

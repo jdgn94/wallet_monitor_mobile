@@ -109,7 +109,6 @@ class _HomePageState extends State<HomePage> {
         backgroundColor:
             usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
         actions: [
-          if (_page != 0) _currencyButton(),
           if (_page == 0 || _page == 1 || _page == 2) _createButton(),
         ],
       ),
@@ -130,19 +129,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _currencyButton() {
-    final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
-
     return CurrencySelectorWidget(
       pref: _pref,
       localSelect: true,
       button: true,
       confirm: _changeCurrency,
-      color: usePrimaryColor
-          ? Theme.of(context).colorScheme.onPrimary
-          : Theme.of(context).colorScheme.onBackground,
-      splashColor: usePrimaryColor
-          ? Theme.of(context).colorScheme.onPrimary
-          : Theme.of(context).colorScheme.primary,
+    );
+  }
+
+  Widget _selectCategory() {
+    return CustomButton(
+      onPressed: () {},
+      width: MediaQuery.of(context).size.width / 3,
+      text: "category selected",
+      type: ButtonType.text,
+      backgroundColor: Theme.of(context).colorScheme.primary.withAlpha(50),
+      size: 15,
+      rightIcon: Icons.arrow_drop_down_rounded,
     );
   }
 
@@ -151,12 +154,31 @@ class _HomePageState extends State<HomePage> {
       children: [
         Visibility(
           visible: _page != 0,
-          child: CalendarSelectorWidget(
-            pref: _pref,
-            changeDates: changeDates,
-            firstCurrentDate: firstCurrentDate,
-            lastCurrentDate: lastCurrentDate,
-            dateType: dateType,
+          child: Column(
+            children: [
+              CalendarSelectorWidget(
+                pref: _pref,
+                changeDates: changeDates,
+                firstCurrentDate: firstCurrentDate,
+                lastCurrentDate: lastCurrentDate,
+                dateType: dateType,
+              ),
+              Visibility(
+                  child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _currencyButton(),
+                      if (_page == 2 || _page == 3) const VerticalDivider(),
+                      if (_page == 2 || _page == 3) _selectCategory(),
+                    ],
+                  ),
+                ),
+              ))
+            ],
           ),
         ),
         Expanded(

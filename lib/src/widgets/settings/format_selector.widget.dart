@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
-import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 
 class FormatSelectorWidget extends StatefulWidget {
   final SharedPreferences pref;

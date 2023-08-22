@@ -19,9 +19,6 @@ class CurrencySelectorWidget extends StatefulWidget {
   final int? defaultCurrency;
   final bool button;
   final Function(Currency)? confirm;
-  final ButtonType buttonType;
-  final Color? color;
-  final Color? splashColor;
 
   const CurrencySelectorWidget({
     super.key,
@@ -31,9 +28,6 @@ class CurrencySelectorWidget extends StatefulWidget {
     this.confirm,
     this.disabled = false,
     this.button = false,
-    this.buttonType = ButtonType.tonal,
-    this.color,
-    this.splashColor,
   });
 
   @override
@@ -44,6 +38,7 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   late TextEditingController _inputController;
   late int currency;
   late List<Currency> currencies;
+  String? currencyText;
   Currency? currencySelect;
 
   @override
@@ -100,8 +95,11 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
 
   Future<void> _setInputName() async {
     final currencyValue = await CurrencyConsult.getById(currency);
-    _inputController.text =
-        "${currencyValue.symbol} ${CurrencyFunctions.name(currencyValue.name)}";
+    setState(() {
+      currencyText =
+          "${currencyValue.symbol} ${CurrencyFunctions.name(currencyValue.name)}";
+    });
+    _inputController.text = currencyText ?? "";
   }
 
   @override
@@ -128,18 +126,15 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
     );
   }
 
-  TextButton _buttonSelector() {
-    return TextButton(
+  CustomButton _buttonSelector() {
+    return CustomButton(
       onPressed: _openSelector,
-      style: ButtonStyle(
-        foregroundColor: MaterialStatePropertyAll(widget.color),
-        overlayColor:
-            MaterialStatePropertyAll(widget.splashColor?.withAlpha(50)),
-      ),
-      child: Text(
-        currencySelect?.symbol ?? "\$",
-        style: const TextStyle(fontSize: 17),
-      ),
+      text: currencyText,
+      type: ButtonType.text,
+      backgroundColor: Theme.of(context).colorScheme.primary.withAlpha(50),
+      width: MediaQuery.of(context).size.width / 3,
+      size: 15,
+      rightIcon: Icons.arrow_drop_down_rounded,
     );
   }
 
