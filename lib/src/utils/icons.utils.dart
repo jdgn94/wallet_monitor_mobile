@@ -111,6 +111,10 @@ IconData getIcon(String name) {
       return MdiIcons.checkCircleOutline;
     case "error":
       return MdiIcons.alertOctagonOutline;
+    case "expenses":
+      return Icons.arrow_upward_outlined;
+    case "incomes":
+      return Icons.arrow_downward_outlined;
     default:
       return Icons.question_mark_rounded;
   }

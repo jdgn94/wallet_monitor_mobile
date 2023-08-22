@@ -1590,10 +1590,10 @@ class S {
     );
   }
 
-  /// `AccountType`
+  /// `Account Type`
   String get accountType {
     return Intl.message(
-      'AccountType',
+      'Account Type',
       name: 'accountType',
       desc: '',
       args: [],
@@ -1995,6 +1995,46 @@ class S {
     return Intl.message(
       'Select Filter',
       name: 'selectFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Limit Credit`
+  String get limitCredit {
+    return Intl.message(
+      'Limit Credit',
+      name: 'limitCredit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incomes`
+  String get incomes {
+    return Intl.message(
+      'Incomes',
+      name: 'incomes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expenses`
+  String get expenses {
+    return Intl.message(
+      'Expenses',
+      name: 'expenses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Subcategory`
+  String get addSubcategory {
+    return Intl.message(
+      'Add Subcategory',
+      name: 'addSubcategory',
       desc: '',
       args: [],
     );

@@ -132,21 +132,13 @@ class _ThemeSelectorWidgetState extends State<ThemeSelectorWidget> {
           ),
         ),
         actions: [
-          CustomButton(
-            onPressed: Navigator.of(context).pop,
-            message: S.current.cancel,
-            icon: Icons.close,
-            color: Colors.red,
-            type: ButtonType.outline,
-            width: 20,
+          TextButton(
+            onPressed: Navigator.of(localContext).pop,
+            child: Text(S.current.cancel),
           ),
-          CustomButton(
+          TextButton(
             onPressed: confirm,
-            message: S.current.confirm,
-            icon: Icons.check,
-            color: Colors.blue,
-            type: ButtonType.outline,
-            width: 20,
+            child: Text(S.current.confirm),
           ),
         ],
       );

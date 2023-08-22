@@ -181,22 +181,13 @@ class _ColorSelectorWidgetState extends State<ColorSelectorWidget> {
             ),
           ),
           actions: [
-            CustomButton(
+            TextButton(
               onPressed: Navigator.of(localContext).pop,
-              message: S.current.cancel,
-              icon: Icons.close,
-              color: Colors.red,
-              type: ButtonType.outline,
-              width: 20,
+              child: Text(S.current.cancel),
             ),
-            CustomButton(
+            TextButton(
               onPressed: confirm,
-              message: S.current.confirm,
-              icon: Icons.check,
-              color: Colors.blue,
-              type: ButtonType.outline,
-              width: 20,
-              disabled: colorSelectTemp == null,
+              child: Text(S.current.confirm),
             ),
           ],
         );

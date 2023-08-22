@@ -21,12 +21,10 @@ abstract class CurrencyConsult {
     return currencies;
   }
 
-  static Future<Currency?> getById(int id) async {
+  static Future<Currency> getById(int id) async {
     final result = await _db.rawQuery("""
       SELECT * FROM currencies WHERE id = $id
     """);
-
-    if (result.isEmpty) return null;
 
     final currencyJson = result[0];
 

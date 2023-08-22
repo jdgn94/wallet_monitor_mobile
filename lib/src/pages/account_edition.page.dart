@@ -33,7 +33,8 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   double minAmount = 0;
   Currency? currency;
   String iconCategory = 'none';
-  Color colorAccount = Color((math.Random().nextDouble() * 0xFFFFFF).toInt());
+  Color colorAccount =
+      Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(250);
 
   @override
   void initState() {
@@ -153,7 +154,10 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
               _descriptionInput(),
               _spacing(),
               // _iconInput(),
-              IconSelectorWidget(confirm: _selectIcon),
+              IconSelectorWidget(
+                confirm: _selectIcon,
+                defaultColor: colorAccount,
+              ),
               _spacing(),
               // _currencyInput(),
               CurrencySelectorWidget(

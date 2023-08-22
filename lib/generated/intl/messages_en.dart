@@ -185,8 +185,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Zimbabwe Dollar"),
         "accountCurrency":
             MessageLookupByLibrary.simpleMessage("Account Currency"),
-        "accountType": MessageLookupByLibrary.simpleMessage("AccountType"),
+        "accountType": MessageLookupByLibrary.simpleMessage("Account Type"),
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
+        "addSubcategory":
+            MessageLookupByLibrary.simpleMessage("Add Subcategory"),
         "allTime": MessageLookupByLibrary.simpleMessage("All Time"),
         "amount": MessageLookupByLibrary.simpleMessage("Amount"),
         "april": MessageLookupByLibrary.simpleMessage("April"),
@@ -221,6 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "disable": MessageLookupByLibrary.simpleMessage("Disable"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "enable": MessageLookupByLibrary.simpleMessage("Enable"),
+        "expenses": MessageLookupByLibrary.simpleMessage("Expenses"),
         "february": MessageLookupByLibrary.simpleMessage("February"),
         "format": MessageLookupByLibrary.simpleMessage("Format"),
         "generalMode": MessageLookupByLibrary.simpleMessage("General Mode"),
@@ -228,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "green": MessageLookupByLibrary.simpleMessage("Green"),
         "icon": MessageLookupByLibrary.simpleMessage("Icon"),
         "icons": MessageLookupByLibrary.simpleMessage("Icons"),
+        "incomes": MessageLookupByLibrary.simpleMessage("Incomes"),
         "initDay": MessageLookupByLibrary.simpleMessage("Initial Day"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Initial configs"),
@@ -238,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "lightStyle": MessageLookupByLibrary.simpleMessage("Light Style"),
         "lighting": MessageLookupByLibrary.simpleMessage("Lighting"),
+        "limitCredit": MessageLookupByLibrary.simpleMessage("Limit Credit"),
         "march": MessageLookupByLibrary.simpleMessage("March"),
         "may": MessageLookupByLibrary.simpleMessage("May"),
         "minimumAmount": MessageLookupByLibrary.simpleMessage("Minimum Amount"),

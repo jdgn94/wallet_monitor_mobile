@@ -165,22 +165,13 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
             ),
           ),
           actions: [
-            CustomButton(
+            TextButton(
               onPressed: Navigator.of(localContext).pop,
-              message: S.current.cancel,
-              icon: Icons.close,
-              color: Colors.red,
-              type: ButtonType.outline,
-              width: 20,
+              child: Text(S.current.cancel),
             ),
-            CustomButton(
+            TextButton(
               onPressed: changeColorAndIcon,
-              message: S.current.confirm,
-              icon: Icons.check,
-              color: Colors.blue,
-              type: ButtonType.outline,
-              width: 20,
-              disabled: iconCategoryTemp == "none",
+              child: Text(S.current.confirm),
             ),
           ],
         );

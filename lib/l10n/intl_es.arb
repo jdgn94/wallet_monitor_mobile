@@ -193,5 +193,9 @@
   "selectRange": "Seleccionar Rango",
   "initDay": "Día Inicial",
   "lastDay": "Día Final",
-  "selectFilter": "Select Filter"
+  "selectFilter": "Seleccionar Filtro",
+  "limitCredit": "Limite Crédito",
+  "incomes": "Ingresos",
+  "expenses": "Gastos",
+  "addSubcategory": "Agregar Sub categoría"
 }

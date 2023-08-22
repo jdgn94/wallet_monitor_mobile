@@ -153,7 +153,7 @@
   "name": "Name",
   "description": "Description",
   "icon": "Icon",
-  "accountType": "AccountType",
+  "accountType": "Account Type",
   "regular": "Regular",
   "saving": "Saving",
   "accountCurrency": "Account Currency",
@@ -193,5 +193,9 @@
   "selectRange": "Select Range",
   "initDay": "Initial Day",
   "lastDay": "Last Day",
-  "selectFilter": "Select Filter"
+  "selectFilter": "Select Filter",
+  "limitCredit": "Limit Credit",
+  "incomes": "Incomes",
+  "expenses": "Expenses",
+  "addSubcategory": "Add Subcategory"
 }

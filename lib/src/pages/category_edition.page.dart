@@ -1,12 +1,25 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:wallet_monitor/generated/l10n.dart';
-import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 
+import 'package:wallet_monitor/generated/l10n.dart';
+
+import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
+import 'package:wallet_monitor/src/utils/icons.utils.dart';
+import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
+import 'package:wallet_monitor/src/widgets/utils/icon_selector.widget.dart';
+import 'package:wallet_monitor/src/widgets/utils/keyboard.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
-import '../widgets/utils/keyboard.widget.dart';
+class _CategoryType {
+  final bool value;
+  final String text;
+
+  const _CategoryType({
+    required this.value,
+    required this.text,
+  });
+}
 
 class CategoryEditionPage extends StatefulWidget {
   const CategoryEditionPage({super.key});
@@ -17,21 +30,30 @@ class CategoryEditionPage extends StatefulWidget {
 
 class _CategoryEditionPageState extends State<CategoryEditionPage> {
   final _pref = SettingsLocalStorage.pref;
+  final List<_CategoryType> categories = [
+    _CategoryType(value: true, text: S.current.expenses),
+    _CategoryType(value: false, text: S.current.incomes),
+  ];
 
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
+  late TextEditingController _accountTypeController;
   late int currencyId;
+  bool expenses = true;
   double maxAmount = 0;
   Currency? currency;
   String iconCategory = 'none';
-  Color colorCategory = Color((math.Random().nextDouble() * 0xFFFFFF).toInt());
+  Color colorCategory =
+      Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(250);
 
   @override
   void initState() {
     _nameController = TextEditingController();
     _descriptionController = TextEditingController();
+    _accountTypeController = TextEditingController();
     currencyId = _pref.getInt("defaultCurrency") ?? 103;
     _getCurrency();
+    _accountTypeController.text = S.current.incomes;
     super.initState();
   }
 
@@ -39,6 +61,7 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
   void dispose() {
     _nameController.dispose();
     _descriptionController.dispose();
+    _accountTypeController.dispose();
     super.dispose();
   }
 
@@ -51,6 +74,23 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     setState(() {
       maxAmount = newValue;
     });
+  }
+
+  void _selectIcon(Color newColor, String newIcon) {
+    setState(() {
+      colorCategory = newColor;
+      iconCategory = newIcon;
+    });
+  }
+
+  void _openChangeAccountType() {
+    showDialog(context: context, builder: _dialogAccountType);
+  }
+
+  void _saveCategory() {}
+
+  bool _checkValues() {
+    return _nameController.text.isEmpty || iconCategory == 'none';
   }
 
   @override
@@ -80,7 +120,11 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
 
   GestureDetector _body() {
     return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
       child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
           child: Column(
@@ -88,14 +132,26 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
               _nameInput(),
               _spacing(),
               _descriptionInput(),
+              _spacing(),
+              IconSelectorWidget(
+                confirm: _selectIcon,
+                defaultColor: colorCategory,
+              ),
+              _spacing(),
+              _accountType(),
+              _spacing(),
               KeyboardWidget(
                 pref: _pref,
                 type: KeyType.input,
-                label: S.current.amount,
+                label: S.current.limitCredit,
                 currency: currency,
                 confirm: _changeLimitForMonth,
                 activeCalendar: false,
               ),
+              _spacing(),
+              _categoryContainer(),
+              _spacing(),
+              _buttonToSave()
             ],
           ),
         ),
@@ -124,6 +180,141 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
       ),
       minLines: 1,
       maxLines: 3,
+    );
+  }
+
+  TextField _accountType() {
+    return TextField(
+      controller: _accountTypeController,
+      readOnly: true,
+      onTap: _openChangeAccountType,
+      decoration: InputDecoration(
+        label: Text(S.current.accountType),
+        prefixIcon: Icon(getIcon(expenses ? "expenses" : "incomes")),
+      ),
+    );
+  }
+
+  StatefulBuilder _dialogAccountType(BuildContext context) {
+    bool localSelected = expenses;
+    return StatefulBuilder(builder: (localContext, localSetState) {
+      void changeValue(bool newValue) {
+        print(newValue);
+        localSetState(() {
+          localSelected = newValue;
+        });
+      }
+
+      return AlertDialog(
+        title: Text(S.current.accountType),
+        content: SizedBox(
+          width: 270,
+          child: Wrap(
+            children: [
+              _accountTypeItem(
+                categories[0].value,
+                localSelected,
+                categories[0].text,
+                changeValue,
+              ),
+              _accountTypeItem(
+                categories[1].value,
+                localSelected,
+                categories[1].text,
+                changeValue,
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+  }
+
+  RadioListTile<bool> _accountTypeItem(
+    bool typeValue,
+    bool itemValue,
+    String text,
+    Function(bool) changeValue,
+  ) {
+    return RadioListTile<bool>(
+      groupValue: itemValue,
+      value: typeValue,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 3),
+      onChanged: (value) => changeValue(value!),
+      title: Row(
+        children: [
+          Container(
+            width: 40,
+            margin: const EdgeInsets.only(right: 3),
+            child: Icon(getIcon(typeValue ? "expenses" : "incomes")),
+          ),
+          Text(
+            text,
+            style: const TextStyle(overflow: TextOverflow.ellipsis),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _categoryContainer() {
+    return Container(
+      width: double.infinity,
+      constraints: const BoxConstraints(
+        minHeight: 80,
+        maxHeight: 250,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(
+            width: 1, color: Theme.of(context).colorScheme.onBackground),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: Text(
+                S.current.categories,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 17,
+                ),
+              ),
+            ),
+            const Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Text(S.current.addSubcategory),
+                      Icon(getIcon('add')),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buttonToSave() {
+    final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
+    return CustomButton(
+      color: usePrimaryColor ? null : colorCategory,
+      onPressed: _saveCategory,
+      text: S.current.create,
+      icon: getIcon("save"),
+      height: 50,
+      size: 20,
+      disabled: _checkValues(),
     );
   }
 }

@@ -11,14 +11,21 @@ import 'package:wallet_monitor/storage/index.dart';
 
 enum DateType { month, day, year, range, all }
 
+// ignore: must_be_immutable
 class CalendarSelectorWidget extends StatefulWidget {
   final SharedPreferences pref;
-  final Function(DateTime, DateTime) changeDates;
+  final Function(DateTime, DateTime, DateType) changeDates;
+  DateTime firstCurrentDate;
+  DateTime lastCurrentDate;
+  DateType dateType;
 
-  const CalendarSelectorWidget({
+  CalendarSelectorWidget({
     super.key,
     required this.pref,
     required this.changeDates,
+    required this.firstCurrentDate,
+    required this.lastCurrentDate,
+    required this.dateType,
   });
 
   @override
@@ -30,8 +37,16 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
   DateTime firstCurrentDate = DateTime.now();
   DateTime? lastCurrentDate;
 
+  @override
+  void initState() {
+    dateType = widget.dateType;
+    firstCurrentDate = widget.firstCurrentDate;
+    lastCurrentDate = widget.lastCurrentDate;
+    super.initState();
+  }
+
   void _changeDates() {
-    widget.changeDates(firstCurrentDate, lastCurrentDate!);
+    widget.changeDates(firstCurrentDate, lastCurrentDate!, dateType);
   }
 
   void _substractDate() {
@@ -102,12 +117,13 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
     );
   }
 
-  Future<DateTime?> _showDatePicker() async {
+  Future<DateTime?> _showDatePicker(
+      {DateTime? minDate, DateTime? maxDate}) async {
     return await showDatePicker(
       context: context,
-      firstDate: DateTime(2000),
-      initialDate: DateTime.now(),
-      lastDate: DateTime.now(),
+      firstDate: minDate ?? DateTime(2000),
+      initialDate: maxDate ?? DateTime.now(),
+      lastDate: maxDate ?? DateTime.now(),
       locale: Locale(widget.pref.getString("lang") ?? "en"),
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       helpText: S.current.selectDay,
@@ -135,7 +151,14 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
 
   Widget _buttonPassMonth() {
     return IconButton(
-      onPressed: dateType == DateType.range || dateType == DateType.all
+      onPressed: dateType == DateType.range ||
+              dateType == DateType.all ||
+              (dateType == DateType.day &&
+                  firstCurrentDate.compareTo(DateTime(200)) <= 0) ||
+              (dateType == DateType.month &&
+                  firstCurrentDate.compareTo(DateTime(200)) <= 0) ||
+              (dateType == DateType.year &&
+                  firstCurrentDate.compareTo(DateTime(200)) <= 0)
           ? null
           : _substractDate,
       icon: const Icon(Icons.chevron_left_rounded),
@@ -173,14 +196,16 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
       onPressed: dateType == DateType.range ||
               dateType == DateType.all ||
               (dateType == DateType.day &&
-                  firstCurrentDate.year >= DateTime.now().year &&
-                  firstCurrentDate.month >= DateTime.now().month &&
-                  firstCurrentDate.day >= DateTime.now().day) ||
+                  firstCurrentDate.compareTo(DateTime(DateTime.now().year,
+                          DateTime.now().month, DateTime.now().day)) >=
+                      0) ||
               (dateType == DateType.month &&
-                  firstCurrentDate.year >= DateTime.now().year &&
-                  firstCurrentDate.month >= DateTime.now().month) ||
+                  firstCurrentDate.compareTo(DateTime(
+                          DateTime.now().year, DateTime.now().month)) >=
+                      0) ||
               (dateType == DateType.year &&
-                  firstCurrentDate.year >= DateTime.now().year)
+                  firstCurrentDate.compareTo(DateTime(DateTime.now().year)) >=
+                      0)
           ? null
           : _addDate,
       icon: const Icon(Icons.chevron_right_rounded),
@@ -280,7 +305,10 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
     DateTime? lastDate;
     return StatefulBuilder(builder: (localContext, localSetState) {
       Future<void> openDatePicker(bool changeFirstDate) async {
-        final dateSelected = await _showDatePicker();
+        final dateSelected = await _showDatePicker(
+          minDate: changeFirstDate ? null : firstDate,
+          maxDate: changeFirstDate ? lastDate : null,
+        );
         if (dateSelected != null) {
           localSetState(() {
             if (changeFirstDate) {

@@ -189,6 +189,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Moneda de la cuenta"),
         "accountType": MessageLookupByLibrary.simpleMessage("Tipo de cuenta"),
         "accounts": MessageLookupByLibrary.simpleMessage("Cuentas"),
+        "addSubcategory":
+            MessageLookupByLibrary.simpleMessage("Agregar Sub categoría"),
         "allTime": MessageLookupByLibrary.simpleMessage("Todo el Tiempo"),
         "amount": MessageLookupByLibrary.simpleMessage("Monto"),
         "april": MessageLookupByLibrary.simpleMessage("Abril"),
@@ -223,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "disable": MessageLookupByLibrary.simpleMessage("Deshabilitar"),
         "edit": MessageLookupByLibrary.simpleMessage("Editar"),
         "enable": MessageLookupByLibrary.simpleMessage("Habilitar"),
+        "expenses": MessageLookupByLibrary.simpleMessage("Gastos"),
         "february": MessageLookupByLibrary.simpleMessage("Febrero"),
         "format": MessageLookupByLibrary.simpleMessage("Formato"),
         "generalMode": MessageLookupByLibrary.simpleMessage("Modo General"),
@@ -230,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "green": MessageLookupByLibrary.simpleMessage("Verde"),
         "icon": MessageLookupByLibrary.simpleMessage("Icono"),
         "icons": MessageLookupByLibrary.simpleMessage("Iconos"),
+        "incomes": MessageLookupByLibrary.simpleMessage("Ingresos"),
         "initDay": MessageLookupByLibrary.simpleMessage("Día Inicial"),
         "initialConfig":
             MessageLookupByLibrary.simpleMessage("Configuraciones inicial"),
@@ -240,6 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Claro"),
         "lightStyle": MessageLookupByLibrary.simpleMessage("Estilo claro"),
         "lighting": MessageLookupByLibrary.simpleMessage("Brillante"),
+        "limitCredit": MessageLookupByLibrary.simpleMessage("Limite Crédito"),
         "march": MessageLookupByLibrary.simpleMessage("Marzo"),
         "may": MessageLookupByLibrary.simpleMessage("Mayo"),
         "minimumAmount": MessageLookupByLibrary.simpleMessage("Monto Mínimo"),
@@ -268,7 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectColor":
             MessageLookupByLibrary.simpleMessage("Seleccionar Color"),
         "selectDay": MessageLookupByLibrary.simpleMessage("Seleccionar Día"),
-        "selectFilter": MessageLookupByLibrary.simpleMessage("Select Filter"),
+        "selectFilter":
+            MessageLookupByLibrary.simpleMessage("Seleccionar Filtro"),
         "selectIcon": MessageLookupByLibrary.simpleMessage("Seleccionar Icono"),
         "selectMonth": MessageLookupByLibrary.simpleMessage("Seleccionar Mes"),
         "selectRange":

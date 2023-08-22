@@ -149,7 +149,7 @@ class _AccountPageState extends State<AccountPage> {
           borderRadius: BorderRadius.circular(10.0),
           child: Ink(
             width: double.infinity,
-            height: 80,
+            height: 70,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

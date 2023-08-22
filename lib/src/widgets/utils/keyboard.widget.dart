@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:wallet_monitor/src/bloc/global/global_bloc.dart';
 import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 
-import 'package:wallet_monitor/src/db/models/currency.model.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/storage/index.dart';
@@ -78,11 +77,11 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       widget.pref.getString("formatNumber") == "de_DE" ? "," : ".",
       "check",
     ];
-    _inputController.text = CurrencyFunctions.formatNumber(
-      symbol: currencySymbol,
-      decimalDigits: widget.currency!.decimalDigits,
-      amount: 0,
-    );
+    // _inputController.text = CurrencyFunctions.formatNumber(
+    //   symbol: currencySymbol,
+    //   decimalDigits: 2,
+    //   amount: 0,
+    // );
     super.initState();
   }
 
@@ -193,7 +192,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     print(id);
 
     setState(() {
-      currencySymbol = currency!.symbol;
+      currencySymbol = currency.symbol;
       actualCurrencyId = id;
     });
     _inputController.text =
