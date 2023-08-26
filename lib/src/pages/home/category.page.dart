@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
+import 'package:wallet_monitor/src/db/queries/category.consult.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
 
 // ignore: must_be_immutable
@@ -16,15 +17,32 @@ class CategoryPage extends StatefulWidget {
   State<CategoryPage> createState() => _CategoryPageState();
 }
 
-class _CategoryPageState extends State<CategoryPage> {
+class _CategoryPageState extends State<CategoryPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  List<Category?> categories = [];
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+    _getCategories();
+    super.initState();
+  }
+
+  Future<void> _getCategories() async {
+    categories = await CategoryConsult.getAll();
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _categoryType(),
-        ],
-      ),
+    return Column(
+      children: [
+        _categoryType(),
+        const SizedBox(height: 10.0),
+        Expanded(child: _categoryPages()),
+      ],
     );
   }
 
@@ -40,6 +58,7 @@ class _CategoryPageState extends State<CategoryPage> {
         initialIndex: 0,
         length: 2,
         child: TabBar(
+          controller: _tabController,
           padding: const EdgeInsets.all(10),
           indicatorSize: TabBarIndicatorSize.tab,
           dividerColor: Colors.transparent,
@@ -74,6 +93,24 @@ class _CategoryPageState extends State<CategoryPage> {
             style: TextStyle(fontWeight: FontWeight.bold, color: numberColor),
           ),
         ],
+      ),
+    );
+  }
+
+  TabBarView _categoryPages() {
+    return TabBarView(
+      controller: _tabController,
+      children: [
+        _categoryExpenses(),
+        Text("ingresps"),
+      ],
+    );
+  }
+
+  SingleChildScrollView _categoryExpenses() {
+    return SingleChildScrollView(
+      child: Column(
+        children: categories.map((item) => Text(item!.name)).toList(),
       ),
     );
   }

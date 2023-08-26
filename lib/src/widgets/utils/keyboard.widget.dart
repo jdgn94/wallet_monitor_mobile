@@ -77,11 +77,6 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       widget.pref.getString("formatNumber") == "de_DE" ? "," : ".",
       "check",
     ];
-    // _inputController.text = CurrencyFunctions.formatNumber(
-    //   symbol: currencySymbol,
-    //   decimalDigits: 2,
-    //   amount: 0,
-    // );
     super.initState();
   }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import "package:sqflite/sqflite.dart";
 import "package:path/path.dart";
 
@@ -16,7 +18,7 @@ class DatabaseService {
   }
 
   Future<String> fullPath() async {
-    const name = 'wallet_monitor.db';
+    const name = 'test.db';
     final path = await getDatabasesPath();
     return join(path, name);
   }

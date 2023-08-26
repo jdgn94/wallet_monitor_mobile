@@ -200,5 +200,7 @@
   "addSubcategory": "Agregar Sub categoría",
   "summary": "Resumen",
   "totalAccounts": "Cuentas Totales",
-  "totalAmount": "Monto Total"
+  "totalAmount": "Monto Total",
+  "subcategory": "Sub Categoría",
+  "subcategories": "Sub Categorías"
 }

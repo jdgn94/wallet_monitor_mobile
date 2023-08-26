@@ -3,6 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
+import 'package:wallet_monitor/src/db/models/subcategory.model.dart';
+import 'package:wallet_monitor/src/db/queries/account.consult.dart';
+import 'package:wallet_monitor/src/db/queries/category.consult.dart';
 
 import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
@@ -38,7 +41,9 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
   late TextEditingController _accountTypeController;
+  late TextEditingController _subcategoryController;
   late int currencyId;
+  List<Subcategory?> subcategories = [];
   bool expenses = true;
   double maxAmount = 0;
   Currency? currency;
@@ -51,6 +56,7 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     _nameController = TextEditingController();
     _descriptionController = TextEditingController();
     _accountTypeController = TextEditingController();
+    _subcategoryController = TextEditingController();
     currencyId = _pref.getInt("defaultCurrency") ?? 103;
     _getCurrency();
     _accountTypeController.text = S.current.incomes;
@@ -62,6 +68,7 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     _nameController.dispose();
     _descriptionController.dispose();
     _accountTypeController.dispose();
+    _subcategoryController.dispose();
     super.dispose();
   }
 
@@ -87,7 +94,53 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     showDialog(context: context, builder: _dialogAccountType);
   }
 
-  void _saveCategory() {}
+  void _openSubcategory(int? position) {
+    showDialog(
+      context: context,
+      builder: (context) => _dialogSubcategory(context, position),
+    );
+  }
+
+  void _disableSubcategory(int position) {
+    subcategories[position]!.deletedAt =
+        subcategories[position]!.deletedAt != null ? null : DateTime.now();
+
+    setState(() {});
+  }
+
+  Future<void> _saveCategory() async {
+    await CategoryConsult.createOrUpdate(
+      maxAmount: maxAmount,
+      color: colorCategory
+          .toString()
+          .replaceAll('Color(0x', '')
+          .replaceAll(")", ""),
+      icon: iconCategory,
+      name: _nameController.text,
+      description: _descriptionController.text,
+      createdAt: DateTime.now(),
+      expenses: expenses,
+    );
+  }
+
+  void _saveSubcategory(int? position) {
+    if (position != null) {
+      subcategories[position]!.name = _subcategoryController.text;
+    } else {
+      subcategories.add(
+        Subcategory(
+          id: 0,
+          name: _subcategoryController.text,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+      );
+    }
+
+    setState(() {});
+    print("viendo el total de las sub categorías: $subcategories");
+    Navigator.of(context).pop();
+  }
 
   bool _checkValues() {
     return _nameController.text.isEmpty || iconCategory == 'none';
@@ -151,7 +204,8 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
               _spacing(),
               _categoryContainer(),
               _spacing(),
-              _buttonToSave()
+              _buttonToSave(),
+              _buttonToCancel(),
             ],
           ),
         ),
@@ -199,10 +253,13 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     bool localSelected = expenses;
     return StatefulBuilder(builder: (localContext, localSetState) {
       void changeValue(bool newValue) {
-        print(newValue);
         localSetState(() {
           localSelected = newValue;
         });
+        setState(() {
+          expenses = newValue;
+        });
+        Navigator.of(localContext).pop();
       }
 
       return AlertDialog(
@@ -262,45 +319,108 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
       width: double.infinity,
       constraints: const BoxConstraints(
         minHeight: 80,
-        maxHeight: 250,
+        maxHeight: 320,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         border: Border.all(
             width: 1, color: Theme.of(context).colorScheme.onBackground),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 5),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Text(
-                S.current.categories,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 17,
-                ),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.start,
+        children: [
+          const SizedBox(height: 5),
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0, top: 10.0),
+            child: Text(
+              S.current.subcategories,
+              style: const TextStyle(
+                fontSize: 17,
               ),
             ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Text(S.current.addSubcategory),
-                      Icon(getIcon('add')),
-                    ],
-                  ),
+          ),
+          const Divider(),
+          Container(
+            constraints: const BoxConstraints(
+              maxHeight: 200,
+            ),
+            child: SingleChildScrollView(
+                child: Column(
+              children: subcategories
+                  .map((item) => _subcategoryItems(item!))
+                  .toList(),
+            )),
+          ),
+          const Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () => _openSubcategory(null),
+                child: Row(
+                  children: [
+                    Text(S.current.addSubcategory),
+                    Icon(getIcon('add')),
+                  ],
                 ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Container _subcategoryItems(Subcategory subcategory) {
+    editSubcategory() {
+      final int position = subcategories.indexOf(subcategory);
+
+      _openSubcategory(position);
+    }
+
+    deleteSubcategory() {
+      final int position = subcategories.indexOf(subcategory);
+
+      _disableSubcategory(position);
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              subcategory.name,
+              style: const TextStyle(fontSize: 17.0),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+          ),
+          Row(
+            children: [
+              CustomButton(
+                onPressed: editSubcategory,
+                icon: getIcon("edit"),
+                color: Colors.blue,
+                type: ButtonType.text,
+                size: 25,
+                message: S.current.edit,
+              ),
+              CustomButton(
+                onPressed: deleteSubcategory,
+                icon: getIcon(
+                  subcategory.deletedAt != null
+                      ? "deleteItemOff"
+                      : "deleteItem",
+                ),
+                color: Colors.red,
+                type: ButtonType.text,
+                size: 25,
+                message: S.current.disable,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -311,10 +431,52 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
       color: usePrimaryColor ? null : colorCategory,
       onPressed: _saveCategory,
       text: S.current.create,
-      icon: getIcon("save"),
       height: 50,
       size: 20,
       disabled: _checkValues(),
     );
+  }
+
+  Widget _buttonToCancel() {
+    return CustomButton(
+      margin: const EdgeInsets.only(top: 10.0),
+      color: Colors.red,
+      onPressed: Navigator.of(context).pop,
+      text: S.current.cancel,
+      type: ButtonType.outline,
+      height: 50,
+      size: 20,
+    );
+  }
+
+  StatefulBuilder _dialogSubcategory(BuildContext context, int? position) {
+    if (position != null) {
+      _subcategoryController.text = subcategories[position]!.name;
+    } else {
+      _subcategoryController.text = "";
+    }
+
+    return StatefulBuilder(builder: (localContext, localSetState) {
+      return AlertDialog(
+        content: TextField(
+          controller: _subcategoryController,
+          autofocus: true,
+          onSubmitted: (_) => _saveSubcategory(position),
+          decoration: InputDecoration(
+            label: Text(S.current.subcategory),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: Navigator.of(localContext).pop,
+            child: Text(S.current.cancel),
+          ),
+          TextButton(
+            onPressed: () => _saveSubcategory(position),
+            child: Text(S.current.confirm),
+          ),
+        ],
+      );
+    });
   }
 }

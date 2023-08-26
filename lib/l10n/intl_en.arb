@@ -200,5 +200,7 @@
   "addSubcategory": "Add Subcategory",
   "summary": "Summary",
   "totalAccounts": "Total Accounts",
-  "totalAmount": "Total Amount"
+  "totalAmount": "Total Amount",
+  "subcategory": "Subcategory",
+  "subcategories": "Subcategories"
 }

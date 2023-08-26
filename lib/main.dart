@@ -56,6 +56,8 @@ class MyApp extends StatelessWidget {
             ? "/settingsSecondary"
             : "/home";
 
+    // const String initialPage = "/settingsInitial";
+
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 

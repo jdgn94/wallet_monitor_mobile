@@ -278,6 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
+        "subcategories": MessageLookupByLibrary.simpleMessage("Subcategories"),
+        "subcategory": MessageLookupByLibrary.simpleMessage("Subcategory"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "teal": MessageLookupByLibrary.simpleMessage("Teal"),

@@ -29,7 +29,36 @@ class WalletMonitorDB {
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         deleted_at DATETIME,
         PRIMARY KEY (id AUTOINCREMENT),
-        FOREIGN KEY (currency_id) REFERENCES currencies(id)
+        FOREIGN KEY (currency_id) REFERENCES currencies (id)
+      );
+    """);
+
+    await database.execute("""
+      CREATE TABLE IF NOT EXISTS categories (
+        id INTEGER NOT NULL,
+        name TEXT NOT NULL UNIQUE,
+        description TEXT,
+        max_amount REAL DEFAULT 0,
+        color TEXT NOT NULL,
+        icon TEXT NOT NULL,
+        expenses INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        deleted_at DATETIME,
+        PRIMARY KEY (id AUTOINCREMENT)
+      );
+    """);
+
+    await database.execute("""
+      CREATE TABLE IF NOT EXISTS subcategories (
+        id INTEGER NOT NULL,
+        name TEXT NOT NULL UNIQUE,
+        category_id INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        deleted_at DATETIME,
+        PRIMARY KEY (id AUTOINCREMENT),
+        FOREIGN KEY (category_id) REFERENCES categories (id)
       );
     """);
   }

@@ -2069,6 +2069,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Subcategory`
+  String get subcategory {
+    return Intl.message(
+      'Subcategory',
+      name: 'subcategory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subcategories`
+  String get subcategories {
+    return Intl.message(
+      'Subcategories',
+      name: 'subcategories',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

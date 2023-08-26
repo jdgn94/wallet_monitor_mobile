@@ -115,6 +115,12 @@ IconData getIcon(String name) {
       return Icons.arrow_upward_outlined;
     case "incomes":
       return Icons.arrow_downward_outlined;
+    case "edit":
+      return MdiIcons.pencil;
+    case "deleteItem":
+      return MdiIcons.delete;
+    case "deleteItemOff":
+      return MdiIcons.deleteOff;
     default:
       return Icons.question_mark_rounded;
   }
