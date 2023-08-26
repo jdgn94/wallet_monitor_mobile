@@ -10,6 +10,7 @@ class SettingsState extends Equatable {
   final String? currencySymbol;
   final String? formatNumber;
   final bool? showTutorial;
+  final String? dateFormat;
 
   const SettingsState(
     this.theme,
@@ -21,6 +22,7 @@ class SettingsState extends Equatable {
     this.currencySymbol,
     this.formatNumber,
     this.showTutorial,
+    this.dateFormat,
   );
 
   @override
@@ -30,8 +32,11 @@ class SettingsState extends Equatable {
         darkStyle,
         lang,
         color,
+        defaultCurrency,
+        currencySymbol,
         formatNumber,
         showTutorial,
+        dateFormat,
       ];
 }
 
@@ -46,5 +51,6 @@ class SettingsInitial extends SettingsState {
     super.currencySymbol,
     super.formatNumber,
     super.showTutorial,
+    super.dateFormat,
   );
 }

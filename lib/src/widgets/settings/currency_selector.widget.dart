@@ -18,6 +18,7 @@ class CurrencySelectorWidget extends StatefulWidget {
   final bool localSelect;
   final int? defaultCurrency;
   final bool button;
+  final bool fromAccount;
   final Function(Currency)? confirm;
 
   const CurrencySelectorWidget({
@@ -28,6 +29,7 @@ class CurrencySelectorWidget extends StatefulWidget {
     this.confirm,
     this.disabled = false,
     this.button = false,
+    this.fromAccount = false,
   });
 
   @override
@@ -89,7 +91,9 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   }
 
   Future<void> _getAllCurrencies() async {
-    currencies = await CurrencyConsult.getAll();
+    currencies = widget.fromAccount
+        ? await CurrencyConsult.getAllByAccounts()
+        : await CurrencyConsult.getAll();
     setState(() {});
   }
 
@@ -135,6 +139,8 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
       width: MediaQuery.of(context).size.width / 3,
       size: 15,
       rightIcon: Icons.arrow_drop_down_rounded,
+      iconSize: 25,
+      padding: EdgeInsets.zero,
     );
   }
 
@@ -173,9 +179,8 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
       return AlertDialog(
         title: Text(S.current.currencies),
         content: SizedBox(
-          height: 500,
           width: 500,
-          child: Column(
+          child: Wrap(
             children: [
               Visibility(
                 visible: false, // MediaQuery.of(context).size.height > 500,
@@ -187,21 +192,21 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
                   ),
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
-                  child: Column(
-                    children: currencies
-                        .map((currency) => _currencyItem(
-                              currency,
-                              currencySelected,
-                              changeValue,
-                            ))
-                        .toList(),
-                  ),
+              SingleChildScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                child: Column(
+                  children: currencies
+                      .map(
+                        (currency) => _currencyItem(
+                          currency,
+                          currencySelected,
+                          changeValue,
+                        ),
+                      )
+                      .toList(),
                 ),
-              )
+              ),
             ],
           ),
         ),

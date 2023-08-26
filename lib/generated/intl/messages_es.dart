@@ -284,11 +284,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Configuraciones"),
         "start": MessageLookupByLibrary.simpleMessage("Comenzar"),
         "statistics": MessageLookupByLibrary.simpleMessage("Estadísticas"),
+        "summary": MessageLookupByLibrary.simpleMessage("Resumen"),
         "system": MessageLookupByLibrary.simpleMessage("Sistema"),
         "teal": MessageLookupByLibrary.simpleMessage("Aguamarina"),
         "theme": MessageLookupByLibrary.simpleMessage("Temas"),
         "themeSelector":
             MessageLookupByLibrary.simpleMessage("Selector de tema"),
-        "title": MessageLookupByLibrary.simpleMessage("Titulo")
+        "title": MessageLookupByLibrary.simpleMessage("Titulo"),
+        "totalAccounts":
+            MessageLookupByLibrary.simpleMessage("Cuentas Totales"),
+        "totalAmount": MessageLookupByLibrary.simpleMessage("Monto Total")
       };
 }

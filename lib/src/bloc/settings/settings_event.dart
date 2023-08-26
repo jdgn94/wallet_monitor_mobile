@@ -49,3 +49,9 @@ class ChangeDefaultCurrency extends SettingsEvent {
 
   const ChangeDefaultCurrency(this.defaultCurrency, this.currencySymbol);
 }
+
+class ChangeDateFormat extends SettingsEvent {
+  final String dateFormat;
+
+  const ChangeDateFormat(this.dateFormat);
+}

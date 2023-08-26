@@ -134,6 +134,7 @@ class _HomePageState extends State<HomePage> {
       localSelect: true,
       button: true,
       confirm: _changeCurrency,
+      fromAccount: true,
     );
   }
 
@@ -146,6 +147,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).colorScheme.primary.withAlpha(50),
       size: 15,
       rightIcon: Icons.arrow_drop_down_rounded,
+      iconSize: 25,
     );
   }
 

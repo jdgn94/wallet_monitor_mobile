@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
 
@@ -49,8 +50,8 @@ class _CategoryPageState extends State<CategoryPage> {
             borderRadius: BorderRadius.circular(10),
           ),
           tabs: [
-            _tab("expenses", 200, Colors.red),
-            _tab("incomes", 1050, Colors.green),
+            _tab(S.current.expenses, 200, Colors.red),
+            _tab(S.current.incomes, 1050, Colors.green),
           ],
         ),
       ),

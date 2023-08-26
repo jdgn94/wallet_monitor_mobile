@@ -278,10 +278,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
+        "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "teal": MessageLookupByLibrary.simpleMessage("Teal"),
         "theme": MessageLookupByLibrary.simpleMessage("Themes"),
         "themeSelector": MessageLookupByLibrary.simpleMessage("Theme selector"),
-        "title": MessageLookupByLibrary.simpleMessage("Title")
+        "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "totalAccounts": MessageLookupByLibrary.simpleMessage("Total Accounts"),
+        "totalAmount": MessageLookupByLibrary.simpleMessage("Total Amount")
       };
 }

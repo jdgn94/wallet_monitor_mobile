@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import "package:bloc/bloc.dart";
 import "package:equatable/equatable.dart";
 
@@ -14,12 +16,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("theme"),
           pref.getString("lightStyle"),
           pref.getString("darkStyle"),
-          pref.getString("lang"),
+          pref.getString("lang") ?? 'und',
           pref.getString("color"),
           pref.getInt("defaultCurrency"),
           pref.getString("currencySymbol"),
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
+          pref.getString("dateFormat"),
         )) {
     on<SettingsEvent>((event, emit) {
       if (event is ChangeTheme) {
@@ -37,6 +40,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("currencySymbol"),
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
+          pref.getString("dateFormat"),
         ));
       }
 
@@ -53,6 +57,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("currencySymbol"),
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
+          pref.getString("dateFormat"),
         ));
       }
 
@@ -69,6 +74,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("currencySymbol"),
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
+          pref.getString("dateFormat"),
         ));
       }
 
@@ -86,6 +92,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           event.currencySymbol,
           pref.getString("formatNumber"),
           pref.getBool("showTutorial"),
+          pref.getString("dateFormat"),
         ));
       }
 
@@ -102,6 +109,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("currencySymbol"),
           event.formatNumber,
           pref.getBool("showTutorial"),
+          pref.getString("dateFormat"),
         ));
       }
 
@@ -118,6 +126,24 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("currencySymbol"),
           pref.getString("formatNumber"),
           event.showTutorial,
+          pref.getString("dateFormat"),
+        ));
+      }
+
+      if (event is ChangeDateFormat) {
+        pref.setString("dateFormat", event.dateFormat);
+
+        emit(SettingsState(
+          pref.getString("theme"),
+          pref.getString("lightStyle"),
+          pref.getString("darkStyle"),
+          pref.getString("lang"),
+          pref.getString("color"),
+          pref.getInt("defaultCurrency"),
+          pref.getString("currencySymbol"),
+          pref.getString("formatNumber"),
+          pref.getBool("showTutorial"),
+          event.dateFormat,
         ));
       }
     });

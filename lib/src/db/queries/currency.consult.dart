@@ -21,6 +21,29 @@ abstract class CurrencyConsult {
     return currencies;
   }
 
+  static Future<List<Currency>> getAllByAccounts() async {
+    final resultCurrenciesIds = await _db.rawQuery("""
+      SELECT
+        c.id
+      FROM
+        accounts a
+        INNER JOIN currencies c ON a.currency_id = c.id
+      GROUP BY
+        a.currency_id
+    """);
+
+    final List<int> currenciesIds =
+        resultCurrenciesIds.map((x) => x['id'] as int).toList();
+
+    final resultCurrencies = await _db.rawQuery("""
+      SELECT * FROM currencies WHERE id IN (${currenciesIds.join(",")})
+    """);
+
+    final currencies = currenciesFromJson(resultCurrencies);
+
+    return currencies;
+  }
+
   static Future<Currency> getById(int id) async {
     final result = await _db.rawQuery("""
       SELECT * FROM currencies WHERE id = $id

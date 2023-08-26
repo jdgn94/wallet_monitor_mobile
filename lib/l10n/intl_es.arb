@@ -197,5 +197,8 @@
   "limitCredit": "Limite Crédito",
   "incomes": "Ingresos",
   "expenses": "Gastos",
-  "addSubcategory": "Agregar Sub categoría"
+  "addSubcategory": "Agregar Sub categoría",
+  "summary": "Resumen",
+  "totalAccounts": "Cuentas Totales",
+  "totalAmount": "Monto Total"
 }

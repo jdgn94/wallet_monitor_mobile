@@ -24,6 +24,7 @@ class CustomButton extends StatelessWidget {
   final bool selected;
   final Color? borderColor;
   final Color? textColor;
+  final double? iconSize;
 
   const CustomButton({
     super.key,
@@ -48,6 +49,7 @@ class CustomButton extends StatelessWidget {
     this.selected = false,
     this.borderColor,
     this.textColor,
+    this.iconSize,
   });
 
   @override
@@ -202,9 +204,10 @@ class CustomButton extends StatelessWidget {
         mainAxisAlignment: alignment ?? MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (icon != null && personalIcon == null) Icon(icon, size: size),
+          if (icon != null && personalIcon == null)
+            Icon(icon, size: iconSize ?? size),
           if ((icon != null || personalIcon != null) && text != null)
-            const SizedBox(width: 10.0),
+            const SizedBox(width: 3),
           if (text != null)
             Expanded(
               child: Text(
@@ -213,10 +216,11 @@ class CustomButton extends StatelessWidget {
                   fontSize: size,
                   overflow: TextOverflow.ellipsis,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
-          if ((rightIcon != null && text != null)) const SizedBox(width: 10.0),
-          if (rightIcon != null) Icon(rightIcon, size: size),
+          if ((rightIcon != null && text != null)) const SizedBox(width: 3),
+          if (rightIcon != null) Icon(rightIcon, size: iconSize ?? size),
         ],
       ),
     );

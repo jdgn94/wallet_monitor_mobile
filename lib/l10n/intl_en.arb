@@ -197,5 +197,8 @@
   "limitCredit": "Limit Credit",
   "incomes": "Incomes",
   "expenses": "Expenses",
-  "addSubcategory": "Add Subcategory"
+  "addSubcategory": "Add Subcategory",
+  "summary": "Summary",
+  "totalAccounts": "Total Accounts",
+  "totalAmount": "Total Amount"
 }
