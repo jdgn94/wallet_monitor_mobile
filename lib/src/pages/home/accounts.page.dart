@@ -54,10 +54,10 @@ class _AccountPageState extends State<AccountPage>
   Future<void> _getResumenByPrimaryAccount() async {}
 
   Future<void> _goToCreateAccount() async {
-    final CreateReturner? response =
-        await Navigator.of(context).pushNamed("/account");
+    final response = await Navigator.of(context).pushNamed("/account");
     if (response == null) return;
-    if (response.reload) {
+    final responseFormate = response as CreateReturner;
+    if (responseFormate.reload) {
       _getAllAccountsAndSummary();
     }
   }
@@ -145,7 +145,7 @@ class _AccountPageState extends State<AccountPage>
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 12.0),
       child: InkWell(
-        onTap: () {},
+        onTap: () => Navigator.pushNamed(context, '/account', arguments: item),
         borderRadius: BorderRadius.circular(10),
         splashColor: buttonSplash,
         highlightColor: buttonSplash,

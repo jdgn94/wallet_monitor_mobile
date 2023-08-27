@@ -9,9 +9,16 @@ export 'package:wallet_monitor/src/db/models/category.model.dart';
 abstract class CategoryConsult {
   static final _db = DatabaseService().db;
 
-  static Future<List<Category?>> getAll() async {
+  static Future<List<Category?>> getAll({bool? expenses}) async {
+    String whereQuery = "";
+    if (expenses == true) {
+      whereQuery = "WHERE expenses = 1";
+    } else if (expenses == false) {
+      whereQuery = "WHERE expenses = 0";
+    }
+
     final resultCategories = await _db.rawQuery("""
-      SELECT * FROM categories
+      SELECT * FROM categories $whereQuery
     """);
 
     print(resultCategories);

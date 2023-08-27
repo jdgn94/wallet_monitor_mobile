@@ -5,6 +5,7 @@ import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
 import 'package:wallet_monitor/src/db/queries/category.consult.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
+import 'package:wallet_monitor/src/widgets/utils/keyboard.widget.dart';
 
 // ignore: must_be_immutable
 class CategoryPage extends StatefulWidget {
@@ -20,7 +21,8 @@ class CategoryPage extends StatefulWidget {
 class _CategoryPageState extends State<CategoryPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List<Category?> categories = [];
+  List<Category?> categoriesExpenses = [];
+  List<Category?> categoriesIncomes = [];
 
   @override
   void initState() {
@@ -30,7 +32,8 @@ class _CategoryPageState extends State<CategoryPage>
   }
 
   Future<void> _getCategories() async {
-    categories = await CategoryConsult.getAll();
+    categoriesExpenses = await CategoryConsult.getAll(expenses: true);
+    categoriesIncomes = await CategoryConsult.getAll(expenses: false);
 
     setState(() {});
   }
@@ -97,20 +100,33 @@ class _CategoryPageState extends State<CategoryPage>
     );
   }
 
-  TabBarView _categoryPages() {
-    return TabBarView(
-      controller: _tabController,
-      children: [
-        _categoryExpenses(),
-        Text("ingresps"),
-      ],
+  Padding _categoryPages() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TabBarView(
+        controller: _tabController,
+        children: [
+          _categoryExpenses(),
+          Text("ingresps"),
+        ],
+      ),
     );
   }
 
   SingleChildScrollView _categoryExpenses() {
     return SingleChildScrollView(
-      child: Column(
-        children: categories.map((item) => Text(item!.name)).toList(),
+      child: Wrap(
+        children: categoriesExpenses
+            .map(
+              (item) => KeyboardWidget(
+                confirm: (_) {},
+                pref: widget.pref,
+                type: KeyType.buttonCategory,
+                category: item!,
+                currency: widget.currency,
+              ),
+            )
+            .toList(),
       ),
     );
   }

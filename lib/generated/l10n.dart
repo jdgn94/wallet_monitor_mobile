@@ -1780,10 +1780,10 @@ class S {
     );
   }
 
-  /// `Primary currency cannot be changed.`
+  /// `Currency cannot be changed.`
   String get currencyNotChange {
     return Intl.message(
-      'Primary currency cannot be changed.',
+      'Currency cannot be changed.',
       name: 'currencyNotChange',
       desc: '',
       args: [],
@@ -2085,6 +2085,126 @@ class S {
     return Intl.message(
       'Subcategories',
       name: 'subcategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food and Drink`
+  String get foodAndDrink {
+    return Intl.message(
+      'Food and Drink',
+      name: 'foodAndDrink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal Care`
+  String get personalCare {
+    return Intl.message(
+      'Personal Care',
+      name: 'personalCare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transport`
+  String get transport {
+    return Intl.message(
+      'Transport',
+      name: 'transport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Education`
+  String get education {
+    return Intl.message(
+      'Education',
+      name: 'education',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Health and Medical`
+  String get healthAndMedical {
+    return Intl.message(
+      'Health and Medical',
+      name: 'healthAndMedical',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entertainment`
+  String get entertainment {
+    return Intl.message(
+      'Entertainment',
+      name: 'entertainment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sport`
+  String get sport {
+    return Intl.message(
+      'Sport',
+      name: 'sport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Services`
+  String get services {
+    return Intl.message(
+      'Services',
+      name: 'services',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technology`
+  String get technology {
+    return Intl.message(
+      'Technology',
+      name: 'technology',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shopping`
+  String get shop {
+    return Intl.message(
+      'Shopping',
+      name: 'shop',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nature`
+  String get nature {
+    return Intl.message(
+      'Nature',
+      name: 'nature',
       desc: '',
       args: [],
     );

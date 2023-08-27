@@ -216,7 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currencyFormat":
             MessageLookupByLibrary.simpleMessage("Formato de Moneda"),
         "currencyNotChange": MessageLookupByLibrary.simpleMessage(
-            "La moneda principal no puede ser cambiada."),
+            "La moneda no puede ser cambiada."),
         "currentBalance": MessageLookupByLibrary.simpleMessage("Balance"),
         "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
         "darkStyle": MessageLookupByLibrary.simpleMessage("Estilo oscuro"),
@@ -224,13 +224,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Descripción"),
         "disable": MessageLookupByLibrary.simpleMessage("Deshabilitar"),
         "edit": MessageLookupByLibrary.simpleMessage("Editar"),
+        "education": MessageLookupByLibrary.simpleMessage("Education"),
         "enable": MessageLookupByLibrary.simpleMessage("Habilitar"),
+        "entertainment":
+            MessageLookupByLibrary.simpleMessage("Entretenimiento"),
         "expenses": MessageLookupByLibrary.simpleMessage("Gastos"),
         "february": MessageLookupByLibrary.simpleMessage("Febrero"),
+        "foodAndDrink":
+            MessageLookupByLibrary.simpleMessage("Comidas y Bebidas"),
         "format": MessageLookupByLibrary.simpleMessage("Formato"),
         "generalMode": MessageLookupByLibrary.simpleMessage("Modo General"),
         "goal": MessageLookupByLibrary.simpleMessage("Meta"),
         "green": MessageLookupByLibrary.simpleMessage("Verde"),
+        "healthAndMedical":
+            MessageLookupByLibrary.simpleMessage("Cuidado y Medicina"),
+        "home": MessageLookupByLibrary.simpleMessage("Hogar"),
         "icon": MessageLookupByLibrary.simpleMessage("Icono"),
         "icons": MessageLookupByLibrary.simpleMessage("Iconos"),
         "incomes": MessageLookupByLibrary.simpleMessage("Ingresos"),
@@ -249,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "may": MessageLookupByLibrary.simpleMessage("Mayo"),
         "minimumAmount": MessageLookupByLibrary.simpleMessage("Monto Mínimo"),
         "name": MessageLookupByLibrary.simpleMessage("Nombre"),
+        "nature": MessageLookupByLibrary.simpleMessage("Naturaleza"),
         "next": MessageLookupByLibrary.simpleMessage("Siguiente"),
         "night": MessageLookupByLibrary.simpleMessage("Nocturno"),
         "none": MessageLookupByLibrary.simpleMessage("Ninguno"),
@@ -257,6 +266,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "operations": MessageLookupByLibrary.simpleMessage("Operaciones"),
         "orange": MessageLookupByLibrary.simpleMessage("Naranja"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
+        "personalCare":
+            MessageLookupByLibrary.simpleMessage("Cuidado Personal"),
         "pink": MessageLookupByLibrary.simpleMessage("Rosado"),
         "primary": MessageLookupByLibrary.simpleMessage("Primaria"),
         "purple": MessageLookupByLibrary.simpleMessage("Morado"),
@@ -281,7 +292,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Seleccionar Rango"),
         "selectYear": MessageLookupByLibrary.simpleMessage("Seleccionar Año"),
         "september": MessageLookupByLibrary.simpleMessage("Septiembre"),
+        "services": MessageLookupByLibrary.simpleMessage("Servicios"),
         "settings": MessageLookupByLibrary.simpleMessage("Configuraciones"),
+        "shop": MessageLookupByLibrary.simpleMessage("Compras"),
+        "sport": MessageLookupByLibrary.simpleMessage("Deporte"),
         "start": MessageLookupByLibrary.simpleMessage("Comenzar"),
         "statistics": MessageLookupByLibrary.simpleMessage("Estadísticas"),
         "subcategories": MessageLookupByLibrary.simpleMessage("Sub Categorías"),
@@ -289,12 +303,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "summary": MessageLookupByLibrary.simpleMessage("Resumen"),
         "system": MessageLookupByLibrary.simpleMessage("Sistema"),
         "teal": MessageLookupByLibrary.simpleMessage("Aguamarina"),
+        "technology": MessageLookupByLibrary.simpleMessage("Tecnología"),
         "theme": MessageLookupByLibrary.simpleMessage("Temas"),
         "themeSelector":
             MessageLookupByLibrary.simpleMessage("Selector de tema"),
         "title": MessageLookupByLibrary.simpleMessage("Titulo"),
         "totalAccounts":
             MessageLookupByLibrary.simpleMessage("Cuentas Totales"),
-        "totalAmount": MessageLookupByLibrary.simpleMessage("Monto Total")
+        "totalAmount": MessageLookupByLibrary.simpleMessage("Monto Total"),
+        "transport": MessageLookupByLibrary.simpleMessage("Transporte")
       };
 }

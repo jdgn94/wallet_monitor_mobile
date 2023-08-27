@@ -172,7 +172,7 @@
   "selectIcon": "Select Icon",
   "selectColor": "Select Color",
   "settings": "Settings",
-  "currencyNotChange": "Primary currency cannot be changed.",
+  "currencyNotChange": "Currency cannot be changed.",
   "createCategory": "Create Category",
   "january": "January",
   "february": "February",
@@ -202,5 +202,17 @@
   "totalAccounts": "Total Accounts",
   "totalAmount": "Total Amount",
   "subcategory": "Subcategory",
-  "subcategories": "Subcategories"
+  "subcategories": "Subcategories",
+  "foodAndDrink": "Food and Drink",
+  "home": "Home",
+  "personalCare": "Personal Care",
+  "transport": "Transport",
+  "education": "Education",
+  "healthAndMedical": "Health and Medical",
+  "entertainment": "Entertainment",
+  "sport": "Sport",
+  "services": "Services",
+  "technology": "Technology",
+  "shop": "Shopping",
+  "nature": "Nature"
 }

@@ -123,7 +123,7 @@ class AccountConsult {
         accounts a
         INNER JOIN currencies c ON a.currency_id = c.id
       WHERE
-        a.deleted_at IS NOT NULL;
+        a.deleted_at IS NULL;
     """);
 
     final accounts = accountsFromJson(result);

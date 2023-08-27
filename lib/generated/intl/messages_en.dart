@@ -212,8 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Currency config"),
         "currencyFormat":
             MessageLookupByLibrary.simpleMessage("Currency Format"),
-        "currencyNotChange": MessageLookupByLibrary.simpleMessage(
-            "Primary currency cannot be changed."),
+        "currencyNotChange":
+            MessageLookupByLibrary.simpleMessage("Currency cannot be changed."),
         "currentBalance":
             MessageLookupByLibrary.simpleMessage("Current Balance"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
@@ -222,13 +222,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "disable": MessageLookupByLibrary.simpleMessage("Disable"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "education": MessageLookupByLibrary.simpleMessage("Education"),
         "enable": MessageLookupByLibrary.simpleMessage("Enable"),
+        "entertainment": MessageLookupByLibrary.simpleMessage("Entertainment"),
         "expenses": MessageLookupByLibrary.simpleMessage("Expenses"),
         "february": MessageLookupByLibrary.simpleMessage("February"),
+        "foodAndDrink": MessageLookupByLibrary.simpleMessage("Food and Drink"),
         "format": MessageLookupByLibrary.simpleMessage("Format"),
         "generalMode": MessageLookupByLibrary.simpleMessage("General Mode"),
         "goal": MessageLookupByLibrary.simpleMessage("Goal"),
         "green": MessageLookupByLibrary.simpleMessage("Green"),
+        "healthAndMedical":
+            MessageLookupByLibrary.simpleMessage("Health and Medical"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "icon": MessageLookupByLibrary.simpleMessage("Icon"),
         "icons": MessageLookupByLibrary.simpleMessage("Icons"),
         "incomes": MessageLookupByLibrary.simpleMessage("Incomes"),
@@ -247,6 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "may": MessageLookupByLibrary.simpleMessage("May"),
         "minimumAmount": MessageLookupByLibrary.simpleMessage("Minimum Amount"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "nature": MessageLookupByLibrary.simpleMessage("Nature"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "night": MessageLookupByLibrary.simpleMessage("Night"),
         "none": MessageLookupByLibrary.simpleMessage("None"),
@@ -255,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "operations": MessageLookupByLibrary.simpleMessage("Operations"),
         "orange": MessageLookupByLibrary.simpleMessage("Orange"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
+        "personalCare": MessageLookupByLibrary.simpleMessage("Personal Care"),
         "pink": MessageLookupByLibrary.simpleMessage("Pink"),
         "primary": MessageLookupByLibrary.simpleMessage("Primary"),
         "purple": MessageLookupByLibrary.simpleMessage("Purple"),
@@ -275,7 +283,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectRange": MessageLookupByLibrary.simpleMessage("Select Range"),
         "selectYear": MessageLookupByLibrary.simpleMessage("Select Year"),
         "september": MessageLookupByLibrary.simpleMessage("September"),
+        "services": MessageLookupByLibrary.simpleMessage("Services"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "shop": MessageLookupByLibrary.simpleMessage("Shopping"),
+        "sport": MessageLookupByLibrary.simpleMessage("Sport"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
         "subcategories": MessageLookupByLibrary.simpleMessage("Subcategories"),
@@ -283,10 +294,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "teal": MessageLookupByLibrary.simpleMessage("Teal"),
+        "technology": MessageLookupByLibrary.simpleMessage("Technology"),
         "theme": MessageLookupByLibrary.simpleMessage("Themes"),
         "themeSelector": MessageLookupByLibrary.simpleMessage("Theme selector"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "totalAccounts": MessageLookupByLibrary.simpleMessage("Total Accounts"),
-        "totalAmount": MessageLookupByLibrary.simpleMessage("Total Amount")
+        "totalAmount": MessageLookupByLibrary.simpleMessage("Total Amount"),
+        "transport": MessageLookupByLibrary.simpleMessage("Transport")
       };
 }

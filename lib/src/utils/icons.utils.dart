@@ -12,19 +12,17 @@ IconData getIcon(String name) {
     case 'noCategories':
       return MdiIcons.shapePlusOutline;
     case 'operations':
-      return MdiIcons.receiptText;
+      return MdiIcons.scriptText;
     case 'noOperations':
-      return MdiIcons.receiptTextOutline;
+      return MdiIcons.scriptTextOutline;
     case 'statistics':
       return MdiIcons.chartBar;
     case 'noStatistics':
       return MdiIcons.chartBarStacked;
     case 'wallet':
-      return Icons.wallet_rounded;
+      return MdiIcons.wallet;
     case 'card':
       return MdiIcons.creditCardOutline;
-    case 'saving':
-      return Icons.savings_rounded;
     case 'cash':
       return MdiIcons.cash;
     case 'add':
@@ -77,6 +75,8 @@ IconData getIcon(String name) {
       return MdiIcons.calendar;
     case "bank":
       return MdiIcons.bank;
+    case "bankOutline":
+      return MdiIcons.bankOutline;
     case "cashMultiple":
       return MdiIcons.cashMultiple;
     case "cash100":
@@ -89,8 +89,12 @@ IconData getIcon(String name) {
       return MdiIcons.giftOutline;
     case "piggyBankOutline":
       return MdiIcons.piggyBankOutline;
+    case 'piggyBank':
+      return MdiIcons.piggyBank;
     case "simOutline":
       return MdiIcons.simOutline;
+    case "walletBifold":
+      return MdiIcons.walletBifold;
     case "walletBifoldOutline":
       return MdiIcons.walletBifoldOutline;
     case "walletGiftCard":
@@ -122,6 +126,6 @@ IconData getIcon(String name) {
     case "deleteItemOff":
       return MdiIcons.deleteOff;
     default:
-      return Icons.question_mark_rounded;
+      return MdiIcons.fromString(name) ?? Icons.question_mark_rounded;
   }
 }

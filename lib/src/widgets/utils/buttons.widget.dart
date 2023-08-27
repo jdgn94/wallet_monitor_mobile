@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_monitor/src/db/models/category.model.dart';
+import 'package:wallet_monitor/src/db/models/currency.model.dart';
+import 'package:wallet_monitor/src/functions/currency.function.dart';
+import 'package:wallet_monitor/src/utils/icons.utils.dart';
 
-enum ButtonType { tonal, outline, text, color, selector }
+enum ButtonType { tonal, outline, text, color, selector, category }
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -25,6 +29,8 @@ class CustomButton extends StatelessWidget {
   final Color? borderColor;
   final Color? textColor;
   final double? iconSize;
+  final Category? category;
+  final Currency? currency;
 
   const CustomButton({
     super.key,
@@ -50,6 +56,8 @@ class CustomButton extends StatelessWidget {
     this.borderColor,
     this.textColor,
     this.iconSize,
+    this.category,
+    this.currency,
   });
 
   @override
@@ -166,6 +174,71 @@ class CustomButton extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (type == ButtonType.category) {
+      final categoryColor = Color(int.parse("0x${category!.color}"));
+
+      return Material(
+        color: Colors.transparent,
+        child: Container(
+          width: MediaQuery.of(context).size.width / 2 - 15,
+          constraints: const BoxConstraints(
+            maxWidth: 300,
+          ),
+          child: InkWell(
+            onTap: disabled ? null : onPressed,
+            borderRadius: BorderRadius.circular(10.0),
+            focusColor: categoryColor.withAlpha(30),
+            hoverColor: categoryColor.withAlpha(30),
+            splashColor: categoryColor.withAlpha(30),
+            highlightColor: categoryColor.withAlpha(30),
+            child: Ink(
+              decoration: BoxDecoration(
+                color: categoryColor.withAlpha(50),
+                borderRadius: BorderRadius.circular(10.0),
+                // border: Border.all(width: 1.5, color: categoryColor),
+              ),
+              height: 50.0,
+              child: Row(
+                children: [
+                  Ink(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: categoryColor.withAlpha(50),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        bottomLeft: Radius.circular(10.0),
+                      ),
+                    ),
+                    child: Icon(getIcon(category!.icon), color: categoryColor),
+                  ),
+                  const SizedBox(width: 10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          category!.name,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Text(
+                        CurrencyFunctions.formatNumber(
+                          symbol: currency!.symbol,
+                          decimalDigits: currency!.decimalDigits,
+                          amount: category!.maxAmount,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -45,6 +45,7 @@ String translateMonth(int month) {
 String dateFormat(
   DateTime date, {
   DateTypeFormat dateType = DateTypeFormat.number,
+  String separator = " ",
 }) {
   switch (dateType.name) {
     case "monthString":
@@ -52,32 +53,35 @@ String dateFormat(
         date.year.toString(),
         translateMonth(date.month),
         "${date.day < 10 ? '0' : ''}${date.day}",
+        separator,
       );
     case "monthStringAndYearOnly":
       return _formatDate(
         date.year.toString(),
         translateMonth(date.month),
         "",
+        separator,
       );
     default:
       return _formatDate(
         date.year.toString(),
         "${date.month < 10 ? '0' : ''}${date.month}",
         "${date.day < 10 ? '0' : ''}${date.day}",
+        separator,
       );
   }
 }
 
-String _formatDate(String year, String month, String day) {
+String _formatDate(String year, String month, String day, String separator) {
   final pref = SettingsLocalStorage.pref;
   final formatType = pref.getString("dateFormat");
 
   switch (formatType) {
     case "us":
-      return "$month $day $year";
+      return "$month$separator$day$separator$year";
     case "es":
-      return "$day $month $year";
+      return "$day$separator$month$separator$year";
     default:
-      return "$year $month $day";
+      return "$year$separator$month$separator$day";
   }
 }

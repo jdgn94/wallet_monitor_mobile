@@ -53,17 +53,6 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       description: '',
       createdAt: DateTime.now(),
     );
-    await AccountConsult.createOrUpdate(
-      id: 3,
-      amount: 0,
-      color: 'ff26c6da',
-      minAmount: 0,
-      icon: 'saving',
-      name: S.current.saving,
-      currencyId: currencyId,
-      description: '',
-      createdAt: DateTime.now(),
-    );
 
     Navigator.of(context)
         .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);

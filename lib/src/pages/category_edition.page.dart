@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/db/models/subcategory.model.dart';
-import 'package:wallet_monitor/src/db/queries/account.consult.dart';
 import 'package:wallet_monitor/src/db/queries/category.consult.dart';
 
 import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
@@ -45,8 +44,16 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
   late int currencyId;
   List<Subcategory?> subcategories = [];
   bool expenses = true;
+  bool currencyLoad = false;
   double maxAmount = 0;
-  Currency? currency;
+  Currency currency = Currency(
+    code: '',
+    decimalDigits: 0,
+    exchangeRate: 1,
+    id: 0,
+    name: '',
+    symbol: '',
+  );
   String iconCategory = 'none';
   Color colorCategory =
       Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(250);
@@ -74,7 +81,9 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
 
   Future<void> _getCurrency() async {
     currency = await CurrencyConsult.getById(currencyId);
-    setState(() {});
+    setState(() {
+      currencyLoad = true;
+    });
   }
 
   void _changeLimitForMonth(double newValue) {
@@ -150,7 +159,11 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: _body(),
+      body: Visibility(
+        visible: currencyLoad,
+        replacement: const CircularProgressIndicator(),
+        child: _body(),
+      ),
     );
   }
 

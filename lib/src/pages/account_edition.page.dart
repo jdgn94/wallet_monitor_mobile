@@ -29,19 +29,28 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
   late int currencyId;
+  Account? account;
+  bool currencyLoad = false;
   double amount = 0;
   double minAmount = 0;
-  Currency? currency;
-  String iconCategory = 'none';
+  Currency currency = Currency(
+    code: '',
+    decimalDigits: 0,
+    exchangeRate: 1,
+    id: 0,
+    name: '',
+    symbol: '',
+  );
+  String iconAccount = 'none';
   Color colorAccount =
       Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(250);
+  bool editing = false;
 
   @override
   void initState() {
     _nameController = TextEditingController();
     _descriptionController = TextEditingController();
     currencyId = _pref.getInt("defaultCurrency") ?? 103;
-    _getCurrency();
     super.initState();
   }
 
@@ -52,15 +61,30 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
     super.dispose();
   }
 
+  void _getArguments() {
+    account = ModalRoute.of(context)!.settings.arguments as Account?;
+
+    if (account != null) {
+      currencyId = account!.currencyId;
+      _nameController.text = account!.name;
+      _descriptionController.text = account!.description!;
+      iconAccount = account!.icon;
+      colorAccount = Color(int.parse("0x${account!.color}"));
+      editing = true;
+    }
+  }
+
   Future<void> _getCurrency() async {
     currency = await CurrencyConsult.getById(currencyId);
-    setState(() {});
+    setState(() {
+      currencyLoad = true;
+    });
   }
 
   void _selectIcon(Color newColor, String newIcon) {
     setState(() {
       colorAccount = newColor;
-      iconCategory = newIcon;
+      iconAccount = newIcon;
     });
   }
 
@@ -75,7 +99,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   }
 
   bool _checkValues() {
-    return _nameController.text.isEmpty || iconCategory == "none";
+    return _nameController.text.isEmpty || iconAccount == "none";
   }
 
   void _changeInitValue(double newValue) {
@@ -99,9 +123,9 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
             .toString()
             .replaceAll("Color(0x", "")
             .replaceAll(")", ""),
-        currencyId: currency!.id,
+        currencyId: currency.id,
         description: _descriptionController.text,
-        icon: iconCategory,
+        icon: iconAccount,
         name: _nameController.text,
         createdAt: DateTime.now(),
       );
@@ -115,9 +139,16 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
 
   @override
   Widget build(BuildContext context) {
+    _getArguments();
+    _getCurrency();
+
     return Scaffold(
       appBar: _appBar(),
-      body: _body(),
+      body: Visibility(
+        visible: currencyLoad,
+        replacement: const CircularProgressIndicator(),
+        child: _body(),
+      ),
     );
   }
 
@@ -157,6 +188,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
               IconSelectorWidget(
                 confirm: _selectIcon,
                 defaultColor: colorAccount,
+                defaultIcon: iconAccount,
               ),
               _spacing(),
               // _currencyInput(),
@@ -165,6 +197,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
                 localSelect: true,
                 defaultCurrency: currencyId,
                 confirm: _changeCurrency,
+                disabled: editing,
               ),
               _spacing(),
               KeyboardWidget(

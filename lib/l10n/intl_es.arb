@@ -172,7 +172,7 @@
   "selectIcon": "Seleccionar Icono",
   "selectColor": "Seleccionar Color",
   "settings": "Configuraciones",
-  "currencyNotChange": "La moneda principal no puede ser cambiada.",
+  "currencyNotChange": "La moneda no puede ser cambiada.",
   "createCategory": "Crear Categoría",
   "january": "Enero",
   "february": "Febrero",
@@ -202,5 +202,17 @@
   "totalAccounts": "Cuentas Totales",
   "totalAmount": "Monto Total",
   "subcategory": "Sub Categoría",
-  "subcategories": "Sub Categorías"
+  "subcategories": "Sub Categorías",
+  "foodAndDrink": "Comidas y Bebidas",
+  "home": "Hogar",
+  "personalCare": "Cuidado Personal",
+  "transport": "Transporte",
+  "education": "Education",
+  "healthAndMedical": "Cuidado y Medicina",
+  "entertainment": "Entretenimiento",
+  "sport": "Deporte",
+  "services": "Servicios",
+  "technology": "Tecnología",
+  "shop": "Compras",
+  "nature": "Naturaleza"
 }
