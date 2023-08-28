@@ -18,6 +18,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SettingsLocalStorage.configureSettings();
   await DatabaseService().database();
+  await FetchController.getAllCurrencies();
 
   final pref = SettingsLocalStorage.pref;
 
@@ -48,8 +49,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FetchController.getAllCurrencies();
-
     final String initialPage = pref.getString("color") == null
         ? "/settingsInitial"
         : pref.getString("formatNumber") == null

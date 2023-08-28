@@ -18,7 +18,7 @@ class DatabaseService {
   }
 
   Future<String> fullPath() async {
-    const name = 'test.db';
+    const name = 'wallet_monitor.db';
     final path = await getDatabasesPath();
     return join(path, name);
   }

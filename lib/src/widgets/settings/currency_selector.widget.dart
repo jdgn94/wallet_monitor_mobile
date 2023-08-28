@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
+import 'package:wallet_monitor/src/db/queries/account.consult.dart';
 import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/functions/snack_bar.function.dart';
@@ -19,6 +20,7 @@ class CurrencySelectorWidget extends StatefulWidget {
   final int? defaultCurrency;
   final bool button;
   final bool fromAccount;
+  final bool createAccountOnChange;
   final Function(Currency)? confirm;
 
   const CurrencySelectorWidget({
@@ -30,6 +32,7 @@ class CurrencySelectorWidget extends StatefulWidget {
     this.disabled = false,
     this.button = false,
     this.fromAccount = false,
+    this.createAccountOnChange = false,
   });
 
   @override
@@ -67,6 +70,10 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   Future<void> _changeCurrencyPref(int newCurrencyId) async {
     final newCurrency = await CurrencyConsult.getById(newCurrencyId);
 
+    if (widget.createAccountOnChange) {
+      await _createAccount(newCurrencyId);
+    }
+
     if (widget.localSelect) {
       widget.confirm!(newCurrency);
       currencySelect = newCurrency;
@@ -76,6 +83,33 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
         newCurrency.symbol,
       ));
     }
+  }
+
+  Future<void> _createAccount(int currencyId) async {
+    final accounts = await AccountConsult.getAllByCurrencyId(currencyId);
+
+    if (accounts.isNotEmpty) return;
+
+    await AccountConsult.createOrUpdate(
+      amount: 0,
+      color: 'ff2196f3',
+      minAmount: 0,
+      icon: 'wallet',
+      name: S.current.card,
+      currencyId: currencyId,
+      description: '',
+      createdAt: DateTime.now(),
+    );
+    await AccountConsult.createOrUpdate(
+      amount: 0,
+      color: 'ff388e3c',
+      minAmount: 0,
+      icon: 'cash',
+      name: S.current.cash,
+      currencyId: currencyId,
+      description: '',
+      createdAt: DateTime.now(),
+    );
   }
 
   void _openSelector() {
@@ -178,7 +212,7 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
 
       return AlertDialog(
         title: Text(S.current.currencies),
-        content: SizedBox(
+        content: Container(
           width: 500,
           child: Wrap(
             children: [
@@ -192,19 +226,24 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                child: Column(
-                  children: currencies
-                      .map(
-                        (currency) => _currencyItem(
-                          currency,
-                          currencySelected,
-                          changeValue,
-                        ),
-                      )
-                      .toList(),
+              Container(
+                constraints: const BoxConstraints(
+                  maxHeight: 500,
+                ),
+                child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  child: Column(
+                    children: currencies
+                        .map(
+                          (currency) => _currencyItem(
+                            currency,
+                            currencySelected,
+                            changeValue,
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
               ),
             ],

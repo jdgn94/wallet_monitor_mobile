@@ -131,6 +131,37 @@ class AccountConsult {
     return accounts;
   }
 
+  static Future<List<Account?>> getAllByCurrencyId(int id) async {
+    final result = await _db.rawQuery("""
+      SELECT
+        a.id,
+        a.name,
+        a.description,
+        a.icon,
+        a.color,
+        a.amount,
+        a.min_amount,
+        a.created_at,
+        a.updated_at,
+        a.deleted_at,
+        a.currency_id,
+        c.name currency_name,
+        c.symbol currency_symbol,
+        c.code currency_code,
+        c.exchange_rate,
+        c.decimal_digits
+      FROM
+        accounts a
+        INNER JOIN currencies c ON a.currency_id = c.id
+      WHERE
+        c.id = $id;
+    """);
+
+    final accounts = accountsFromJson(result);
+
+    return accounts;
+  }
+
   static Future<Account?> getById(int id) async {
     final result = await _db.rawQuery("""
       SELECT * FROM accounts WHERE id = $id

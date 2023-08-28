@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             ThemeSelectorWidget(pref: _pref),
             ColorSelectorWidget(pref: _pref),
-            CurrencySelectorWidget(pref: _pref, disabled: true),
+            CurrencySelectorWidget(pref: _pref, createAccountOnChange: true),
             FormatSelectorWidget(pref: _pref),
             LanguageSelectorWidget(pref: _pref),
           ],

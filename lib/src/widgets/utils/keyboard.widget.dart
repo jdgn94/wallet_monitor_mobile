@@ -398,6 +398,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                 left: 7.0, right: 7.0, top: 7.0, bottom: 7.0),
             child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
+              alignment: WrapAlignment.center,
               children: keyValues
                   .map((e) => _keyboardButton(e, changeState))
                   .toList(),

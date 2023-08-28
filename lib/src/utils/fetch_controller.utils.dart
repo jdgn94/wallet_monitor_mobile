@@ -10,10 +10,12 @@ abstract class FetchController {
   static const String _baseUrl = "http://192.168.1.10:3000/api";
 
   static Future<void> getAllCurrencies() async {
+    print("Estoy consultando el api para la busqueda de las monedas");
     try {
       final url = Uri.parse("$_baseUrl/currency/all");
 
       final response = await http.get(url);
+      print(response.statusCode);
 
       if (response.statusCode != 200) throw "error on getAllCurrencies";
 
@@ -34,11 +36,11 @@ abstract class FetchController {
       }
     } catch (e) {
       // aquí tengo que correr la semilla
+      print(e);
       final currencies = await CurrencyConsult.getAll();
       if (currencies.isEmpty) {
         insertCurrencies();
       }
-      print(e);
     }
   }
 }

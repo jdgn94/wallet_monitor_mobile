@@ -144,67 +144,71 @@ class _AccountPageState extends State<AccountPage>
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 12.0),
-      child: InkWell(
-        onTap: () => Navigator.pushNamed(context, '/account', arguments: item),
-        borderRadius: BorderRadius.circular(10),
-        splashColor: buttonSplash,
-        highlightColor: buttonSplash,
-        hoverColor: buttonSplash,
-        focusColor: buttonSplash,
-        child: Ink(
-          width: double.infinity,
-          height: 70,
-          decoration: BoxDecoration(
-            color: buttonColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            children: [
-              Ink(
-                height: double.infinity,
-                width: 70,
-                decoration: BoxDecoration(
-                  color: buttonColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
+      child: Material(
+        // color: Colors.transparent,
+        child: InkWell(
+          onTap: () =>
+              Navigator.pushNamed(context, '/account', arguments: item),
+          borderRadius: BorderRadius.circular(10),
+          splashColor: buttonSplash,
+          highlightColor: buttonSplash,
+          hoverColor: buttonSplash,
+          focusColor: buttonSplash,
+          child: Ink(
+            width: double.infinity,
+            height: 70,
+            decoration: BoxDecoration(
+              color: buttonColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              children: [
+                Ink(
+                  height: double.infinity,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: buttonColor,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      getIcon(item.icon),
+                      color: Color(int.parse("0x${item.color}")),
+                      size: 45,
+                    ),
                   ),
                 ),
-                child: Center(
-                  child: Icon(
-                    getIcon(item.icon),
-                    color: Color(int.parse("0x${item.color}")),
-                    size: 45,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item.name,
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item.name,
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        CurrencyFunctions.formatNumber(
-                          symbol: item.currencySymbol,
-                          decimalDigits: item.decimalDigits,
-                          amount: item.amount,
+                        Text(
+                          CurrencyFunctions.formatNumber(
+                            symbol: item.currencySymbol,
+                            decimalDigits: item.decimalDigits,
+                            amount: item.amount,
+                          ),
+                          style: const TextStyle(fontSize: 17),
                         ),
-                        style: const TextStyle(fontSize: 17),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
