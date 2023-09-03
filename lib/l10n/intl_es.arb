@@ -214,5 +214,16 @@
   "services": "Servicios",
   "technology": "Tecnología",
   "shop": "Compras",
-  "nature": "Naturaleza"
+  "nature": "Naturaleza",
+  "category": "Categoría",
+  "account": "Cuenta",
+  "tax": "Impuesto",
+  "addTax": "Agregar Impuesto",
+  "percent": "Porcentaje",
+  "value": "valor",
+  "subtractFromTotal": "Extraer del total",
+  "addToTotal": "Agregar al total",
+  "observation": "Observation",
+  "commission": "Comisiones",
+  "Image": "Imagen"
 }

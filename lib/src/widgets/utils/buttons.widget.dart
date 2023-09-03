@@ -31,6 +31,8 @@ class CustomButton extends StatelessWidget {
   final double? iconSize;
   final Category? category;
   final Currency? currency;
+  final bool showCategoryAmount;
+  final bool showSubcategories;
 
   const CustomButton({
     super.key,
@@ -58,6 +60,8 @@ class CustomButton extends StatelessWidget {
     this.iconSize,
     this.category,
     this.currency,
+    this.showCategoryAmount = true,
+    this.showSubcategories = false,
   });
 
   @override
@@ -118,18 +122,21 @@ class CustomButton extends StatelessWidget {
     }
 
     if (type == ButtonType.selector) {
-      return InkWell(
-        onTap: onPressed,
-        borderRadius: BorderRadius.circular(10.0),
-        child: Ink(
-          width: MediaQuery.of(context).size.width / 2 - 70,
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: Column(
-            children: [
-              Icon(icon),
-              const SizedBox(height: 10.0),
-              Text(text ?? ""),
-            ],
+      return Container(
+        constraints: const BoxConstraints(maxWidth: 200),
+        child: InkWell(
+          onTap: onPressed,
+          borderRadius: BorderRadius.circular(10.0),
+          child: Ink(
+            width: MediaQuery.of(context).size.width / 2 - 70,
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Column(
+              children: [
+                Icon(icon),
+                const SizedBox(height: 10.0),
+                Text(text ?? ""),
+              ],
+            ),
           ),
         ),
       );
@@ -187,8 +194,8 @@ class CustomButton extends StatelessWidget {
         color: Colors.transparent,
         child: Container(
           width: MediaQuery.of(context).size.width / 2 - 15,
-          constraints: const BoxConstraints(
-            maxWidth: 300,
+          constraints: BoxConstraints(
+            maxWidth: showSubcategories ? 3000 : 280,
           ),
           child: InkWell(
             onTap: disabled ? null : onPressed,
@@ -221,6 +228,7 @@ class CustomButton extends StatelessWidget {
                   const SizedBox(width: 10),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Text(

@@ -102,31 +102,37 @@ class _CategoryPageState extends State<CategoryPage>
 
   Padding _categoryPages() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
       child: TabBarView(
         controller: _tabController,
         children: [
           _categoryExpenses(),
-          Text("ingresps"),
+          const Text("ingresps"),
         ],
       ),
     );
   }
 
-  SingleChildScrollView _categoryExpenses() {
-    return SingleChildScrollView(
-      child: Wrap(
-        children: categoriesExpenses
-            .map(
-              (item) => KeyboardWidget(
-                confirm: (_) {},
-                pref: widget.pref,
-                type: KeyType.buttonCategory,
-                category: item!,
-                currency: widget.currency,
-              ),
-            )
-            .toList(),
+  Center _categoryExpenses() {
+    return Center(
+      child: SizedBox(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Wrap(
+            spacing: 10,
+            children: categoriesExpenses
+                .map(
+                  (item) => KeyboardWidget(
+                    confirm: (_) {},
+                    pref: widget.pref,
+                    type: KeyType.buttonCategory,
+                    category: item!,
+                    currency: widget.currency,
+                  ),
+                )
+                .toList(),
+          ),
+        ),
       ),
     );
   }

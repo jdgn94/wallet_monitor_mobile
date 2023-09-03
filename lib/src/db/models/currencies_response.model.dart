@@ -21,7 +21,7 @@ class CurrenciesResponse {
 
 List<Currency> _formatCurrency(List<dynamic> json) {
   print("Formating currencies values from fetch");
-  final hola = 126.0;
+  const hola = 126.0;
   hola.toInt();
   return json
       .map(

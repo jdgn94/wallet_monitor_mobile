@@ -100,8 +100,9 @@ class AccountConsult {
     return summary;
   }
 
-  static Future<List<Account?>> getAllNoDeleted() async {
-    final result = await _db.rawQuery("""
+  static Future<List<Account?>> getAllNoDeleted(
+      {required int currencyPrimaryId}) async {
+    final resultByPrimary = await _db.rawQuery("""
       SELECT
         a.id,
         a.name,
@@ -123,8 +124,37 @@ class AccountConsult {
         accounts a
         INNER JOIN currencies c ON a.currency_id = c.id
       WHERE
-        a.deleted_at IS NULL;
+        a.currency_id = $currencyPrimaryId
+        AND a.deleted_at IS NULL;
     """);
+
+    final resultWithoutPrimary = await _db.rawQuery("""
+      SELECT
+        a.id,
+        a.name,
+        a.description,
+        a.icon,
+        a.color,
+        a.amount,
+        a.min_amount,
+        a.created_at,
+        a.updated_at,
+        a.deleted_at,
+        a.currency_id,
+        c.name currency_name,
+        c.symbol currency_symbol,
+        c.code currency_code,
+        c.exchange_rate,
+        c.decimal_digits
+      FROM
+        accounts a
+        INNER JOIN currencies c ON a.currency_id = c.id
+      WHERE
+        a.currency_id <> $currencyPrimaryId
+        AND a.deleted_at IS NULL;
+    """);
+
+    final result = [...resultByPrimary, ...resultWithoutPrimary];
 
     final accounts = accountsFromJson(result);
 

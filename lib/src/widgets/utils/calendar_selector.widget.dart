@@ -559,19 +559,19 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
             border: Border(
               bottom: BorderSide(
                 color: primaryColor,
-                width: borderButton ? 1.5 : 0.3,
+                width: borderButton ? 1.5 : 0,
               ),
               left: BorderSide(
                 color: primaryColor,
-                width: borderLeft ? 1.5 : 0.3,
+                width: borderLeft ? 1.5 : 0,
               ),
               top: BorderSide(
                 color: primaryColor,
-                width: borderTop ? 1.5 : 0.3,
+                width: borderTop ? 1.5 : 0,
               ),
               right: BorderSide(
                 color: primaryColor,
-                width: borderRight ? 1.5 : 0.3,
+                width: borderRight ? 1.5 : 0,
               ),
             ),
             borderRadius: BorderRadius.only(
@@ -587,7 +587,14 @@ class _CalendarSelectorWidgetState extends State<CalendarSelectorWidget> {
               Transform(
                 alignment: Alignment.center,
                 transform: Matrix4.rotationY(mirror ? math.pi : 0),
-                child: SvgPicture.asset(asset, height: 55),
+                child: SvgPicture.asset(
+                  asset,
+                  height: 55,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.onBackground,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
               const SizedBox(height: 5),
               Expanded(

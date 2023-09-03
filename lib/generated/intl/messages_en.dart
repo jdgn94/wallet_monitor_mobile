@@ -183,12 +183,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "YemenRial": MessageLookupByLibrary.simpleMessage("Yemen Rial"),
         "ZimbabweDollar":
             MessageLookupByLibrary.simpleMessage("Zimbabwe Dollar"),
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
         "accountCurrency":
             MessageLookupByLibrary.simpleMessage("Account Currency"),
         "accountType": MessageLookupByLibrary.simpleMessage("Account Type"),
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "addSubcategory":
             MessageLookupByLibrary.simpleMessage("Add Subcategory"),
+        "addTax": MessageLookupByLibrary.simpleMessage("Add Tax"),
+        "addToTotal": MessageLookupByLibrary.simpleMessage("Add to total"),
         "allTime": MessageLookupByLibrary.simpleMessage("All Time"),
         "amount": MessageLookupByLibrary.simpleMessage("Amount"),
         "april": MessageLookupByLibrary.simpleMessage("April"),
@@ -198,9 +201,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "card": MessageLookupByLibrary.simpleMessage("Card"),
         "cash": MessageLookupByLibrary.simpleMessage("Cash"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+        "category": MessageLookupByLibrary.simpleMessage("Category"),
         "chameleon": MessageLookupByLibrary.simpleMessage("Chameleon"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector": MessageLookupByLibrary.simpleMessage("Color selector"),
+        "commission": MessageLookupByLibrary.simpleMessage("Commission"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createAccount": MessageLookupByLibrary.simpleMessage("Create Account"),
@@ -237,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "icon": MessageLookupByLibrary.simpleMessage("Icon"),
         "icons": MessageLookupByLibrary.simpleMessage("Icons"),
+        "image": MessageLookupByLibrary.simpleMessage("Image"),
         "incomes": MessageLookupByLibrary.simpleMessage("Incomes"),
         "initDay": MessageLookupByLibrary.simpleMessage("Initial Day"),
         "initialConfig":
@@ -258,9 +264,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "night": MessageLookupByLibrary.simpleMessage("Night"),
         "none": MessageLookupByLibrary.simpleMessage("None"),
         "november": MessageLookupByLibrary.simpleMessage("November"),
+        "observation": MessageLookupByLibrary.simpleMessage("Observation"),
         "october": MessageLookupByLibrary.simpleMessage("October"),
         "operations": MessageLookupByLibrary.simpleMessage("Operations"),
         "orange": MessageLookupByLibrary.simpleMessage("Orange"),
+        "percent": MessageLookupByLibrary.simpleMessage("Percent"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
         "personalCare": MessageLookupByLibrary.simpleMessage("Personal Care"),
         "pink": MessageLookupByLibrary.simpleMessage("Pink"),
@@ -291,8 +299,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
         "subcategories": MessageLookupByLibrary.simpleMessage("Subcategories"),
         "subcategory": MessageLookupByLibrary.simpleMessage("Subcategory"),
+        "subtractFromTotal":
+            MessageLookupByLibrary.simpleMessage("Subtract from total"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
+        "tax": MessageLookupByLibrary.simpleMessage("Tax"),
         "teal": MessageLookupByLibrary.simpleMessage("Teal"),
         "technology": MessageLookupByLibrary.simpleMessage("Technology"),
         "theme": MessageLookupByLibrary.simpleMessage("Themes"),
@@ -300,6 +311,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "totalAccounts": MessageLookupByLibrary.simpleMessage("Total Accounts"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Total Amount"),
-        "transport": MessageLookupByLibrary.simpleMessage("Transport")
+        "transport": MessageLookupByLibrary.simpleMessage("Transport"),
+        "value": MessageLookupByLibrary.simpleMessage("Value")
       };
 }

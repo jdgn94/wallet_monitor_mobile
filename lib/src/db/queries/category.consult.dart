@@ -9,16 +9,25 @@ export 'package:wallet_monitor/src/db/models/category.model.dart';
 abstract class CategoryConsult {
   static final _db = DatabaseService().db;
 
-  static Future<List<Category?>> getAll({bool? expenses}) async {
+  static Future<List<Category?>> getAll({bool? expenses, bool? deleted}) async {
     String whereQuery = "";
     if (expenses == true) {
       whereQuery = "WHERE expenses = 1";
     } else if (expenses == false) {
       whereQuery = "WHERE expenses = 0";
     }
+    if (deleted == true) {
+      whereQuery = whereQuery == ""
+          ? "WHERE deleted_at IS NOT NULL"
+          : "$whereQuery AND deleted_at IS NOT NULL";
+    } else if (deleted == false) {
+      whereQuery = whereQuery == ""
+          ? "WHERE deleted_at IS NULL"
+          : "$whereQuery AND deleted_at IS NULL";
+    }
 
     final resultCategories = await _db.rawQuery("""
-      SELECT * FROM categories $whereQuery
+      SELECT * FROM categories $whereQuery;
     """);
 
     print(resultCategories);
@@ -28,20 +37,17 @@ abstract class CategoryConsult {
     for (int i = 0; i < totalCategories; i++) {
       final tempCategory = resultCategories[i];
       final resultSubcategories = await _db.rawQuery("""
-        SELECT * FROM subcategories where category_id = ${tempCategory["id"]};
+        SELECT
+          *
+        FROM
+          subcategories
+        WHERE
+          category_id = ${tempCategory["id"]}
+          AND deleted_at IS NOT NULL;
       """);
 
       tempCategories.add({
-        // "id": tempCategory["id"],
-        // "name": tempCategory["name"],
-        // "max_amount": tempCategory["max_amount"],
-        // "color": tempCategory["color"],
-        // "icon": tempCategory["icon"],
-        // "expenses": tempCategory["expenses"],
         "subcategories": resultSubcategories,
-        // "created_at": tempCategory["created_at"],
-        // "updated_at": tempCategory["updated_at"],
-        // "deleted_at": tempCategory["deleted_at"],
         ...tempCategory,
       });
     }

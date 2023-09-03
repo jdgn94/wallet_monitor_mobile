@@ -2209,6 +2209,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Category`
+  String get category {
+    return Intl.message(
+      'Category',
+      name: 'category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tax`
+  String get tax {
+    return Intl.message(
+      'Tax',
+      name: 'tax',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Tax`
+  String get addTax {
+    return Intl.message(
+      'Add Tax',
+      name: 'addTax',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Percent`
+  String get percent {
+    return Intl.message(
+      'Percent',
+      name: 'percent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Value`
+  String get value {
+    return Intl.message(
+      'Value',
+      name: 'value',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subtract from total`
+  String get subtractFromTotal {
+    return Intl.message(
+      'Subtract from total',
+      name: 'subtractFromTotal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add to total`
+  String get addToTotal {
+    return Intl.message(
+      'Add to total',
+      name: 'addToTotal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Observation`
+  String get observation {
+    return Intl.message(
+      'Observation',
+      name: 'observation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Commission`
+  String get commission {
+    return Intl.message(
+      'Commission',
+      name: 'commission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image`
+  String get image {
+    return Intl.message(
+      'Image',
+      name: 'image',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

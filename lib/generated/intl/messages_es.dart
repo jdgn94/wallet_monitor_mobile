@@ -185,12 +185,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "YemenRial": MessageLookupByLibrary.simpleMessage("Yemen Rial"),
         "ZimbabweDollar":
             MessageLookupByLibrary.simpleMessage("Zimbabue Dólar"),
+        "account": MessageLookupByLibrary.simpleMessage("Cuenta"),
         "accountCurrency":
             MessageLookupByLibrary.simpleMessage("Moneda de la cuenta"),
         "accountType": MessageLookupByLibrary.simpleMessage("Tipo de cuenta"),
         "accounts": MessageLookupByLibrary.simpleMessage("Cuentas"),
         "addSubcategory":
             MessageLookupByLibrary.simpleMessage("Agregar Sub categoría"),
+        "addTax": MessageLookupByLibrary.simpleMessage("Agregar Impuesto"),
+        "addToTotal": MessageLookupByLibrary.simpleMessage("Agregar al total"),
         "allTime": MessageLookupByLibrary.simpleMessage("Todo el Tiempo"),
         "amount": MessageLookupByLibrary.simpleMessage("Monto"),
         "april": MessageLookupByLibrary.simpleMessage("Abril"),
@@ -200,10 +203,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "card": MessageLookupByLibrary.simpleMessage("Tarjeta"),
         "cash": MessageLookupByLibrary.simpleMessage("Efectivo"),
         "categories": MessageLookupByLibrary.simpleMessage("Categorías"),
+        "category": MessageLookupByLibrary.simpleMessage("Categoría"),
         "chameleon": MessageLookupByLibrary.simpleMessage("Camaleón"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "colorSelector":
             MessageLookupByLibrary.simpleMessage("Selector de color"),
+        "commission": MessageLookupByLibrary.simpleMessage("Comisiones"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
         "create": MessageLookupByLibrary.simpleMessage("Crear"),
         "createAccount": MessageLookupByLibrary.simpleMessage("Crear Cuenta"),
@@ -262,9 +267,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "night": MessageLookupByLibrary.simpleMessage("Nocturno"),
         "none": MessageLookupByLibrary.simpleMessage("Ninguno"),
         "november": MessageLookupByLibrary.simpleMessage("Noviembre"),
+        "observation": MessageLookupByLibrary.simpleMessage("Observation"),
         "october": MessageLookupByLibrary.simpleMessage("Octubre"),
         "operations": MessageLookupByLibrary.simpleMessage("Operaciones"),
         "orange": MessageLookupByLibrary.simpleMessage("Naranja"),
+        "percent": MessageLookupByLibrary.simpleMessage("Porcentaje"),
         "personal": MessageLookupByLibrary.simpleMessage("Personal"),
         "personalCare":
             MessageLookupByLibrary.simpleMessage("Cuidado Personal"),
@@ -300,8 +307,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "statistics": MessageLookupByLibrary.simpleMessage("Estadísticas"),
         "subcategories": MessageLookupByLibrary.simpleMessage("Sub Categorías"),
         "subcategory": MessageLookupByLibrary.simpleMessage("Sub Categoría"),
+        "subtractFromTotal":
+            MessageLookupByLibrary.simpleMessage("Extraer del total"),
         "summary": MessageLookupByLibrary.simpleMessage("Resumen"),
         "system": MessageLookupByLibrary.simpleMessage("Sistema"),
+        "tax": MessageLookupByLibrary.simpleMessage("Impuesto"),
         "teal": MessageLookupByLibrary.simpleMessage("Aguamarina"),
         "technology": MessageLookupByLibrary.simpleMessage("Tecnología"),
         "theme": MessageLookupByLibrary.simpleMessage("Temas"),
@@ -311,6 +321,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalAccounts":
             MessageLookupByLibrary.simpleMessage("Cuentas Totales"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Monto Total"),
-        "transport": MessageLookupByLibrary.simpleMessage("Transporte")
+        "transport": MessageLookupByLibrary.simpleMessage("Transporte"),
+        "value": MessageLookupByLibrary.simpleMessage("valor")
       };
 }

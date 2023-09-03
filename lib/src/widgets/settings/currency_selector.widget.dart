@@ -49,14 +49,15 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
   @override
   void initState() {
     currency =
-        widget.pref.getInt('defaultCurrency') ?? widget.defaultCurrency ?? 103;
+        widget.defaultCurrency ?? widget.pref.getInt('defaultCurrency') ?? 103;
     _inputController = TextEditingController();
     _setInputName();
     _getAllCurrencies();
     if (widget.pref.getInt('defaultCurrency') == null) {
       _changeCurrencyPref(103);
     } else {
-      _changeCurrencyPref(widget.pref.getInt('defaultCurrency')!);
+      _changeCurrencyPref(
+          widget.defaultCurrency ?? widget.pref.getInt('defaultCurrency')!);
     }
     super.initState();
   }
@@ -212,7 +213,7 @@ class _CurrencySelectorWidgetState extends State<CurrencySelectorWidget> {
 
       return AlertDialog(
         title: Text(S.current.currencies),
-        content: Container(
+        content: SizedBox(
           width: 500,
           child: Wrap(
             children: [

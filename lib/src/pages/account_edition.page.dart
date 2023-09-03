@@ -9,7 +9,6 @@ import 'package:wallet_monitor/src/db/queries/account.consult.dart';
 import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 import 'package:wallet_monitor/src/db/models/navigator_returned.dart';
 import 'package:wallet_monitor/src/functions/snack_bar.function.dart';
-import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/icon_selector.widget.dart';
@@ -31,6 +30,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   late int currencyId;
   Account? account;
   bool currencyLoad = false;
+  bool loading = false;
   double amount = 0;
   double minAmount = 0;
   Currency currency = Currency(
@@ -65,17 +65,24 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
     account = ModalRoute.of(context)!.settings.arguments as Account?;
 
     if (account != null) {
-      currencyId = account!.currencyId;
-      _nameController.text = account!.name;
-      _descriptionController.text = account!.description!;
-      iconAccount = account!.icon;
-      colorAccount = Color(int.parse("0x${account!.color}"));
-      editing = true;
+      setState(() {
+        currencyId = account!.currencyId;
+        _nameController.text = account!.name;
+        _descriptionController.text = account!.description!;
+        iconAccount = account!.icon;
+        colorAccount = Color(int.parse("0x${account!.color}"));
+        amount = account!.amount;
+        minAmount = account!.minAmount;
+        editing = true;
+      });
     }
   }
 
   Future<void> _getCurrency() async {
+    loading = true;
+    print("currency id desde el get currency del account edition $currencyId");
     currency = await CurrencyConsult.getById(currencyId);
+    print("currency obtenido: ${currency.id}");
     setState(() {
       currencyLoad = true;
     });
@@ -117,6 +124,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
   Future<void> _saveAccount() async {
     try {
       await AccountConsult.createOrUpdate(
+        id: account?.id,
         minAmount: minAmount,
         amount: amount,
         color: colorAccount
@@ -139,8 +147,10 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
 
   @override
   Widget build(BuildContext context) {
-    _getArguments();
-    _getCurrency();
+    if (currencyLoad == false && loading == false) {
+      _getArguments();
+      _getCurrency();
+    }
 
     return Scaffold(
       appBar: _appBar(),
@@ -204,6 +214,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
                 pref: _pref,
                 type: KeyType.input,
                 label: S.current.amount,
+                defaultValue: amount.toString(),
                 currency: currency,
                 confirm: _changeInitValue,
                 activeCalendar: false,
@@ -213,11 +224,13 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
                 pref: _pref,
                 type: KeyType.input,
                 label: S.current.minimumAmount,
+                defaultValue: minAmount.toString(),
                 currency: currency,
                 confirm: _changeMinAmount,
                 activeCalendar: false,
               ),
               _spacing(),
+              if (editing) _buttonToCancel(),
               _buttonToSave(),
             ],
           ),
@@ -230,7 +243,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
     return const SizedBox(height: 40.0);
   }
 
-  Widget _nameInput() {
+  TextField _nameInput() {
     return TextField(
       controller: _nameController,
       decoration: InputDecoration(
@@ -239,7 +252,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
     );
   }
 
-  Widget _descriptionInput() {
+  TextField _descriptionInput() {
     return TextField(
       controller: _descriptionController,
       decoration: InputDecoration(
@@ -250,13 +263,24 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
     );
   }
 
-  Widget _buttonToSave() {
+  CustomButton _buttonToCancel() {
+    return CustomButton(
+      onPressed: Navigator.of(context).pop,
+      margin: const EdgeInsets.only(bottom: 10.0),
+      type: ButtonType.outline,
+      color: Colors.red,
+      text: S.current.cancel,
+      height: 50,
+      size: 20,
+    );
+  }
+
+  CustomButton _buttonToSave() {
     final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
     return CustomButton(
       color: usePrimaryColor ? null : colorAccount,
       onPressed: _saveAccount,
-      text: S.current.create,
-      icon: getIcon("save"),
+      text: editing ? S.current.edit : S.current.create,
       height: 50,
       size: 20,
       disabled: _checkValues(),

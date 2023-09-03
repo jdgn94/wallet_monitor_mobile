@@ -62,6 +62,16 @@ class _AccountPageState extends State<AccountPage>
     }
   }
 
+  Future<void> _editAccount(Account account) async {
+    final response =
+        await Navigator.of(context).pushNamed('/account', arguments: account);
+    if (response == null) return;
+    final responseFormate = response as CreateReturner;
+    if (responseFormate.reload) {
+      _getAllAccountsAndSummary();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -147,8 +157,7 @@ class _AccountPageState extends State<AccountPage>
       child: Material(
         // color: Colors.transparent,
         child: InkWell(
-          onTap: () =>
-              Navigator.pushNamed(context, '/account', arguments: item),
+          onTap: () => _editAccount(item),
           borderRadius: BorderRadius.circular(10),
           splashColor: buttonSplash,
           highlightColor: buttonSplash,

@@ -214,5 +214,16 @@
   "services": "Services",
   "technology": "Technology",
   "shop": "Shopping",
-  "nature": "Nature"
+  "nature": "Nature",
+  "category": "Category",
+  "account": "Account",
+  "tax": "Tax",
+  "addTax": "Add Tax",
+  "percent": "Percent",
+  "value": "Value",
+  "subtractFromTotal": "Subtract from total",
+  "addToTotal": "Add to total",
+  "observation": "Observation",
+  "commission": "Commission",
+  "image": "Image"
 }

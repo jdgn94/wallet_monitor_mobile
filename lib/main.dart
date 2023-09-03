@@ -57,8 +57,8 @@ class MyApp extends StatelessWidget {
 
     // const String initialPage = "/settingsInitial";
 
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    // SystemChrome.setPreferredOrientations(
+    //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     return BlocBuilder<SettingsBloc, SettingsState>(
       builder: (context, state) {

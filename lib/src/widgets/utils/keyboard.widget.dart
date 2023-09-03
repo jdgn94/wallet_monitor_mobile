@@ -3,10 +3,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
+import 'package:wallet_monitor/generated/l10n.dart';
 
 import 'package:wallet_monitor/src/bloc/global/global_bloc.dart';
-import 'package:wallet_monitor/src/db/models/category.model.dart';
 import 'package:wallet_monitor/src/db/queries/account.consult.dart';
+import 'package:wallet_monitor/src/db/queries/category.consult.dart';
 import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/functions/utils.functions.dart';
@@ -25,6 +26,7 @@ class KeyboardWidget extends StatefulWidget {
   String? label;
   String? defaultValue;
   bool activeCalendar;
+  bool refreshWithGlobal;
 
   KeyboardWidget({
     super.key,
@@ -36,6 +38,7 @@ class KeyboardWidget extends StatefulWidget {
     this.label,
     this.defaultValue,
     this.activeCalendar = true,
+    this.refreshWithGlobal = false,
   });
 
   @override
@@ -51,22 +54,28 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
   late int currencyDecimalDigits;
   late Currency currency;
   late List<Account?> accounts;
+  late Category? category;
+  late List<Category?> categories;
   late Account? account;
   List<String> keyValues = [];
   DateTime dateSelected = DateTime.now();
-  List<String> allNumbers = ["0"];
+  List<String> allNumbers = [];
   List<String> mathOperations = [];
   bool writingDecimal = false;
   bool secondaryNumberError = false;
 
   @override
   void initState() {
+    print("Hola vale");
+    print(widget.pref.getString("formatNumber"));
     definitiveNumber = widget.defaultValue ?? '0';
     _inputController = TextEditingController();
     currency = widget.currency;
     currencySymbol = currency.symbol;
     actualCurrencyId = currency.id;
     currencyDecimalDigits = currency.decimalDigits;
+    allNumbers.add(widget.defaultValue ?? "0");
+    print("datos recibidos en el teclado: $currencySymbol");
     keyValues = [
       "division",
       "7",
@@ -91,6 +100,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
           : ".",
       "check",
     ];
+    _refreshInput(currency.id);
     super.initState();
   }
 
@@ -101,8 +111,11 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
   }
 
   Future<void> _getFirstAccount() async {
-    accounts = await AccountConsult.getAllNoDeleted();
+    accounts = await AccountConsult.getAllNoDeleted(
+        currencyPrimaryId: widget.currency.id);
     account = accounts.isEmpty ? null : accounts.first;
+    category = widget.category;
+    categories = await CategoryConsult.getAll(deleted: false);
 
     setState(() {});
   }
@@ -111,7 +124,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     allNumbers = <String>[];
     mathOperations = <String>[];
     allNumbers.add(definitiveNumber);
-    await _getFirstAccount();
+    if (widget.category != null) await _getFirstAccount();
 
     showModalBottomSheet(
       context: context,
@@ -119,7 +132,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       isDismissible: true,
       isScrollControlled: true,
       enableDrag: false,
-      showDragHandle: true,
+      // showDragHandle: true,
     );
   }
 
@@ -200,7 +213,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
 
   Future<void> _refreshInput(int id) async {
     final currency = await CurrencyConsult.getById(id);
-    print(id);
+    print("Estoy referescando el input con el siguiente id de moneda $id");
 
     setState(() {
       currencySymbol = currency.symbol;
@@ -286,6 +299,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
       print(actualCurrencyId);
       print(snapshot.newCurrency);
       if (snapshot.newCurrency != actualCurrencyId &&
+          widget.refreshWithGlobal &&
           snapshot.newCurrency != null) {
         Future.delayed(
             Duration.zero, () => _refreshInput(snapshot.newCurrency!));
@@ -296,6 +310,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
           onPressed: _showKeyboard,
           category: widget.category!,
           currency: currency,
+          margin: const EdgeInsets.only(top: 10),
           type: ButtonType.category,
         );
       }
@@ -318,68 +333,279 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
   FractionallySizedBox _fullScreenKeyboard() {
     return FractionallySizedBox(
       child: StatefulBuilder(builder: (context, changeState) {
-        return Wrap(
-          crossAxisAlignment: WrapCrossAlignment.end,
-          alignment: WrapAlignment.end,
-          children: [
-            _totalNumber(),
-            _categoryAccount(),
-            Divider(
-              height: 1.5,
-              color: Theme.of(context).colorScheme.onBackground.withAlpha(60),
-            ),
-            _keyboard(changeState),
-            _dateSelectedInfo(),
-          ],
+        return SingleChildScrollView(
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.end,
+            alignment: WrapAlignment.end,
+            children: [
+              _categoryAccount(),
+              _totalNumber(),
+              _additionalButtons(),
+              Divider(
+                height: 1.5,
+                color: Theme.of(context).colorScheme.onBackground.withAlpha(60),
+              ),
+              _keyboard(changeState),
+              _dateSelectedInfo(),
+            ],
+          ),
         );
       }),
     );
   }
 
-  Row _totalNumber() {
+  Widget _categoryAccount() {
+    if (widget.category == null) return const SizedBox();
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          CurrencyFunctions.formatNumber(
-            amount: double.parse(allNumbers[0]),
-            decimalDigits: currencyDecimalDigits,
-            symbol: currencySymbol,
-          ),
-          style: const TextStyle(fontSize: 25.0),
-        ),
-        if (allNumbers.length > 1)
-          Visibility(
-            visible: allNumbers.length > 1,
-            child: Row(
-              children: [
-                const SizedBox(width: 3),
-                Icon(getIcon(mathOperations[0])),
-                const SizedBox(width: 3),
-                Text(
-                  CurrencyFunctions.formatNumber(
-                    amount: double.parse(allNumbers[1]),
-                    decimalDigits: currencyDecimalDigits,
-                    symbol: currencySymbol,
-                  ),
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    color: secondaryNumberError
-                        ? Colors.red
-                        : Theme.of(context).colorScheme.onBackground,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        _buttonCategory(),
+        _buttonAccount(),
       ],
     );
   }
 
-  Row _categoryAccount() {
-    // if (category) return Row();
-    return Row();
+  Container _buttonCategory() {
+    final color = Color(int.parse("0x${category!.color}")).withAlpha(255);
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 320),
+      child: InkWell(
+        onTap: () {},
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30),
+          bottomLeft: Radius.circular(30),
+        ),
+        child: Ink(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          width: MediaQuery.of(context).size.width / 2,
+          height: 115,
+          decoration: BoxDecoration(
+            color: color.withAlpha(50),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                S.current.category,
+                style: const TextStyle(fontSize: 15),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(getIcon(category!.icon), color: color),
+                  const SizedBox(width: 10),
+                  Text(
+                    category!.name,
+                    style: const TextStyle(fontSize: 17),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              InkWell(
+                onTap: () {},
+                borderRadius: BorderRadius.circular(30),
+                child: Ink(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: color.withAlpha(50),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: const Text("Subcategory"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container _buttonAccount() {
+    final color = Color(int.parse("0x${account!.color}")).withAlpha(255);
+
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 320),
+      child: InkWell(
+        onTap: () {},
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(30),
+          bottomRight: Radius.circular(30),
+        ),
+        child: Ink(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          width: MediaQuery.of(context).size.width / 2,
+          height: 115,
+          decoration: BoxDecoration(
+            color: color.withAlpha(50),
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                S.current.account,
+                style: const TextStyle(fontSize: 15),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(getIcon(account!.icon), color: color),
+                  const SizedBox(width: 10),
+                  Text(
+                    account!.name,
+                    style: const TextStyle(fontSize: 17),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Padding _totalNumber() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            CurrencyFunctions.formatNumber(
+              amount: double.parse(allNumbers[0]),
+              decimalDigits: currencyDecimalDigits,
+              symbol: currencySymbol,
+            ),
+            style: const TextStyle(fontSize: 25.0),
+          ),
+          if (allNumbers.length > 1)
+            Visibility(
+              visible: allNumbers.length > 1,
+              child: Row(
+                children: [
+                  const SizedBox(width: 3),
+                  Icon(getIcon(mathOperations[0])),
+                  const SizedBox(width: 3),
+                  Text(
+                    CurrencyFunctions.formatNumber(
+                      amount: double.parse(allNumbers[1]),
+                      decimalDigits: currencyDecimalDigits,
+                      symbol: currencySymbol,
+                    ),
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      color: secondaryNumberError
+                          ? Colors.red
+                          : Theme.of(context).colorScheme.onBackground,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _additionalButtons() {
+    if (widget.category == null) return const SizedBox();
+
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Theme.of(context).colorScheme.onBackground.withAlpha(60),
+            width: 1,
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buttonExtra(
+            message: S.current.tax,
+            icon: "bankOutline",
+            right: true,
+          ),
+          _buttonExtra(
+            message: S.current.observation,
+            icon: "commentTextOutline",
+          ),
+          _buttonExtra(
+            message: S.current.commission,
+            icon: "percentOutline",
+            left: true,
+          ),
+          _buttonExtra(
+            message: S.current.image,
+            icon: "cameraOutline",
+            icon2: "imageOutline",
+            left: true,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Tooltip _buttonExtra({
+    required String message,
+    required String icon,
+    String? icon2,
+    bool left = false,
+    bool right = false,
+  }) {
+    return Tooltip(
+      message: message,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 3),
+        constraints: const BoxConstraints(maxWidth: 155),
+        child: InkWell(
+          onTap: () {},
+          child: Ink(
+            width: MediaQuery.of(context).size.width / 4,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border(
+                right: BorderSide(
+                  color: right
+                      ? Theme.of(context).colorScheme.onBackground.withAlpha(60)
+                      : Colors.transparent,
+                  width: 1,
+                ),
+                left: BorderSide(
+                  color: left
+                      ? Theme.of(context).colorScheme.onBackground.withAlpha(60)
+                      : Colors.transparent,
+                  width: 1,
+                ),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(getIcon(icon)),
+                if (icon2 != null) const Text("/"),
+                if (icon2 != null) Icon(getIcon(icon2)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   SizedBox _keyboard(StateSetter changeState) {
@@ -394,8 +620,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
             constraints: const BoxConstraints(
               maxWidth: 615,
             ),
-            padding: const EdgeInsets.only(
-                left: 7.0, right: 7.0, top: 7.0, bottom: 7.0),
+            padding: const EdgeInsets.all(7.0),
             child: Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               alignment: WrapAlignment.center,
