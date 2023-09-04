@@ -159,8 +159,8 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
         icon: iconCategory,
         name: _nameController.text,
         description: _descriptionController.text,
-        createdAt: DateTime.now(),
         expenses: expenses,
+        createdAt: category?.createdAt ?? DateTime.now(),
       );
 
       if (subcategories.isNotEmpty) {
@@ -176,6 +176,29 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
         }
       }
 
+      final response = CreateReturner(reload: true);
+      Navigator.of(context).pop(response);
+    } catch (e) {
+      showMessage(context: context, type: Type.error, message: e.toString());
+    }
+  }
+
+  Future<void> _disableCategory() async {
+    try {
+      await CategoryConsult.createOrUpdate(
+        id: category!.id,
+        maxAmount: maxAmount,
+        color: colorCategory
+            .toString()
+            .replaceAll('Color(0x', '')
+            .replaceAll(")", ""),
+        icon: iconCategory,
+        name: _nameController.text,
+        description: _descriptionController.text,
+        expenses: expenses,
+        createdAt: category!.createdAt,
+        deletedAt: category!.deletedAt == null ? DateTime.now() : null,
+      );
       final response = CreateReturner(reload: true);
       Navigator.of(context).pop(response);
     } catch (e) {
@@ -274,7 +297,7 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
               _spacing(),
               _categoryContainer(),
               _spacing(),
-              if (editing) buttonToDelete(),
+              if (editing) _buttonToDelete(),
               if (editing) _buttonToCancel(),
               _buttonToSave(),
             ],
@@ -529,14 +552,16 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     });
   }
 
-  CustomButton buttonToDelete() {
+  CustomButton _buttonToDelete() {
     return CustomButton(
-      onPressed: () {},
+      onPressed: _disableCategory,
       type: ButtonType.text,
       margin: const EdgeInsets.only(bottom: 10.0),
-      backgroundColor: Colors.red.withAlpha(50),
-      color: Colors.red,
-      text: S.current.disable,
+      backgroundColor: category!.deletedAt == null
+          ? Colors.red.withAlpha(50)
+          : Colors.blue.withAlpha(50),
+      color: category!.deletedAt == null ? Colors.red : Colors.blue,
+      text: category!.deletedAt == null ? S.current.disable : S.current.enable,
       size: 20,
     );
   }

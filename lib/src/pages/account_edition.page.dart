@@ -137,7 +137,32 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
         description: _descriptionController.text,
         icon: iconAccount,
         name: _nameController.text,
-        createdAt: DateTime.now(),
+        createdAt: account?.createdAt ?? DateTime.now(),
+      );
+
+      final response = CreateReturner(reload: true);
+      Navigator.of(context).pop(response);
+    } catch (e) {
+      showMessage(context: context, type: Type.error, message: e.toString());
+    }
+  }
+
+  Future<void> _disableCategory() async {
+    try {
+      await AccountConsult.createOrUpdate(
+        id: account!.id,
+        minAmount: minAmount,
+        amount: amount,
+        color: colorAccount
+            .toString()
+            .replaceAll("Color(0x", "")
+            .replaceAll(")", ""),
+        currencyId: currency.id,
+        description: _descriptionController.text,
+        icon: iconAccount,
+        name: _nameController.text,
+        createdAt: account!.createdAt,
+        deletedAt: account!.deletedAt != null ? DateTime.now() : null,
       );
 
       final response = CreateReturner(reload: true);
@@ -232,6 +257,7 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
                 activeCalendar: false,
               ),
               _spacing(),
+              if (editing) _buttonToDelete(),
               if (editing) _buttonToCancel(),
               _buttonToSave(),
             ],
@@ -262,6 +288,20 @@ class _AccountEditionPageState extends State<AccountEditionPage> {
       ),
       minLines: 1,
       maxLines: 3,
+    );
+  }
+
+  CustomButton _buttonToDelete() {
+    return CustomButton(
+      onPressed: _disableCategory,
+      type: ButtonType.text,
+      margin: const EdgeInsets.only(bottom: 10.0),
+      backgroundColor: account!.deletedAt == null
+          ? Colors.red.withAlpha(50)
+          : Colors.blue.withAlpha(50),
+      color: account!.deletedAt == null ? Colors.red : Colors.blue,
+      text: account!.deletedAt == null ? S.current.disable : S.current.enable,
+      size: 20,
     );
   }
 
