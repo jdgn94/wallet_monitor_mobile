@@ -115,7 +115,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
         currencyPrimaryId: widget.currency.id);
     account = accounts.isEmpty ? null : accounts.first;
     category = widget.category;
-    categories = await CategoryConsult.getAll(deleted: false);
+    categories = await CategoryConsult.getAll(showDelete: false);
 
     setState(() {});
   }

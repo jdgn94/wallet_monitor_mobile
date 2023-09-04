@@ -1,10 +1,11 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_monitor/src/db/models/category.model.dart';
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 
-enum ButtonType { tonal, outline, text, color, selector, category }
+enum ButtonType { tonal, outline, text, color, selector, category, dotted }
 
 class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -33,6 +34,8 @@ class CustomButton extends StatelessWidget {
   final Currency? currency;
   final bool showCategoryAmount;
   final bool showSubcategories;
+  final double maxWidth;
+  final double maxHeight;
 
   const CustomButton({
     super.key,
@@ -62,6 +65,8 @@ class CustomButton extends StatelessWidget {
     this.currency,
     this.showCategoryAmount = true,
     this.showSubcategories = false,
+    this.maxWidth = double.infinity,
+    this.maxHeight = double.infinity,
   });
 
   @override
@@ -70,6 +75,10 @@ class CustomButton extends StatelessWidget {
       message: message,
       child: Container(
         margin: margin,
+        constraints: BoxConstraints(
+          maxWidth: maxWidth,
+          maxHeight: maxHeight,
+        ),
         child: _buttonStyle(context),
       ),
     );
@@ -187,6 +196,51 @@ class CustomButton extends StatelessWidget {
       );
     }
 
+    if (type == ButtonType.dotted) {
+      return DottedBorder(
+        color: Theme.of(context).colorScheme.onBackground.withAlpha(150),
+        strokeWidth: 1,
+        borderType: BorderType.RRect,
+        padding: EdgeInsets.zero,
+        radius: const Radius.circular(10.0),
+        child: InkWell(
+          onTap: disabled ? null : onPressed,
+          child: Ink(
+            child: Container(
+              constraints: BoxConstraints(
+                  minHeight: 50,
+                  maxHeight: maxHeight,
+                  minWidth: 50,
+                  maxWidth: maxWidth),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (icon != null && personalIcon == null)
+                    Icon(icon, size: iconSize ?? size),
+                  if ((icon != null || personalIcon != null) && text != null)
+                    const SizedBox(width: 10),
+                  if (text != null)
+                    Text(
+                      text!,
+                      style: TextStyle(
+                        fontSize: size,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  if ((rightIcon != null && text != null))
+                    const SizedBox(width: 10),
+                  if (rightIcon != null)
+                    Icon(rightIcon, size: iconSize ?? size),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     if (type == ButtonType.category) {
       final categoryColor = Color(int.parse("0x${category!.color}"));
 
@@ -195,8 +249,7 @@ class CustomButton extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width / 2 - 15,
           constraints: BoxConstraints(
-            maxWidth: showSubcategories ? 3000 : 280,
-          ),
+              maxWidth: showSubcategories ? 3000 : 280, minHeight: 50.0),
           child: InkWell(
             onTap: disabled ? null : onPressed,
             borderRadius: BorderRadius.circular(10.0),
@@ -230,19 +283,26 @@ class CustomButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Text(
+                      if (showCategoryAmount)
+                        Expanded(
+                          child: Text(
+                            category!.name,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      if (showCategoryAmount == false)
+                        Text(
                           category!.name,
                           overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      Text(
-                        CurrencyFunctions.formatNumber(
-                          symbol: currency!.symbol,
-                          decimalDigits: currency!.decimalDigits,
-                          amount: category!.maxAmount,
+                      if (showCategoryAmount && currency != null)
+                        Text(
+                          CurrencyFunctions.formatNumber(
+                            symbol: currency!.symbol,
+                            decimalDigits: currency!.decimalDigits,
+                            amount: category!.maxAmount,
+                          ),
                         ),
-                      )
                     ],
                   ),
                 ],

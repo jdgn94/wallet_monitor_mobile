@@ -1,12 +1,15 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
 import 'package:wallet_monitor/generated/l10n.dart';
-import 'package:wallet_monitor/src/db/models/subcategory.model.dart';
+import 'package:wallet_monitor/src/db/models/navigator_returned.dart';
 import 'package:wallet_monitor/src/db/queries/category.consult.dart';
-
 import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
+import 'package:wallet_monitor/src/db/queries/subcategory.consult.dart';
+import 'package:wallet_monitor/src/functions/snack_bar.function.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/icon_selector.widget.dart';
@@ -42,9 +45,12 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
   late TextEditingController _accountTypeController;
   late TextEditingController _subcategoryController;
   late int currencyId;
+  late Category? category;
   List<Subcategory?> subcategories = [];
   bool expenses = true;
   bool currencyLoad = false;
+  bool loading = false;
+  bool editing = false;
   double maxAmount = 0;
   Currency currency = Currency(
     code: '',
@@ -65,8 +71,6 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     _accountTypeController = TextEditingController();
     _subcategoryController = TextEditingController();
     currencyId = _pref.getInt("defaultCurrency") ?? 103;
-    _getCurrency();
-    _accountTypeController.text = S.current.incomes;
     super.initState();
   }
 
@@ -79,10 +83,36 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     super.dispose();
   }
 
+  void _getArguments() {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    expenses = args["expenses"] as bool;
+    category = args["category"] as Category?;
+
+    _accountTypeController.text =
+        expenses == true ? S.current.expenses : S.current.incomes;
+
+    if (category != null) {
+      _nameController.text = category!.name;
+      _descriptionController.text = category!.description;
+      _accountTypeController.text =
+          category!.expenses == true ? S.current.expenses : S.current.incomes;
+      subcategories = category!.subcategories;
+      iconCategory = category!.icon;
+      colorCategory = Color(int.parse("0x${category!.color}")).withAlpha(250);
+      expenses = category!.expenses;
+      editing = true;
+    }
+  }
+
   Future<void> _getCurrency() async {
+    setState(() {
+      loading = true;
+    });
     currency = await CurrencyConsult.getById(currencyId);
     setState(() {
       currencyLoad = true;
+      loading = false;
     });
   }
 
@@ -118,18 +148,39 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
   }
 
   Future<void> _saveCategory() async {
-    await CategoryConsult.createOrUpdate(
-      maxAmount: maxAmount,
-      color: colorCategory
-          .toString()
-          .replaceAll('Color(0x', '')
-          .replaceAll(")", ""),
-      icon: iconCategory,
-      name: _nameController.text,
-      description: _descriptionController.text,
-      createdAt: DateTime.now(),
-      expenses: expenses,
-    );
+    try {
+      final categoryId = await CategoryConsult.createOrUpdate(
+        id: category?.id,
+        maxAmount: maxAmount,
+        color: colorCategory
+            .toString()
+            .replaceAll('Color(0x', '')
+            .replaceAll(")", ""),
+        icon: iconCategory,
+        name: _nameController.text,
+        description: _descriptionController.text,
+        createdAt: DateTime.now(),
+        expenses: expenses,
+      );
+
+      if (subcategories.isNotEmpty) {
+        final length = subcategories.length;
+        for (int i = 0; i < length; i++) {
+          await SubcategoryConsult.createOrUpdate(
+            id: subcategories[i]!.id == 0 ? null : subcategories[i]!.id,
+            name: subcategories[i]!.name,
+            categoryId: categoryId,
+            createdAt: subcategories[i]!.createdAt,
+            deletedAt: subcategories[i]!.deletedAt,
+          );
+        }
+      }
+
+      final response = CreateReturner(reload: true);
+      Navigator.of(context).pop(response);
+    } catch (e) {
+      showMessage(context: context, type: Type.error, message: e.toString());
+    }
   }
 
   void _saveSubcategory(int? position) {
@@ -157,11 +208,16 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (currencyLoad == false && loading == false) {
+      _getArguments();
+      _getCurrency();
+    }
+
     return Scaffold(
       appBar: _appBar(),
       body: Visibility(
         visible: currencyLoad,
-        replacement: const CircularProgressIndicator(),
+        replacement: const Center(child: CircularProgressIndicator()),
         child: _body(),
       ),
     );
@@ -202,6 +258,7 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
               IconSelectorWidget(
                 confirm: _selectIcon,
                 defaultColor: colorCategory,
+                defaultIcon: iconCategory,
               ),
               _spacing(),
               _accountType(),
@@ -217,8 +274,9 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
               _spacing(),
               _categoryContainer(),
               _spacing(),
+              if (editing) buttonToDelete(),
+              if (editing) _buttonToCancel(),
               _buttonToSave(),
-              _buttonToCancel(),
             ],
           ),
         ),
@@ -271,6 +329,8 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
         });
         setState(() {
           expenses = newValue;
+          _accountTypeController.text =
+              newValue ? S.current.expenses : S.current.incomes;
         });
         Navigator.of(localContext).pop();
       }
@@ -438,30 +498,6 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     );
   }
 
-  Widget _buttonToSave() {
-    final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
-    return CustomButton(
-      color: usePrimaryColor ? null : colorCategory,
-      onPressed: _saveCategory,
-      text: S.current.create,
-      height: 50,
-      size: 20,
-      disabled: _checkValues(),
-    );
-  }
-
-  Widget _buttonToCancel() {
-    return CustomButton(
-      margin: const EdgeInsets.only(top: 10.0),
-      color: Colors.red,
-      onPressed: Navigator.of(context).pop,
-      text: S.current.cancel,
-      type: ButtonType.outline,
-      height: 50,
-      size: 20,
-    );
-  }
-
   StatefulBuilder _dialogSubcategory(BuildContext context, int? position) {
     if (position != null) {
       _subcategoryController.text = subcategories[position]!.name;
@@ -491,5 +527,41 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
         ],
       );
     });
+  }
+
+  CustomButton buttonToDelete() {
+    return CustomButton(
+      onPressed: () {},
+      type: ButtonType.text,
+      margin: const EdgeInsets.only(bottom: 10.0),
+      backgroundColor: Colors.red.withAlpha(50),
+      color: Colors.red,
+      text: S.current.disable,
+      size: 20,
+    );
+  }
+
+  CustomButton _buttonToCancel() {
+    return CustomButton(
+      margin: const EdgeInsets.only(bottom: 10.0),
+      color: Colors.red,
+      onPressed: Navigator.of(context).pop,
+      text: S.current.cancel,
+      type: ButtonType.outline,
+      height: 50,
+      size: 20,
+    );
+  }
+
+  CustomButton _buttonToSave() {
+    final usePrimaryColor = _pref.getString("color") == "7" ? false : true;
+    return CustomButton(
+      color: usePrimaryColor ? null : colorCategory,
+      onPressed: _saveCategory,
+      text: editing ? S.current.edit : S.current.create,
+      height: 50,
+      size: 20,
+      disabled: _checkValues(),
+    );
   }
 }

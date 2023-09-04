@@ -225,5 +225,7 @@
   "addToTotal": "Agregar al total",
   "observation": "Observation",
   "commission": "Comisiones",
-  "Image": "Imagen"
+  "Image": "Imagen",
+  "noCategories": "Sin Categorías",
+  "addCategory": "Crear Categoría"
 }

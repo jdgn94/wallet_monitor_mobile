@@ -225,5 +225,7 @@
   "addToTotal": "Add to total",
   "observation": "Observation",
   "commission": "Commission",
-  "image": "Image"
+  "image": "Image",
+  "noCategories": "No Categories",
+  "addCategory": "Add Category"
 }

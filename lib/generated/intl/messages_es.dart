@@ -190,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Moneda de la cuenta"),
         "accountType": MessageLookupByLibrary.simpleMessage("Tipo de cuenta"),
         "accounts": MessageLookupByLibrary.simpleMessage("Cuentas"),
+        "addCategory": MessageLookupByLibrary.simpleMessage("Crear Categoría"),
         "addSubcategory":
             MessageLookupByLibrary.simpleMessage("Agregar Sub categoría"),
         "addTax": MessageLookupByLibrary.simpleMessage("Agregar Impuesto"),
@@ -265,6 +266,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nature": MessageLookupByLibrary.simpleMessage("Naturaleza"),
         "next": MessageLookupByLibrary.simpleMessage("Siguiente"),
         "night": MessageLookupByLibrary.simpleMessage("Nocturno"),
+        "noCategories": MessageLookupByLibrary.simpleMessage("Sin Categorías"),
         "none": MessageLookupByLibrary.simpleMessage("Ninguno"),
         "november": MessageLookupByLibrary.simpleMessage("Noviembre"),
         "observation": MessageLookupByLibrary.simpleMessage("Observation"),

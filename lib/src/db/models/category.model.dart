@@ -11,7 +11,7 @@ class Category {
   DateTime createdAt;
   DateTime updatedAt;
   DateTime? deletedAt;
-  List<Subcategory?>? subcategories;
+  List<Subcategory?> subcategories;
 
   Category({
     required this.id,
@@ -24,7 +24,7 @@ class Category {
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
-    this.subcategories,
+    required this.subcategories,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
@@ -40,9 +40,7 @@ class Category {
         deletedAt: json["deleted_at"] == null
             ? null
             : DateTime.parse(json["deleted_at"]),
-        subcategories: subcategoriesFromJson(
-          json["subcategories"],
-        ),
+        subcategories: json["subcategories"],
       );
 }
 

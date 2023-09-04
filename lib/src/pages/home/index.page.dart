@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor:
             usePrimaryColor ? Theme.of(context).colorScheme.primary : null,
         actions: [
-          if (_page == 0 || _page == 1 || _page == 2) _createButton(),
+          if (_page == 1) _createButton(),
         ],
       ),
     );
@@ -117,14 +117,8 @@ class _HomePageState extends State<HomePage> {
 
   IconButton _createButton() {
     return IconButton(
-      onPressed: () => Navigator.of(context).pushNamed(
-        _page == 0
-            ? "/account"
-            : _page == 1
-                ? "/category"
-                : "/operation",
-      ),
-      icon: Icon(getIcon("add")),
+      onPressed: () => Navigator.of(context).pushNamed("/edit_category"),
+      icon: Icon(getIcon("pencil")),
     );
   }
 

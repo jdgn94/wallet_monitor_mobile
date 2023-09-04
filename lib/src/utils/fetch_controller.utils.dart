@@ -7,7 +7,8 @@ import 'package:wallet_monitor/src/db/queries/currency.consult.dart';
 import 'package:wallet_monitor/src/db/seeds/currencies.seed.dart';
 
 abstract class FetchController {
-  static const String _baseUrl = "http://192.168.1.10:3000/api";
+  // static const String _baseUrl = "http://192.168.1.10:3000/api";
+  static const String _baseUrl = "http://192.168.10.109:3000/api";
 
   static Future<void> getAllCurrencies() async {
     print("Estoy consultando el api para la busqueda de las monedas");
