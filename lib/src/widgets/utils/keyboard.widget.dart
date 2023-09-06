@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, must_be_immutable, use_build_context_synchronously
+// ignore_for_file: depend_on_referenced_packages, must_be_immutable, use_build_context_synchronously, unnecessary_null_comparison
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,6 +73,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     definitiveNumber = widget.defaultValue ?? '0';
     _inputController = TextEditingController();
     currency = widget.currency;
+    currencySecondary = widget.currency;
     currencySymbol = currency.symbol;
     actualCurrencyId = currency.id;
     currencyDecimalDigits = currency.decimalDigits;
@@ -130,6 +131,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     mathOperations = <String>[];
     allNumbers.add(definitiveNumber);
     if (widget.category != null) await _getFirstAccount();
+    currencySecondary = currency;
 
     showModalBottomSheet(
       context: context,
@@ -320,6 +322,10 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     currencySecondary = await CurrencyConsult.getById(id);
   }
 
+  void _openChangeExchangeRate() {
+    print("Tengo que hacer el cambio de tasa");
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GlobalBloc, GlobalState>(builder: (context, snapshot) {
@@ -366,7 +372,13 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
             alignment: WrapAlignment.end,
             children: [
               _categoryAccount(changeState),
-              _totalNumber(),
+              Row(
+                children: [
+                  _totalNumber(),
+                  if (currencySecondary.id != currency.id)
+                    _totalNumber(secondaryCurrency: true),
+                ],
+              ),
               _additionalButtons(),
               Divider(
                 height: 1.5,
@@ -516,46 +528,81 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     );
   }
 
-  Padding _totalNumber() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            CurrencyFunctions.formatNumber(
-              amount: double.parse(allNumbers[0]),
-              decimalDigits: currencyDecimalDigits,
-              symbol: currencySymbol,
-            ),
-            style: const TextStyle(fontSize: 25.0),
-          ),
-          if (allNumbers.length > 1)
-            Visibility(
-              visible: allNumbers.length > 1,
-              child: Row(
-                children: [
-                  const SizedBox(width: 3),
-                  Icon(getIcon(mathOperations[0])),
-                  const SizedBox(width: 3),
-                  Text(
-                    CurrencyFunctions.formatNumber(
-                      amount: double.parse(allNumbers[1]),
-                      decimalDigits: currencyDecimalDigits,
-                      symbol: currencySymbol,
-                    ),
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      color: secondaryNumberError
-                          ? Colors.red
-                          : Theme.of(context).colorScheme.onBackground,
-                    ),
-                  ),
-                ],
+  InkWell _totalNumber({bool secondaryCurrency = false}) {
+    final bool towCurrencies = currencySecondary.id != currency.id;
+
+    return InkWell(
+      onTap: secondaryCurrency ? () => _openChangeExchangeRate() : null,
+      child: Ink(
+        padding: const EdgeInsets.all(8.0),
+        width: MediaQuery.of(context).size.width / (towCurrencies ? 2 : 1),
+        decoration: BoxDecoration(
+          gradient: secondaryCurrency
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: const [0.2, 0.7],
+                  colors: [
+                    Colors.transparent,
+                    Theme.of(context).colorScheme.primary.withAlpha(60),
+                  ],
+                )
+              : null,
+        ),
+        child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          alignment: WrapAlignment.center,
+          children: [
+            Text(
+              CurrencyFunctions.formatNumber(
+                amount: secondaryCurrency
+                    ? double.parse(allNumbers[0]) /
+                        currency.exchangeRate *
+                        currencySecondary.exchangeRate
+                    : double.parse(allNumbers[0]),
+                decimalDigits: secondaryCurrency
+                    ? currencySecondary.decimalDigits
+                    : currencyDecimalDigits,
+                symbol: secondaryCurrency
+                    ? currencySecondary.symbol
+                    : currencySymbol,
               ),
+              style: const TextStyle(fontSize: 20.0),
             ),
-        ],
+            if (allNumbers.length > 1)
+              Visibility(
+                visible: allNumbers.length > 1,
+                child: Wrap(
+                  children: [
+                    const SizedBox(width: 3),
+                    Icon(getIcon(mathOperations[0])),
+                    const SizedBox(width: 3),
+                    Text(
+                      CurrencyFunctions.formatNumber(
+                        amount: secondaryCurrency
+                            ? double.parse(allNumbers[1]) /
+                                currency.exchangeRate *
+                                currencySecondary.exchangeRate
+                            : double.parse(allNumbers[1]),
+                        decimalDigits: secondaryCurrency
+                            ? currencySecondary.decimalDigits
+                            : currencyDecimalDigits,
+                        symbol: secondaryCurrency
+                            ? currencySecondary.symbol
+                            : currencySymbol,
+                      ),
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: secondaryNumberError
+                            ? Colors.red
+                            : Theme.of(context).colorScheme.onBackground,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
