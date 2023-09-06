@@ -227,5 +227,6 @@
   "commission": "Comisiones",
   "Image": "Imagen",
   "noCategories": "Sin Categorías",
-  "addCategory": "Crear Categoría"
+  "addCategory": "Crear Categoría",
+  "totalSubcategories": "Total Sub Categorías"
 }

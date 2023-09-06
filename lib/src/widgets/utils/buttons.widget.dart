@@ -206,6 +206,7 @@ class CustomButton extends StatelessWidget {
         child: InkWell(
           onTap: disabled ? null : onPressed,
           child: Ink(
+            width: MediaQuery.of(context).size.width / 2 - 15,
             child: Container(
               constraints: BoxConstraints(
                   minHeight: 50,
@@ -279,32 +280,37 @@ class CustomButton extends StatelessWidget {
                     child: Icon(getIcon(category!.icon), color: categoryColor),
                   ),
                   const SizedBox(width: 10),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (showCategoryAmount)
-                        Expanded(
-                          child: Text(
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (showCategoryAmount)
+                          Expanded(
+                            child: Text(
+                              category!.name,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        if (showCategoryAmount == false)
+                          Text(
                             category!.name,
                             overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                      if (showCategoryAmount == false)
-                        Text(
-                          category!.name,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      if (showCategoryAmount && currency != null)
-                        Text(
-                          CurrencyFunctions.formatNumber(
-                            symbol: currency!.symbol,
-                            decimalDigits: currency!.decimalDigits,
-                            amount: category!.maxAmount,
+                        if (showCategoryAmount && currency != null)
+                          Text(
+                            CurrencyFunctions.formatNumber(
+                              symbol: currency!.symbol,
+                              decimalDigits: currency!.decimalDigits,
+                              amount: category!.maxAmount,
+                            ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
+                  if (category!.deletedAt != null)
+                    Icon(getIcon("eyeOffOutline")),
+                  const SizedBox(width: 10),
                 ],
               ),
             ),

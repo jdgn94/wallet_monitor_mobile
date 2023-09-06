@@ -21,7 +21,14 @@ class _AccountsTotals {
 class AccountConsult {
   static final _db = DatabaseService().db;
 
-  static Future<_AccountsTotals> getAll() async {
+  static Future<_AccountsTotals> getAll(
+      {bool? showDelete, bool? ignoreTotal}) async {
+    String whereConsult = "";
+
+    if (showDelete == false) {
+      whereConsult = "WHERE a.deleted_at IS NOT NULL";
+    }
+
     final resultAccounts = await _db.rawQuery("""
       SELECT
         a.id,
@@ -43,12 +50,14 @@ class AccountConsult {
       FROM
         accounts a
         INNER JOIN currencies c ON a.currency_id = c.id;
+      $whereConsult
     """);
 
     print(resultAccounts);
     final accounts = accountsFromJson(resultAccounts);
 
-    final resultSummaryAccounts = await _db.rawQuery("""
+    final resultSummaryAccounts =
+        ignoreTotal == true ? <Map<String, dynamic>>[] : await _db.rawQuery("""
       SELECT
         COUNT(a.id) total_accounts,
         SUM(a.amount) total_amounts,

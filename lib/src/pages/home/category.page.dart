@@ -32,8 +32,10 @@ class _CategoryPageState extends State<CategoryPage>
   }
 
   Future<void> _getCategories() async {
-    categoriesExpenses = await CategoryConsult.getAll(expenses: true);
-    categoriesIncomes = await CategoryConsult.getAll(expenses: false);
+    categoriesExpenses =
+        await CategoryConsult.getAll(expenses: true, showDelete: false);
+    categoriesIncomes =
+        await CategoryConsult.getAll(expenses: false, showDelete: false);
 
     setState(() {});
   }
@@ -106,31 +108,41 @@ class _CategoryPageState extends State<CategoryPage>
       child: TabBarView(
         controller: _tabController,
         children: [
-          _categoryExpenses(),
-          const Text("ingresps"),
+          _categoryList(categoriesExpenses),
+          _categoryList(categoriesIncomes),
         ],
       ),
     );
   }
 
-  Center _categoryExpenses() {
+  Center _categoryList(List<Category?> categoryList) {
+    final width = (MediaQuery.of(context).size.width / 2 > 280
+            ? (290 * (MediaQuery.of(context).size.width / 280).truncate())
+            : (MediaQuery.of(context).size.width - 10)) -
+        10;
+
     return Center(
-      child: SizedBox(
-        height: double.infinity,
-        child: SingleChildScrollView(
-          child: Wrap(
-            spacing: 10,
-            children: categoriesExpenses
-                .map(
-                  (item) => KeyboardWidget(
-                    confirm: (_) {},
-                    pref: widget.pref,
-                    type: KeyType.buttonCategory,
-                    category: item!,
-                    currency: widget.currency,
-                  ),
-                )
-                .toList(),
+      child: Visibility(
+        visible: categoryList.isNotEmpty,
+        replacement: Text(S.current.noCategories),
+        child: Container(
+          height: double.infinity,
+          width: width.toDouble(),
+          child: SingleChildScrollView(
+            child: Wrap(
+              spacing: 10,
+              children: categoryList
+                  .map(
+                    (item) => KeyboardWidget(
+                      confirm: (_) {},
+                      pref: widget.pref,
+                      type: KeyType.buttonCategory,
+                      category: item!,
+                      currency: widget.currency,
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
         ),
       ),

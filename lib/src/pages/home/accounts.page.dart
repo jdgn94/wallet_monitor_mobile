@@ -280,7 +280,6 @@ class _AccountPageState extends State<AccountPage>
         ),
         Container(
           width: double.infinity,
-          height: 115,
           margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(

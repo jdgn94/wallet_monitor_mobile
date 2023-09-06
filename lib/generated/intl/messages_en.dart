@@ -313,6 +313,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "totalAccounts": MessageLookupByLibrary.simpleMessage("Total Accounts"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Total Amount"),
+        "totalSubcategories":
+            MessageLookupByLibrary.simpleMessage("Total Subcategories"),
         "transport": MessageLookupByLibrary.simpleMessage("Transport"),
         "value": MessageLookupByLibrary.simpleMessage("Value")
       };

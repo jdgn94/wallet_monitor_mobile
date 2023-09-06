@@ -53,10 +53,12 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
   late int actualCurrencyId;
   late int currencyDecimalDigits;
   late Currency currency;
+  late Currency currencySecondary;
   late List<Account?> accounts;
   late Category? category;
   late List<Category?> categories;
   late Account? account;
+  late Subcategory? subcategorySelected;
   List<String> keyValues = [];
   DateTime dateSelected = DateTime.now();
   List<String> allNumbers = [];
@@ -115,6 +117,9 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
         currencyPrimaryId: widget.currency.id);
     account = accounts.isEmpty ? null : accounts.first;
     category = widget.category;
+    subcategorySelected = widget.category?.subcategories.length == 0
+        ? null
+        : widget.category?.subcategories.first;
     categories = await CategoryConsult.getAll(showDelete: false);
 
     setState(() {});
@@ -293,6 +298,28 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     return Theme.of(context).colorScheme.primary;
   }
 
+  Future<void> _openCategoryList(StateSetter changeState) async {
+    categories = await CategoryConsult.getAll(showDelete: false);
+    showDialog(
+      context: context,
+      builder: (context) => _dialogCategories(context, changeState),
+    );
+  }
+
+  Future<void> _openAccountList(StateSetter changeState) async {
+    accounts =
+        (await AccountConsult.getAll(showDelete: false, ignoreTotal: true))
+            .accounts;
+    showDialog(
+      context: context,
+      builder: (context) => _dialogAccounts(context, changeState),
+    );
+  }
+
+  Future<void> _changeSecondaryCurrency(int id) async {
+    currencySecondary = await CurrencyConsult.getById(id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GlobalBloc, GlobalState>(builder: (context, snapshot) {
@@ -338,7 +365,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
             crossAxisAlignment: WrapCrossAlignment.end,
             alignment: WrapAlignment.end,
             children: [
-              _categoryAccount(),
+              _categoryAccount(changeState),
               _totalNumber(),
               _additionalButtons(),
               Divider(
@@ -354,23 +381,23 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     );
   }
 
-  Widget _categoryAccount() {
+  Widget _categoryAccount(StateSetter changeState) {
     if (widget.category == null) return const SizedBox();
     return Row(
       children: [
-        _buttonCategory(),
-        _buttonAccount(),
+        _buttonCategory(changeState),
+        _buttonAccount(changeState),
       ],
     );
   }
 
-  Container _buttonCategory() {
+  Container _buttonCategory(StateSetter changeState) {
     final color = Color(int.parse("0x${category!.color}")).withAlpha(255);
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 320),
       child: InkWell(
-        onTap: () {},
+        onTap: () => _openCategoryList(changeState),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30),
           bottomLeft: Radius.circular(30),
@@ -417,7 +444,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                     color: color.withAlpha(50),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: const Text("Subcategory"),
+                  child: Text(subcategorySelected?.name ?? "No Subcategory"),
                 ),
               ),
             ],
@@ -427,13 +454,13 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
     );
   }
 
-  Container _buttonAccount() {
+  Container _buttonAccount(StateSetter changeState) {
     final color = Color(int.parse("0x${account!.color}")).withAlpha(255);
 
     return Container(
       constraints: const BoxConstraints(maxWidth: 320),
       child: InkWell(
-        onTap: () {},
+        onTap: () => _openAccountList(changeState),
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(30),
           bottomRight: Radius.circular(30),
@@ -468,6 +495,19 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                     style: const TextStyle(fontSize: 17),
                   ),
                 ],
+              ),
+              const SizedBox(height: 10),
+              Ink(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                decoration: BoxDecoration(
+                  color: color.withAlpha(50),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Text(
+                  CurrencyFunctions.name(account!.currencyName),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
@@ -698,6 +738,162 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
             dateFormat(dateSelected, separator: "/"),
           ),
         ],
+      ),
+    );
+  }
+
+  AlertDialog _dialogCategories(BuildContext context, StateSetter changeState) {
+    return AlertDialog(
+      title: Text(S.current.categories),
+      content: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Material(
+          color: Colors.transparent,
+          child: SingleChildScrollView(
+            child: Wrap(
+              direction: Axis.horizontal,
+              spacing: 10,
+              children: categories
+                  .map((e) =>
+                      _listItem(categoryItem: e, changeState: changeState))
+                  .toList(),
+            ),
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: Navigator.of(context).pop,
+          child: Text(S.current.cancel),
+        ),
+      ],
+    );
+  }
+
+  AlertDialog _dialogAccounts(BuildContext context, StateSetter changeState) {
+    return AlertDialog(
+      title: Text(S.current.accounts),
+      content: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Material(
+          color: Colors.transparent,
+          child: SingleChildScrollView(
+            child: Wrap(
+              direction: Axis.horizontal,
+              spacing: 10,
+              children: accounts
+                  .map((e) =>
+                      _listItem(accountItem: e, changeState: changeState))
+                  .toList(),
+            ),
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: Navigator.of(context).pop,
+          child: Text(S.current.cancel),
+        ),
+      ],
+    );
+  }
+
+  Padding _listItem({
+    Category? categoryItem,
+    Account? accountItem,
+    required StateSetter changeState,
+  }) {
+    final color = Color(int.parse(
+            "0x${categoryItem?.color ?? accountItem?.color ?? '000000'}"))
+        .withAlpha(255);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: InkWell(
+        onTap: () async {
+          if (categoryItem != null) {
+            setState(() {
+              category = categoryItem;
+              subcategorySelected = categoryItem.subcategories.isEmpty
+                  ? null
+                  : categoryItem.subcategories.first;
+            });
+          }
+          if (accountItem != null) {
+            await _changeSecondaryCurrency(accountItem.currencyId);
+            setState(() {
+              account = accountItem;
+            });
+          }
+          changeState(() {});
+          Navigator.of(context).pop();
+        },
+        borderRadius: BorderRadius.circular(10),
+        child: Ink(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: color.withAlpha(50),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Container(
+            constraints: const BoxConstraints(maxHeight: 100),
+            child: Row(
+              children: [
+                Ink(
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    color: color.withAlpha(50),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        getIcon(categoryItem?.icon ?? accountItem?.icon ?? ''),
+                        color: color,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          categoryItem?.name ?? accountItem?.name ?? 'No name',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          "${S.current.description}: ${categoryItem?.description ?? accountItem?.description ?? 'No description'}",
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        if (categoryItem != null)
+                          Text(
+                            "${S.current.totalSubcategories}: ${categoryItem.subcategories.length}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        if (accountItem != null)
+                          Text(CurrencyFunctions.formatNumber(
+                            amount: accountItem.amount,
+                            decimalDigits: accountItem.decimalDigits,
+                            symbol: accountItem.currencySymbol,
+                          ))
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

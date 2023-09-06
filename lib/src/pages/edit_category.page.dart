@@ -160,7 +160,7 @@ class _EditCategoryPageState extends State<EditCategoryPage>
   ) {
     final width = (MediaQuery.of(context).size.width / 2 > 280
             ? (290 * (MediaQuery.of(context).size.width / 280).truncate())
-            : (MediaQuery.of(context).size.width / 2 - 16)) -
+            : (MediaQuery.of(context).size.width - 10)) -
         10;
     print("Ancho de la pantalla: por el cual multiplicar $width");
 

@@ -6,6 +6,7 @@ import 'package:wallet_monitor/src/db/queries/subcategory.consult.dart';
 import 'package:wallet_monitor/src/db/services/database.service.dart';
 
 export 'package:wallet_monitor/src/db/models/category.model.dart';
+export 'package:wallet_monitor/src/db/queries/subcategory.consult.dart';
 
 abstract class CategoryConsult {
   static final _db = DatabaseService().db;

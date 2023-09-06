@@ -2339,6 +2339,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Total Subcategories`
+  String get totalSubcategories {
+    return Intl.message(
+      'Total Subcategories',
+      name: 'totalSubcategories',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
