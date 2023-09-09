@@ -41,15 +41,6 @@ abstract class CategoryConsult {
     final totalCategories = resultCategories.length;
     for (int i = 0; i < totalCategories; i++) {
       final Map<String, dynamic> tempCategory = resultCategories[i];
-      // final resultSubcategories = await _db.rawQuery("""
-      //   SELECT
-      //     *
-      //   FROM
-      //     subcategories
-      //   WHERE
-      //     category_id = ${tempCategory["id"]}
-      //     AND deleted_at IS NOT NULL;
-      // """);
       final resultSubcategories = await SubcategoryConsult.getAllByCategory(
         tempCategory["id"],
         showDelete: showDelete,
@@ -63,7 +54,6 @@ abstract class CategoryConsult {
 
     print(tempCategories);
     final categories = categoriesFromJson(tempCategories);
-    print(categories);
 
     return categories;
   }

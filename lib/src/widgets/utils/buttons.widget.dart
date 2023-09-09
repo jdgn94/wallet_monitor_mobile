@@ -4,6 +4,7 @@ import 'package:wallet_monitor/src/db/models/category.model.dart';
 import 'package:wallet_monitor/src/db/models/currency.model.dart';
 import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
+import 'package:wallet_monitor/src/widgets/utils/icon.widget.dart';
 
 enum ButtonType { tonal, outline, text, color, selector, category, dotted }
 
@@ -277,7 +278,11 @@ class CustomButton extends StatelessWidget {
                         bottomLeft: Radius.circular(10.0),
                       ),
                     ),
-                    child: Icon(getIcon(category!.icon), color: categoryColor),
+                    child: IconWidget(
+                      iconName: category!.icon,
+                      color: categoryColor,
+                      size: 30,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(

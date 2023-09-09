@@ -2190,6 +2190,26 @@ class S {
     );
   }
 
+  /// `People`
+  String get people {
+    return Intl.message(
+      'People',
+      name: 'people',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Special`
+  String get special {
+    return Intl.message(
+      'Special',
+      name: 'special',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Shopping`
   String get shop {
     return Intl.message(
@@ -2345,6 +2365,56 @@ class S {
     return Intl.message(
       'Total Subcategories',
       name: 'totalSubcategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food`
+  String get food {
+    return Intl.message(
+      'Food',
+      name: 'food',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passage`
+  String get passage {
+    return Intl.message(
+      'Passage',
+      name: 'passage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Services`
+  String get service {
+    return Intl.message(
+      'Services',
+      name: 'service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shopping`
+  String get shopping {
+    return Intl.message(
+      'Shopping',
+      name: 'shopping',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay`
+  String get pay {
+    return Intl.message(
+      'Pay',
+      name: 'pay',
       desc: '',
       args: [],
     );

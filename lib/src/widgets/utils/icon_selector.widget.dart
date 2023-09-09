@@ -6,6 +6,7 @@ import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/src/widgets/settings/picker_color_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
+import 'package:wallet_monitor/src/widgets/utils/icon.widget.dart';
 
 class IconSelectorWidget extends StatefulWidget {
   final Function(Color, String) confirm;
@@ -69,7 +70,6 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
   final List<String> _homeIcons = [
     "home",
     "garage",
-    "alarmLight",
     "alarmPanel",
     "fan",
     "bedEmpty",
@@ -83,8 +83,6 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     "lightbulb",
     "connection",
     "door",
-    "pipe",
-    "pipeLeak",
     "shower",
     "countertopOutline",
     "faucet",
@@ -96,7 +94,6 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     "broom",
     "sprayBottle",
     "formatPaint",
-    "wrench",
   ];
   final List<String> _personalCareIcons = [
     "contentCut",
@@ -130,7 +127,7 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     "trainCarCaboose",
     "bus",
     "car",
-    "towTruck",
+    "taxi",
     "truck",
     "vanUtility",
     "ferry",
@@ -149,6 +146,7 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     "notebookMultipleOutline",
     "bagPersonal",
     "bagPersonalOutline",
+    "mathCompass",
     "pencil",
     "pencilOutline",
     "greasePencil",
@@ -164,7 +162,10 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     "noteOutline",
     "noteMultiple",
     "noteMultipleOutline",
-    "mathCompass",
+    "beakerOutline",
+    "flaskOutline",
+    "flaskRoundBottom",
+    "testTube",
     "calculatorVariant",
     "calculatorVariantOutline",
     "translate",
@@ -181,7 +182,6 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     "virus",
     "virusOutline",
     "bloodBag",
-    "cannabis",
     "clipboardPulse",
     "clipboardPulseOutline",
     "diabetes",
@@ -282,6 +282,165 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     "microphone",
     "robotOutline",
   ];
+  final List<String> _sportIcons = [
+    "badminton",
+    "baseballOutline",
+    "basketball",
+    "bowling",
+    "billiards",
+    "football",
+    "rugby",
+    "volleyball",
+    "soccer",
+    "cricket",
+    "tableTennis",
+    "tennis",
+    "dumbbell",
+    "fencing",
+    "arrowProjectile",
+    "boxingGlove",
+    "golf",
+    "jumpRope",
+    "kite",
+    "skate",
+    "rollerblade",
+    "skateboard",
+    "racingHelmet",
+    "divingScubaMask",
+    "divingScuba",
+    "gymnastics",
+    "paragliding",
+    "hiking",
+    "run",
+    "karate",
+    "swim",
+    "rowing",
+    "bike",
+  ];
+  final List<String> _natureIcons = [
+    "bug",
+    "ladybug",
+    "bee",
+    "spider",
+    "paw",
+    "beehiveOutline",
+    "butterfly",
+    "clover",
+    "flower",
+    "flowerPollen",
+    "flowerPoppy",
+    "flowerTulip",
+    "cactus",
+    "nature",
+    "tree",
+    "pineTree",
+    "pineTreeVariant",
+    "forest",
+    "leaf",
+    "leafMaple",
+    "cannabis",
+    "mushroom",
+    "grass",
+    "sprout",
+    "seed",
+    "greenhouse",
+  ];
+  final List<String> _serviceIcons = [
+    "lock",
+    "lockOutline",
+    "alarmBell",
+    "alarmLight",
+    "cctv",
+    "broom",
+    "wrench",
+    "pipe",
+    "pipeLeak",
+    "tankerTruck",
+    "truckCargoContainer",
+    "towTruck",
+    "dumpTruck",
+    "carWash",
+    "carWireless",
+    "carWrench",
+    "gasStation",
+    "phone",
+    "sim",
+    "lightbulbOnOutline",
+    "lightningBolt",
+    "waterOutline",
+    "coffin",
+  ];
+  final List<String> _peopleIcons = [
+    "account",
+    "accountMultiple",
+    "accountHardHat",
+    "accountHeart",
+    "accountTie",
+    "accountSchool",
+    "accountTieWoman",
+    "baby",
+    "babyBuggy",
+    "cradle",
+    "faceMan",
+    "faceWoman",
+    "humanDolly",
+    "humanMale",
+    "humanFemale",
+  ];
+  final List<String> _specialIcons = [
+    "android",
+    "apple",
+    "_appStore",
+    "_applePay",
+    "facebook",
+    "instagram",
+    "linkedin",
+    "twitter",
+    "twitch",
+    "youtube",
+    "google",
+    "googlePlay",
+    "_googlePay",
+    "microsoft",
+    "microsoftAzure",
+    "microsoftOffice",
+    "_adobeCloud",
+    "atlassian",
+    "aws",
+    "wordpress",
+    "digitalOcean",
+    "googleDrive",
+    "dropbox",
+    "_amazon",
+    "_ebay",
+    "_mercadoLibre",
+    "nintendoSwitch",
+    "sonyPlaystation",
+    "microsoftXbox",
+    "steam",
+    "_epicGames",
+    "origin",
+    "_ea",
+    "ubisoft",
+    "unity",
+    "unreal",
+    "spotify",
+    "_deezer",
+    "soundcloud",
+    "pandora",
+    "_tidal",
+    "_appleMusic",
+    "_amazonMusic",
+    "_youtubeMusic",
+    "netflix",
+    "_disneyPlus",
+    "_primeVideo",
+    "hulu",
+    "_hboMax",
+    "patreon",
+    "_paypal",
+    "_stripe",
+  ];
 
   @override
   void initState() {
@@ -325,10 +484,10 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
           Center(
             child: GestureDetector(
               onTap: _openChangeIcon,
-              child: Icon(
-                getIcon(iconCategory),
+              child: IconWidget(
+                iconName: iconCategory,
                 color: colorCategory.withAlpha(255),
-                size: 35,
+                size: 50,
               ),
             ),
           ),
@@ -425,7 +584,7 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
         borderRadius: BorderRadius.circular(10),
         color: color.withAlpha(50),
       ),
-      child: Icon(getIcon(icon), color: color, size: 35),
+      child: IconWidget(iconName: icon, color: color, size: 35),
     );
   }
 
@@ -463,6 +622,16 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
               _iconList(_shopIcons, iconSelected, changeIcon),
               _title(S.current.technology),
               _iconList(_technologyIcons, iconSelected, changeIcon),
+              _title(S.current.sport),
+              _iconList(_sportIcons, iconSelected, changeIcon),
+              _title(S.current.nature),
+              _iconList(_natureIcons, iconSelected, changeIcon),
+              _title(S.current.service),
+              _iconList(_serviceIcons, iconSelected, changeIcon),
+              _title(S.current.people),
+              _iconList(_peopleIcons, iconSelected, changeIcon),
+              _title(S.current.special),
+              _iconList(_specialIcons, iconSelected, changeIcon),
             ],
           ),
         ),
@@ -512,24 +681,31 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     String iconSelected,
     Function(String) action,
   ) {
-    return IconButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-          action(iconName);
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(
-            iconName == iconSelected
-                ? Theme.of(context).colorScheme.primary
-                : null,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).pop();
+        action(iconName);
+      },
+      borderRadius: BorderRadius.circular(60),
+      child: Ink(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(60),
+          color: iconName == iconSelected
+              ? Theme.of(context).colorScheme.primary
+              : null,
+        ),
+        child: Center(
+          child: IconWidget(
+            iconName: iconName,
+            size: 40,
+            color: iconName == iconSelected
+                ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).colorScheme.onBackground,
           ),
         ),
-        icon: Icon(
-          getIcon(iconName),
-          color: iconName == iconSelected
-              ? Theme.of(context).colorScheme.onPrimary
-              : Theme.of(context).colorScheme.onBackground,
-          size: 35,
-        ));
+      ),
+    );
   }
 }

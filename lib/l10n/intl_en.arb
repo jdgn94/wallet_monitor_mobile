@@ -213,6 +213,8 @@
   "sport": "Sport",
   "services": "Services",
   "technology": "Technology",
+  "people": "People",
+  "special": "Special",
   "shop": "Shopping",
   "nature": "Nature",
   "category": "Category",
@@ -228,5 +230,10 @@
   "image": "Image",
   "noCategories": "No Categories",
   "addCategory": "Add Category",
-  "totalSubcategories": "Total Subcategories"
+  "totalSubcategories": "Total Subcategories",
+  "food": "Food",
+  "passage": "Passage",
+  "service": "Services",
+  "shopping": "Shopping",
+  "pay": "Pay"
 }

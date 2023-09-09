@@ -13,6 +13,7 @@ import 'package:wallet_monitor/src/functions/currency.function.dart';
 import 'package:wallet_monitor/src/functions/utils.functions.dart';
 import 'package:wallet_monitor/src/utils/icons.utils.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
+import 'package:wallet_monitor/src/widgets/utils/icon.widget.dart';
 import 'package:wallet_monitor/storage/index.dart';
 
 enum KeyType { input, category, buttonCategory }
@@ -417,7 +418,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
         child: Ink(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           width: MediaQuery.of(context).size.width / 2,
-          height: 115,
+          // height: 115,
           decoration: BoxDecoration(
             color: color.withAlpha(50),
             borderRadius: const BorderRadius.only(
@@ -437,11 +438,13 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(getIcon(category!.icon), color: color),
+                  IconWidget(iconName: category!.icon, size: 28, color: color),
                   const SizedBox(width: 10),
                   Text(
                     category!.name,
                     style: const TextStyle(fontSize: 17),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -456,7 +459,11 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                     color: color.withAlpha(50),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Text(subcategorySelected?.name ?? "No Subcategory"),
+                  child: Text(
+                    subcategorySelected?.name ?? "No Subcategory",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
             ],
@@ -480,7 +487,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
         child: Ink(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           width: MediaQuery.of(context).size.width / 2,
-          height: 115,
+          // height: 115,
           decoration: BoxDecoration(
             color: color.withAlpha(50),
             borderRadius: const BorderRadius.only(
@@ -500,11 +507,13 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(getIcon(account!.icon), color: color),
+                  IconWidget(iconName: account!.icon, size: 28, color: color),
                   const SizedBox(width: 10),
                   Text(
                     account!.name,
                     style: const TextStyle(fontSize: 17),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -518,6 +527,7 @@ class _KeyboardWidgetState extends State<KeyboardWidget> {
                 ),
                 child: Text(
                   CurrencyFunctions.name(account!.currencyName),
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

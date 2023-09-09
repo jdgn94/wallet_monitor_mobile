@@ -83,6 +83,25 @@ flutter:
     - lib/src/assets/images/dark_theme.png
     - lib/src/assets/images/light_theme.png
     - lib/src/assets/images/system_theme.png
+    - lib/src/assets/icons/adobeCloud.svg
+    - lib/src/assets/icons/amazon.svg
+    - lib/src/assets/icons/amazonMusic.svg
+    - lib/src/assets/icons/appleMusic.svg
+    - lib/src/assets/icons/applePay.svg
+    - lib/src/assets/icons/appStore.svg
+    - lib/src/assets/icons/deezer.svg
+    - lib/src/assets/icons/disneyPlus.svg
+    - lib/src/assets/icons/ea.svg
+    - lib/src/assets/icons/ebay.svg
+    - lib/src/assets/icons/epicGames.svg
+    - lib/src/assets/icons/googlePay.svg
+    - lib/src/assets/icons/hboMax.svg
+    - lib/src/assets/icons/mercadoLibre.svg
+    - lib/src/assets/icons/paypal.svg
+    - lib/src/assets/icons/primeVideo.svg
+    - lib/src/assets/icons/stripe.svg
+    - lib/src/assets/icons/tidal.svg
+    - lib/src/assets/icons/youtubeMusic.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
