@@ -231,10 +231,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "education": MessageLookupByLibrary.simpleMessage("Education"),
         "enable": MessageLookupByLibrary.simpleMessage("Enable"),
         "entertainment": MessageLookupByLibrary.simpleMessage("Entertainment"),
+        "entertainmentDescription": MessageLookupByLibrary.simpleMessage(
+            "Expenses from entertainments"),
         "expenses": MessageLookupByLibrary.simpleMessage("Expenses"),
         "february": MessageLookupByLibrary.simpleMessage("February"),
         "food": MessageLookupByLibrary.simpleMessage("Food"),
         "foodAndDrink": MessageLookupByLibrary.simpleMessage("Food and Drink"),
+        "foodDescription":
+            MessageLookupByLibrary.simpleMessage("Expenses from foods"),
         "format": MessageLookupByLibrary.simpleMessage("Format"),
         "generalMode": MessageLookupByLibrary.simpleMessage("General Mode"),
         "goal": MessageLookupByLibrary.simpleMessage("Goal"),
@@ -284,6 +288,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "regular": MessageLookupByLibrary.simpleMessage("Regular"),
         "regularAccounts":
             MessageLookupByLibrary.simpleMessage("Regular Accounts."),
+        "salary": MessageLookupByLibrary.simpleMessage("Salary"),
+        "salaryDescription":
+            MessageLookupByLibrary.simpleMessage("Incomes from salaries"),
         "saving": MessageLookupByLibrary.simpleMessage("Saving"),
         "savingsAccounts":
             MessageLookupByLibrary.simpleMessage("Savings Accounts."),
@@ -298,6 +305,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectYear": MessageLookupByLibrary.simpleMessage("Select Year"),
         "september": MessageLookupByLibrary.simpleMessage("September"),
         "service": MessageLookupByLibrary.simpleMessage("Services"),
+        "serviceDescription":
+            MessageLookupByLibrary.simpleMessage("Expenses from services"),
         "services": MessageLookupByLibrary.simpleMessage("Services"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "shop": MessageLookupByLibrary.simpleMessage("Shopping"),
@@ -323,6 +332,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalSubcategories":
             MessageLookupByLibrary.simpleMessage("Total Subcategories"),
         "transport": MessageLookupByLibrary.simpleMessage("Transport"),
+        "transportDescription":
+            MessageLookupByLibrary.simpleMessage("Expenses from transports"),
         "value": MessageLookupByLibrary.simpleMessage("Value")
       };
 }

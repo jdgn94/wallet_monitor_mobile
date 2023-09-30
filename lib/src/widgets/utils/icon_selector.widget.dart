@@ -12,11 +12,13 @@ class IconSelectorWidget extends StatefulWidget {
   final Function(Color, String) confirm;
   final Color? defaultColor;
   final String? defaultIcon;
+  final bool onlyIcon;
   const IconSelectorWidget({
     super.key,
     required this.confirm,
     this.defaultColor,
     this.defaultIcon,
+    this.onlyIcon = false,
   });
 
   @override
@@ -465,35 +467,70 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     showDialog(context: context, builder: _dialogIcon);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 64,
-      child: Stack(
-        children: [
-          TextField(
-            controller: _iconController,
-            readOnly: true,
-            onTap: _openChangeIcon,
-            decoration: InputDecoration(
-              label: Text(S.current.icon),
-              filled: true,
-              fillColor: colorCategory.withAlpha(50),
-            ),
-          ),
-          Center(
-            child: GestureDetector(
-              onTap: _openChangeIcon,
-              child: IconWidget(
-                iconName: iconCategory,
-                color: colorCategory.withAlpha(255),
-                size: 50,
-              ),
-            ),
-          ),
-        ],
+  void changeIconSubcategory(String newIcon) {
+    print(newIcon);
+    setState(() {
+      iconCategory = newIcon;
+    });
+  }
+
+  void openIconSelectorSubcategory() {
+    showDialog(
+      context: context,
+      builder: (context) => _dialogIconSelector(
+        context,
+        setState,
+        iconCategory,
+        changeIconSubcategory,
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.onlyIcon) {
+      return Column(
+        children: [
+          Text(S.current.icon),
+          const SizedBox(
+            height: 5,
+            width: double.infinity,
+          ),
+          InkWell(
+            onTap: openIconSelectorSubcategory,
+            child: _iconPreview(iconCategory, colorCategory),
+          ),
+        ],
+      );
+    } else {
+      return SizedBox(
+        height: 64,
+        child: Stack(
+          children: [
+            TextField(
+              controller: _iconController,
+              readOnly: true,
+              onTap: _openChangeIcon,
+              decoration: InputDecoration(
+                label: Text(S.current.icon),
+                filled: true,
+                fillColor: colorCategory.withAlpha(50),
+              ),
+            ),
+            Center(
+              child: GestureDetector(
+                onTap: _openChangeIcon,
+                child: IconWidget(
+                  iconName: iconCategory,
+                  color: colorCategory.withAlpha(255),
+                  size: 50,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   StatefulBuilder _dialogIcon(BuildContext context) {
@@ -501,6 +538,7 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     Color colorCategoryTemp = colorCategory;
     return StatefulBuilder(builder: (localContext, localSetState) {
       void changeIcon(String newIcon) {
+        print(newIcon);
         localSetState(() {
           iconCategoryTemp = newIcon;
         });
@@ -663,16 +701,19 @@ class _IconSelectorWidgetState extends State<IconSelectorWidget> {
     );
   }
 
-  Wrap _iconList(
+  Material _iconList(
     List<String> list,
     String iconSelected,
     Function(String) changeIcon,
   ) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: list
-          .map((item) => _iconButton(item, iconSelected, changeIcon))
-          .toList(),
+    return Material(
+      color: Colors.transparent,
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: list
+            .map((item) => _iconButton(item, iconSelected, changeIcon))
+            .toList(),
+      ),
     );
   }
 

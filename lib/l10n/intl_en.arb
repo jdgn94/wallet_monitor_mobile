@@ -235,5 +235,11 @@
   "passage": "Passage",
   "service": "Services",
   "shopping": "Shopping",
-  "pay": "Pay"
+  "pay": "Pay",
+  "foodDescription": "Expenses from foods",
+  "transportDescription": "Expenses from transports",
+  "entertainmentDescription": "Expenses from entertainments",
+  "serviceDescription": "Expenses from services",
+  "salary": "Salary",
+  "salaryDescription": "Incomes from salaries"
 }

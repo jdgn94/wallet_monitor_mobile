@@ -245,6 +245,7 @@ class CustomButton extends StatelessWidget {
 
     if (type == ButtonType.category) {
       final categoryColor = Color(int.parse("0x${category!.color}"));
+      print(category!.icon);
 
       return Material(
         color: Colors.transparent,

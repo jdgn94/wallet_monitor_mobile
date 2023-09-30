@@ -61,6 +61,7 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     symbol: '',
   );
   String iconCategory = 'none';
+  String iconSubcategory = 'none';
   Color colorCategory =
       Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(250);
 
@@ -209,11 +210,13 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
   void _saveSubcategory(int? position) {
     if (position != null) {
       subcategories[position]!.name = _subcategoryController.text;
+      subcategories[position]!.icon = iconSubcategory;
     } else {
       subcategories.add(
         Subcategory(
           id: 0,
           name: _subcategoryController.text,
+          icon: iconSubcategory,
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
         ),
@@ -529,14 +532,41 @@ class _CategoryEditionPageState extends State<CategoryEditionPage> {
     }
 
     return StatefulBuilder(builder: (localContext, localSetState) {
+      String localIcon =
+          position != null ? subcategories[position]!.icon : 'none';
+      void selectIconSubcategory(_, String newIcon) {
+        localSetState(() {
+          localIcon = newIcon;
+        });
+        setState(() {
+          iconSubcategory = newIcon;
+        });
+      }
+
       return AlertDialog(
-        content: TextField(
-          controller: _subcategoryController,
-          autofocus: true,
-          onSubmitted: (_) => _saveSubcategory(position),
-          decoration: InputDecoration(
-            label: Text(S.current.subcategory),
-          ),
+        content: Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            IconSelectorWidget(
+              confirm: selectIconSubcategory,
+              defaultColor: colorCategory,
+              defaultIcon: localIcon,
+              onlyIcon: true,
+            ),
+            const SizedBox(
+              height: 15,
+              width: double.infinity,
+            ),
+            TextField(
+              controller: _subcategoryController,
+              autofocus: true,
+              onSubmitted: (_) => _saveSubcategory(position),
+              decoration: InputDecoration(
+                label: Text(S.current.subcategory),
+              ),
+            ),
+          ],
         ),
         actions: [
           TextButton(

@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:wallet_monitor/generated/l10n.dart';
 import 'package:wallet_monitor/src/bloc/settings/settings_bloc.dart';
 import 'package:wallet_monitor/src/db/queries/account.consult.dart';
+import 'package:wallet_monitor/src/db/queries/category.consult.dart';
 import 'package:wallet_monitor/src/widgets/settings/format_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/settings/currency_selector.widget.dart';
 import 'package:wallet_monitor/src/widgets/utils/buttons.widget.dart';
@@ -36,7 +37,7 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       amount: 0,
       color: 'ff2196f3',
       minAmount: 0,
-      icon: 'wallet',
+      icon: 'card',
       name: S.current.card,
       currencyId: currencyId,
       description: '',
@@ -51,6 +52,51 @@ class _SettingsSecondPageState extends State<SettingsSecondPage> {
       name: S.current.cash,
       currencyId: currencyId,
       description: '',
+      createdAt: DateTime.now(),
+    );
+    await CategoryConsult.createOrUpdate(
+      id: 1,
+      name: S.current.food,
+      description: S.current.foodDescription,
+      color: 'FFF44336',
+      icon: 'silverwareForkKnife',
+      expenses: true,
+      createdAt: DateTime.now(),
+    );
+    await CategoryConsult.createOrUpdate(
+      id: 2,
+      name: S.current.transport,
+      description: S.current.transportDescription,
+      color: 'FF3F51B5',
+      icon: 'bus',
+      expenses: true,
+      createdAt: DateTime.now(),
+    );
+    await CategoryConsult.createOrUpdate(
+      id: 3,
+      name: S.current.entertainment,
+      description: S.current.entertainmentDescription,
+      color: 'FF673AB7',
+      icon: 'filmstrip',
+      expenses: true,
+      createdAt: DateTime.now(),
+    );
+    await CategoryConsult.createOrUpdate(
+      id: 4,
+      name: S.current.service,
+      description: S.current.serviceDescription,
+      color: 'FF8BC34A',
+      icon: 'wrench',
+      expenses: true,
+      createdAt: DateTime.now(),
+    );
+    await CategoryConsult.createOrUpdate(
+      id: 5,
+      name: S.current.salary,
+      description: S.current.salaryDescription,
+      color: 'FF85bb65',
+      icon: 'cashMultiple',
+      expenses: false,
       createdAt: DateTime.now(),
     );
 

@@ -33,6 +33,7 @@ abstract class SubcategoryConsult {
   static Future<void> createOrUpdate({
     int? id,
     required String name,
+    String? icon,
     required int categoryId,
     required DateTime createdAt,
     DateTime? deletedAt,
@@ -42,6 +43,7 @@ abstract class SubcategoryConsult {
       {
         "id": id,
         "name": name,
+        "icon": icon,
         "category_id": categoryId,
         "created_at": createdAt.toIso8601String(),
         "updated_at": DateTime.now().toIso8601String(),

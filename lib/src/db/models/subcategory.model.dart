@@ -1,6 +1,7 @@
 class Subcategory {
   final int id;
   String name;
+  String icon;
   DateTime createdAt;
   DateTime updatedAt;
   DateTime? deletedAt;
@@ -8,6 +9,7 @@ class Subcategory {
   Subcategory({
     required this.id,
     required this.name,
+    required this.icon,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
@@ -16,6 +18,7 @@ class Subcategory {
   factory Subcategory.fromJson(Map<String, dynamic> json) => Subcategory(
         id: json["id"],
         name: json["name"],
+        icon: json["icon"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"] == null

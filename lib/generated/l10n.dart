@@ -2419,6 +2419,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Expenses from foods`
+  String get foodDescription {
+    return Intl.message(
+      'Expenses from foods',
+      name: 'foodDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expenses from transports`
+  String get transportDescription {
+    return Intl.message(
+      'Expenses from transports',
+      name: 'transportDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expenses from entertainments`
+  String get entertainmentDescription {
+    return Intl.message(
+      'Expenses from entertainments',
+      name: 'entertainmentDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expenses from services`
+  String get serviceDescription {
+    return Intl.message(
+      'Expenses from services',
+      name: 'serviceDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Salary`
+  String get salary {
+    return Intl.message(
+      'Salary',
+      name: 'salary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incomes from salaries`
+  String get salaryDescription {
+    return Intl.message(
+      'Incomes from salaries',
+      name: 'salaryDescription',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

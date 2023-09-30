@@ -234,11 +234,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "enable": MessageLookupByLibrary.simpleMessage("Habilitar"),
         "entertainment":
             MessageLookupByLibrary.simpleMessage("Entretenimiento"),
+        "entertainmentDescription":
+            MessageLookupByLibrary.simpleMessage("Gastos de entretenimiento"),
         "expenses": MessageLookupByLibrary.simpleMessage("Gastos"),
         "february": MessageLookupByLibrary.simpleMessage("Febrero"),
         "food": MessageLookupByLibrary.simpleMessage("Comida"),
         "foodAndDrink":
             MessageLookupByLibrary.simpleMessage("Comidas y Bebidas"),
+        "foodDescription":
+            MessageLookupByLibrary.simpleMessage("Gastos de comidas"),
         "format": MessageLookupByLibrary.simpleMessage("Formato"),
         "generalMode": MessageLookupByLibrary.simpleMessage("Modo General"),
         "goal": MessageLookupByLibrary.simpleMessage("Meta"),
@@ -288,6 +292,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "regular": MessageLookupByLibrary.simpleMessage("Normal"),
         "regularAccounts":
             MessageLookupByLibrary.simpleMessage("Cuentas Normales."),
+        "salary": MessageLookupByLibrary.simpleMessage("Salario"),
+        "salaryDescription":
+            MessageLookupByLibrary.simpleMessage("Ingresos por salario"),
         "saving": MessageLookupByLibrary.simpleMessage("Ahorro"),
         "savingsAccounts":
             MessageLookupByLibrary.simpleMessage("Cuentas de Ahorros."),
@@ -306,6 +313,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectYear": MessageLookupByLibrary.simpleMessage("Seleccionar Año"),
         "september": MessageLookupByLibrary.simpleMessage("Septiembre"),
         "service": MessageLookupByLibrary.simpleMessage("Servicios"),
+        "serviceDescription":
+            MessageLookupByLibrary.simpleMessage("Gastos de servicios"),
         "services": MessageLookupByLibrary.simpleMessage("Servicios"),
         "settings": MessageLookupByLibrary.simpleMessage("Configuraciones"),
         "shop": MessageLookupByLibrary.simpleMessage("Compras"),
@@ -333,6 +342,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalSubcategories":
             MessageLookupByLibrary.simpleMessage("Total Sub Categorías"),
         "transport": MessageLookupByLibrary.simpleMessage("Transporte"),
+        "transportDescription":
+            MessageLookupByLibrary.simpleMessage("Gastos de transportes"),
         "value": MessageLookupByLibrary.simpleMessage("valor")
       };
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import "package:flutter/material.dart";
 
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -79,7 +81,7 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: S.delegate.supportedLocales,
           locale: Locale.fromSubtags(
-            languageCode: state.lang ?? 'und',
+            languageCode: state.lang ?? Platform.localeName.split('_')[0],
           ),
         );
       },

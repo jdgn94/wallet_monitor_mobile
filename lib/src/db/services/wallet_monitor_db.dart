@@ -53,6 +53,7 @@ class WalletMonitorDB {
       CREATE TABLE IF NOT EXISTS subcategories (
         id INTEGER NOT NULL,
         name TEXT NOT NULL UNIQUE,
+        icon TEXT,
         category_id INTEGER NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,

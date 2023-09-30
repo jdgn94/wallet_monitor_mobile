@@ -235,5 +235,11 @@
   "passage": "Pasaje",
   "service": "Servicios",
   "shopping": "Compras",
-  "pay": "Pagos"
+  "pay": "Pagos",
+  "foodDescription": "Gastos de comidas",
+  "transportDescription": "Gastos de transportes",
+  "entertainmentDescription": "Gastos de entretenimiento",
+  "serviceDescription": "Gastos de servicios",
+  "salary": "Salario",
+  "salaryDescription": "Ingresos por salario"
 }

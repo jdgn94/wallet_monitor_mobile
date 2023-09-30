@@ -1,4 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
+import 'dart:io';
 
 import "package:bloc/bloc.dart";
 import "package:equatable/equatable.dart";
@@ -16,7 +17,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           pref.getString("theme"),
           pref.getString("lightStyle"),
           pref.getString("darkStyle"),
-          pref.getString("lang") ?? 'und',
+          pref.getString("lang") ?? Platform.localeName.split('_')[0],
           pref.getString("color"),
           pref.getInt("defaultCurrency"),
           pref.getString("currencySymbol"),

@@ -10,8 +10,6 @@ class CurrenciesResponse {
   });
 
   factory CurrenciesResponse.fromJson(Map<String, dynamic> json) {
-    print("in currencies response from json");
-    print(json["currencies"]);
     return CurrenciesResponse(
       currencies: _formatCurrency(json["currencies"] as List<dynamic>),
       message: json["message"],
@@ -20,7 +18,6 @@ class CurrenciesResponse {
 }
 
 List<Currency> _formatCurrency(List<dynamic> json) {
-  print("Formating currencies values from fetch");
   const hola = 126.0;
   hola.toInt();
   return json
